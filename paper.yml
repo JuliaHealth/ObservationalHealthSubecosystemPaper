@@ -1,0 +1,21 @@
+title: "Developing Observational Health Research Capacity in the Julia Ecosystem"
+keywords:
+  - Observational Health
+  - OMOP Common Data Model
+  - Database Management
+  - Characterization
+authors:
+  - name: Jacob S. Zelko
+    orcid: 0000-0003-4531-1614
+    affiliation: 1
+  - name: Malina Hy
+    affiliation: 1, 2
+  - name: Varshini Chinta
+    affiliation: 1, 2
+affiliations:
+  - name: Georgia Tech Research Institute 
+    index: 1
+  - name: Georgia Institute of Technology
+    index: 2
+date: 14 September 2022
+bibliography: ref.bib
