@@ -9,77 +9,145 @@
 
 \begin{abstract}
 
-2 - 3 sentences
+Observational health continues to be a growing field in health informatics research as electronic health records, patient medical claims, and other ancilliary patient data source become more readily computable and accessible to researchers.
+JuliaHealth is poised as an ecosystem to innovate within this area of research by bringing highly performant analytics approaches, composable solutions, and interoperable software that leverages prior state of the art. 
+This paper will discuss the state of the art observational health research tools within the JuliaHealth ecosystem and how JuliaHealth is prepared to further research goals within this domain.
 
 \end{abstract}
 
 \section{Introduction}
 
-Paragraph 1: Background on observational health research
+Over the past $10$ years, there have been several innovations within the observational health research.
+Arguably, the most crucial innovation that has emerged is the Observational Medical Outcomes Partnership Common Data Model (OMOP CDM) which was designed specifically to standardize observational health data to enable transferable analyses.
+The importance of this model has become apparent within open science organizations like the OHDSI (Observational Health Data Science and Informatics) network where members across $100+$ countries with access to various health systems have been able to successfully map their patient data to the OMOP CDM.
+This has led to successful collaboration relationships across countries where one research group can develop a network study and then disseminate the study across collaborators leading to the idea that you can "write once, run everywhere."
 
-Observational health data captures a comprehensive view of patient cohort populations, and they are often used to assess incidence rates, prevalence rates, risk factors, and prognosis associated with physical and mental health conditions and treatment interventions. By analyzing healthcare records and clinical events, observational health research can perform cohort characterization, population-estimation, and patient-level predictions to evaluate population health, target interventions and prevention measures, and ultimately transform healthcare policy.    
+The OMOP CDM itself does not require a specific technology to work with the data stored in this standard.
+It features a person-centric design where each domain records personal identity while prioritizing data protection through the limiting of information that could endanger patient anonymity.
+As the OMOP CDM has become a cornerstone in running these widely distributed network studies, special attention to developing tools around handling OMOP CDM data is necessary to meaningfully contribute within the observational health research space.
 
-However, current observational health and epidemiological surveys are limited by their data collection and administration methods, sample size representativeness, cohort phenotype definitions, and statistical/algorithmic methods to combine outside, disparate data sources. There is a need for timely, unbiased, accurate, and quality data regarding the mental illness and the ability detect and characterize trends in prevalence, severity, and the association with other chronic illnesses/morbidities. 
+\subsection{What Is JuliaHealth and Its Goals?}
 
-This effort could help leading health officials implement better informed interventions that will increase equitable access to mental healthcare across vulnerable populations, support efforts to decrease acute mental health-related morbidities, and improve efficacy of health spending. 
+\subsection{Status of Conducting Observational Health Research in Julia}
 
-Paragraph 2: What is OHDSI + HADES R ecosystem
+Over the history of JuliaHealth, a sub-ecosystem within the JuliaHealth ecosystem has developed which is dedicated to performing observational health research around the OMOP CDM.
+This sub-ecosystem is now mature enough to conduct internationally federated observational health research using tools housed within JuliaHealth and Julia exclusively.
+Additionally, due to the strong interoperability capabilities of Julia, rather than forgoing or completely reinventing aspects of pre-existing observational health research tools, the Julia observational health subecosystem builds on some of these innovations.
 
-Observational Health Data Sciences and Informatics (OHDSI) is a global, collaborative, interdisciplinary, and open-science network of researchers, healthcare professionals, students, patients, other individuals and organizations committed to large-scale health data analytics and generating reliable evidence, with the goal of promoting better health decisions and better care. 
+As an example, OHDSI's HADES (Health Analytics Data-To-Evidence Suite) has been in existence for over $10$ years and has several rich packages.
+One of the premier tools within HADES is the ATLAS Shiny application which was developed to "support the design and execution of observational analyses to generate real world evidence from patient level observational data."
 
-Since current observational health data sources are aggregated at different levels and cannot be generalized to the overall population, the data is often incomplete, inaccurate, and prone to issues of bias, error handling, and multidimensional complexity. The goal of OHDSI is to produce reproducible, robust, and reliable evidence by developing standardized data formats and research protocol designs to enable large-scale collaborative research and improve the transparency and scalability of observational health research. 
+\section{Describing an Observational Health Research Workflow Using JuliaHealth}
 
-The development of the Observational Medical Outcomes Partnership (OMOP) was created in 2009 to address concerns related to data type, study design, and data privacy concerns. The OMOP Common Data Model (CDM) is a "person-centered" information model with standardized relationships and structures with other event tables to create a longitudinal view of all clinical, healthcare-related events for each person. 
+TODO: Discuss the "big idea" of what this workflow could look like
 
-OHDSI also develops open-source analytical and software tools, such as HADES and ATLAS, which features a comprehensive set of functions needed to conduct network studies from assessing demographic information to generating summary statistics and interactive dashboards. The best practices set forth by OHDSI has improved the quality and reliability of evidence in observational studies, and it improved network research study collaboration, supported large-scale analytics, and standardized data structures and medical vocabulary.  
+\subsection{Cohort Expressions Usability}
 
-Health Analytics Data-to-Evidence Suite (HADES) is a collection of 20 R packages, developed by the OHDSI team, that interact directly with the OMOP CDM to support large-scale analytics, including cohort construction (CirceR, CohortGenerator), population-level estimation (CohortMethod), patient-level prediction (PatientLevelPrediction), and return statistics, figures, and tables. 
+Broadly, ATLAS has become the de facto tool to develop patient phenotype definitions within observational health research contexts.
+These phenotype definitions have varying levels of complexity where they can be very simple (finding all patients with one health condition or diagnosis) or grow to be extremely complex (defining controlled, uncontrolled, and indeterminate patient cohorts based on medications, lab results, etc.)
+The computable phenotype definitions that ATLAS generates based on phenotype definitions are in a variety of serialization formats such as JSON or prepared SQL expressions available in multiple SQL flavors.
+(Examples of a computable phenotype definition serialized to JSON can be found in Appendix 1 and an exmaple of a serialization to PostgreSQL can be found in Appendix 2)
 
+The Julia package, OHDSICohortExpressions.jl, exists specifically to ingest these serialized expressions of computable phenotype definitions and create patient cohorts that match the given criterion in the definition.
+How this tool works is to 1) read and verify the serialized computable phenotype definition 2) reinterpret the serialization into the FunSQL.jl Domain Specific Language 3) return a prepared SQL statement against a given SQL database that queries an OMOP CDM database for the desired patient population(s) of interest.
+Once these prepared statements are made, researchers can execute the generated SQL against their OMOP CDM instance to generate cohorts for future analyses.
 
-Paragraph 3: Why tooling was needed
+\subsection{Fine-Grain Creation of Cohorts}
 
-\section{Methods}
+TODO: Discuss OMOPCDMCohortCreator.jl
 
-\subsection{Tooling for Observational Health Research}
+\subsection{Working with Patient Databases}
 
-Paragraph 1: Introduction of novel packages
+TODO: Discuss DBConnector
 
-Paragraph 2: Development philosophy and algorithmic design
+\subsection{Building on Current Tools and State of the Art}
 
-\subsection{Example Use Cases}
+TODO: Discuss OHDSIAPI.jl
 
-\subsubsection{Minimal Characterization Study}
+\section{Conducting a Small-Scale Observational Health Research Study Using JuliaHealth Tools}
 
-Paragraph 1: Condensed version of tutorial: https://juliahealth.org/OMOPCDMCohortCreator.jl/dev/tutorials/
-
-Paragraph 2: Example of using results (base off this paragraph): From here, the potential to calculate valuable metrics disease prevalence across niche populations is rich and opens up the possibility to do even more with these subpopulations one could generate (e.g. cross walking with survey panel data, area estimation, etc.). Furthermore, I have tested this but have not had an opportunity to write a tutorial on the matter, but these functionalities work with Distributed.jl to enable non-blocking asynchronous code execution (still working out exact approach/functionalities) to fully utilize Julia’s performance when working and transforming large amounts of data that is often found in observational studies.
-
-\subsubsection{Composability within Ecosystem} 
-
-Paragraph 1 - 2: Distributed computing + Distributed.jl (maybe with Memoization) + Light benchmarking (?)
-
-Paragraph 3: Support for other databases + FunSQL.jl + SQL output
+  1. Showing DBConnection
+  2. Using ATLAS Cohort Definition
+  3. Pulling from OMOP CDM Cohort
+  4. Writing characterization code
+  5. Creating artifacts like plots and summary statistics
 
 \section{Discussion}
 
-Paragraph 1: How it is being used
+\subsection{Advanced Features of the JuliaHealth Ecosystem}
 
-Paragraph 2: Next steps and Future - base off of this: As I was recently funded another year to continue my health disparities research (yay!), I have great ambitions to build out observational health research capacity in JuliaHealth through avenues such as:
+    1. Modularization of code and chaining
+    2. Distributed computing
+    3. FunSQL back-end
 
-Finalize a submission to JuliaCon Proceedings (need to finish writing tests across this portfolio and adding documentation in the coming weeks)
-Partnering on potentially running studies within the Julia community using these tools
-Scoping out better support for survey and panel data
-Building additional tooling around observational health research (such as determining fairness metrics, easily deployable interactive results explorers, interop with OHDSI tools, etc.)
-Lowering barrier to entry of prototyping large scale studies for researchers
+\subsection{Strong Composition of Machine Learning, Differential Equations, and JuliaHealth}
+
+\subsection{Potential Future Directions}
 
 \section{Conclusion}
 
-Paragraph 1: Final thoughts
-
 \section{Acknowledgements}
+
+For this work, we would like to thank and recognize the following individuals and groups: Dr. Jon Duke and Charity Hilton for their early support, 
 
 \section{References}
 
 \input{bib.tex}
 
 \end{document}
+
+% Paragraph 1: Background on observational health research
+
+% Observational health data captures a comprehensive view of patient cohort populations, and they are often used to assess incidence rates, prevalence rates, risk factors, and prognosis associated with physical and mental health conditions and treatment interventions. By analyzing healthcare records and clinical events, observational health research can perform cohort characterization, population-estimation, and patient-level predictions to evaluate population health, target interventions and prevention measures, and ultimately transform healthcare policy.    
+
+% However, current observational health and epidemiological surveys are limited by their data collection and administration methods, sample size representativeness, cohort phenotype definitions, and statistical/algorithmic methods to combine outside, disparate data sources. There is a need for timely, unbiased, accurate, and quality data regarding the mental illness and the ability detect and characterize trends in prevalence, severity, and the association with other chronic illnesses/morbidities. 
+
+% This effort could help leading health officials implement better informed interventions that will increase equitable access to mental healthcare across vulnerable populations, support efforts to decrease acute mental health-related morbidities, and improve efficacy of health spending. 
+
+% Paragraph 2: What is OHDSI + HADES R ecosystem
+
+% Observational Health Data Sciences and Informatics (OHDSI) is a global, collaborative, interdisciplinary, and open-science network of researchers, healthcare professionals, students, patients, other individuals and organizations committed to large-scale health data analytics and generating reliable evidence, with the goal of promoting better health decisions and better care. 
+
+% Since current observational health data sources are aggregated at different levels and cannot be generalized to the overall population, the data is often incomplete, inaccurate, and prone to issues of bias, error handling, and multidimensional complexity. The goal of OHDSI is to produce reproducible, robust, and reliable evidence by developing standardized data formats and research protocol designs to enable large-scale collaborative research and improve the transparency and scalability of observational health research. 
+
+% The development of the Observational Medical Outcomes Partnership (OMOP) was created in 2009 to address concerns related to data type, study design, and data privacy concerns. The OMOP Common Data Model (CDM) is a "person-centered" information model with standardized relationships and structures with other event tables to create a longitudinal view of all clinical, healthcare-related events for each person. 
+
+% OHDSI also develops open-source analytical and software tools, such as HADES and ATLAS, which features a comprehensive set of functions needed to conduct network studies from assessing demographic information to generating summary statistics and interactive dashboards. The best practices set forth by OHDSI has improved the quality and reliability of evidence in observational studies, and it improved network research study collaboration, supported large-scale analytics, and standardized data structures and medical vocabulary.  
+
+% Health Analytics Data-to-Evidence Suite (HADES) is a collection of 20 R packages, developed by the OHDSI team, that interact directly with the OMOP CDM to support large-scale analytics, including cohort construction (CirceR, CohortGenerator), population-level estimation (CohortMethod), patient-level prediction (PatientLevelPrediction), and return statistics, figures, and tables. 
+
+% Paragraph 3: Why tooling was needed
+
+% Old Content
+
+% \subsection{Tooling for Observational Health Research}
+
+% Paragraph 1: Introduction of novel packages
+
+% Paragraph 2: Development philosophy and algorithmic design
+
+% \subsection{Example Use Cases}
+
+% \subsubsection{Minimal Characterization Study}
+
+% Paragraph 1: Condensed version of tutorial: https://juliahealth.org/OMOPCDMCohortCreator.jl/dev/tutorials/
+
+% Paragraph 2: Example of using results (base off this paragraph): From here, the potential to calculate valuable metrics disease prevalence across niche populations is rich and opens up the possibility to do even more with these subpopulations one could generate (e.g. cross walking with survey panel data, area estimation, etc.). Furthermore, I have tested this but have not had an opportunity to write a tutorial on the matter, but these functionalities work with Distributed.jl to enable non-blocking asynchronous code execution (still working out exact approach/functionalities) to fully utilize Julia’s performance when working and transforming large amounts of data that is often found in observational studies.
+
+% \subsubsection{Composability within Ecosystem} 
+
+% Paragraph 1 - 2: Distributed computing + Distributed.jl (maybe with Memoization) + Light benchmarking (?)
+
+% Paragraph 3: Support for other databases + FunSQL.jl + SQL output
+
+% \section{Discussion}
+
+% Paragraph 1: How it is being used
+
+% Paragraph 2: Next steps and Future - base off of this: As I was recently funded another year to continue my health disparities research (yay!), I have great ambitions to build out observational health research capacity in JuliaHealth through avenues such as:
+
+% Finalize a submission to JuliaCon Proceedings (need to finish writing tests across this portfolio and adding documentation in the coming weeks)
+% Partnering on potentially running studies within the Julia community using these tools
+% Scoping out better support for survey and panel data
+% Building additional tooling around observational health research (such as determining fairness metrics, easily deployable interactive results explorers, interop with OHDSI tools, etc.)
+% Lowering barrier to entry of prototyping large scale studies for researchers
