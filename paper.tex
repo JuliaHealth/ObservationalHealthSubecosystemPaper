@@ -45,8 +45,7 @@ TODO: Discuss the "big idea" of what this workflow could look like
 
 Broadly, ATLAS has become the de facto tool to develop patient phenotype definitions within observational health research contexts.
 These phenotype definitions have varying levels of complexity where they can be very simple (finding all patients with one health condition or diagnosis) or grow to be extremely complex (defining controlled, uncontrolled, and indeterminate patient cohorts based on medications, lab results, etc.)
-The computable phenotype definitions that ATLAS generates based on phenotype definitions are in a variety of serialization formats such as JSON or prepared SQL expressions available in multiple SQL flavors.
-(Examples of a computable phenotype definition serialized to JSON can be found in Appendix 1 and an exmaple of a serialization to PostgreSQL can be found in Appendix 2)
+The computable phenotype definitions that ATLAS generates based on phenotype definitions are in a variety of serialization formats such as JSON (see \ref{appendix:json}) or prepared SQL expressions available in multiple SQL flavors (see \ref{appendix:postgresql}).
 
 The Julia package, OHDSICohortExpressions.jl, exists specifically to ingest these serialized expressions of computable phenotype definitions and create patient cohorts that match the given criterion in the definition.
 How this tool works is to 1) read and verify the serialized computable phenotype definition 2) reinterpret the serialization into the FunSQL.jl Domain Specific Language 3) return a prepared SQL statement against a given SQL database that queries an OMOP CDM database for the desired patient population(s) of interest.
@@ -84,13 +83,46 @@ TODO: Discuss OHDSIAPI.jl
 
 \subsection{Potential Future Directions}
 
+As shown in this work, there is a rich opportunity for the JuliaHealth organization to become a strong presence within observational health research. 
+JuliaHealth is now sufficiently at a stage of maturity where potential future researchers can leverage JuliaHealth's tools to conduct further future research or build upon existing architecture to target specific needs.
+Some potential future directions that can be taken are as follows.
+
+, efforts can focus on developing a package for assessing fairness and bias in patient datasets, considering factors like data completeness, demographic variables, and fairness algorithms. Additionally, researchers can work on creating modular tools for disease pathway analysis, allowing quick insights into disease prevalence, incidence, and comorbidities within patient data. 
+
+Moreover, there's potential to advance clinical informatics by developing a flexible clinical type system, supporting computable phenotype definitions and medical ontologies. The ecosystem can also benefit from tools to audit the fairness of phenotype definitions. Finally, as the landscape of data expands, integrating non-traditional sources like social media and environmental data into standardized patient records will be a critical frontier. In these ways, JuliaHealth is primed to drive innovation in observational health informatics, pushing the boundaries of data-driven healthcare research.
+
+
 \section{Conclusion}
+
+
 
 \section{Acknowledgements}
 
 For this work, we would like to thank and recognize the following individuals and groups: Dr. Jon Duke and Charity Hilton for their early support, 
 
 \section{References}
+
+% APPENDIX
+\appendix
+
+\section{JSON Serialization of Computable Phenotype Definition}\label{appendix:json}
+
+An example of the JSON serialization of computable phenotype definitions can be found within the paper repository here:
+
+In particular, this example seeks to identify individuals with Type 2 Diabetes Mellitus within a given OMOP CDM.
+
+This was generated using ATLAS Version 2.12.1 as well as 
+WebAPI Version 2.12.1.
+A generic definition of the schema that was created for ATLAS 2.7.1 can be explored here: https://github.com/OHDSIBr/ATLAS-JSON-Schema/tree/2.7.4
+
+\section{PostgreSQL Serialization of Computable Phenotype Definition}\label{appendix:postgresql}
+
+An example of a PostgreSQL SQL serialization of computable phenotype definitions can be found within the paper repository here:
+
+In particular, this example seeks to identify individuals with Type 2 Diabetes Mellitus within a given OMOP CDM.
+
+This was generated using ATLAS Version 2.12.1 as well as 
+WebAPI Version 2.12.1.
 
 \input{bib.tex}
 
