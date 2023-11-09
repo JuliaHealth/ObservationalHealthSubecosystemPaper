@@ -9,7 +9,7 @@
 
 \begin{abstract}
 
-Observational health continues to be a growing field in health informatics research as electronic health records, patient medical claims, and other ancilliary patient data source become more readily computable and accessible to researchers.
+Observational health continues to be a growing field in health informatics research as electronic health records (EHR), patient medical claims, and other ancilliary patient data source become more readily computable and accessible to researchers.
 JuliaHealth is poised as an ecosystem to innovate within this area of research by bringing highly performant analytics approaches, composable solutions, and interoperable software that leverages prior state of the art. 
 This paper will discuss the state of the art observational health research tools within the JuliaHealth ecosystem and how JuliaHealth is prepared to further research goals within this domain.
 
@@ -27,6 +27,7 @@ It features a person-centric design where each domain records personal identity 
 As the OMOP CDM has become a cornerstone in running these widely distributed network studies, special attention to developing tools around handling OMOP CDM data is necessary to meaningfully contribute within the observational health research space.
 
 \subsection{What Is JuliaHealth and Its Goals?}
+JuliaHealth is an open-source organization under the umbrella of the Julia language. It leverages the high-performance of the Julia language in the health field while for example handling large data sets and manipulating them. JuliaHealth aims to be researchers' companion in making use of the observational-health data as Julia is easy to be learnt syntax-wise.
 
 \subsection{Status of Conducting Observational Health Research in Julia}
 
@@ -52,12 +53,15 @@ How this tool works is to 1) read and verify the serialized computable phenotype
 Once these prepared statements are made, researchers can execute the generated SQL against their OMOP CDM instance to generate cohorts for future analyses.
 
 \subsection{Fine-Grain Creation of Cohorts}
+Creating cohorts from a data-set as OMOP CDM has been an interest for researchers to test the outcome. OMOPCDMCohortCreator.jl is a package that manipulates a given database of OMOP CDM. The Package allows researchers to create cohorts using its tools. OMOPCDMCohortCreator.jl connects to the database using OMOPCDMConnector, then provides various tools to extract patients data of specific disease, race, gender, ...etc or filters them to achieve the desired cohort of patients using `executeAudit` function.
 
 TODO: Discuss OMOPCDMCohortCreator.jl
 
 \subsection{Working with Patient Databases}
 
 TODO: Discuss DBConnector
+
+In this paper we discuss data-sets of type OMOPCDM, DBConnector is a Julia package that connects databases on MySQL, SQLite or postgreSQL using one line command. DBConnector uses the DBInterface 
 
 \subsection{Building on Current Tools and State of the Art}
 
