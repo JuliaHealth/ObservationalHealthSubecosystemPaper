@@ -53,15 +53,45 @@ How this tool works is to 1) read and verify the serialized computable phenotype
 Once these prepared statements are made, researchers can execute the generated SQL against their OMOP CDM instance to generate cohorts for future analyses.
 
 \subsection{Fine-Grain Creation of Cohorts}
-Creating cohorts from a data-set as OMOP CDM has been an interest for researchers to test the outcome. OMOPCDMCohortCreator.jl is a package that manipulates a given database of OMOP CDM. The Package allows researchers to create cohorts using its tools. OMOPCDMCohortCreator.jl connects to the database using OMOPCDMConnector, then provides various tools to extract patients data of specific disease, race, gender, ...etc or filters them to achieve the desired cohort of patients using `executeAudit` function.
 
-TODO: Discuss OMOPCDMCohortCreator.jl
+Although OHDSICohortExpressions.jl is sufficient to translate existing phenotype definitions generated in ATLAS to executable queries, oftentimes, there is a tricky problem of how to best iterate on phenotype definitions.
+Often, one has to take an existing definition and either revise to a more narrow cohort or write manual code to build more niche cohorts after an initial definition is created.
+This refactoring of a phenotype definition can lead to conflating ideas within conversation between expert clinical reviewers, analysts, and health researchers.
+This broadly can be the notions of what we are exploring (the phenotype definition; often the responsibility of a clinical reviewer), what is possible to compute upon (the computable phenotype definition; often the responsibility of an analyst), and the goals of the overall study.
+For situations such as these, the tool OMOPCDMCohortCreator.jl was created.
+
+OMOPCDMCohortCreator.jl allows one to iteratively build a patient population quickly and easily.
+One can use patient pools developed from pre-existing cohorts defined off of phenotype definitions as a starting point in exploring patients or create new patient populations quickly without the need for a well-defined phenotype definition.
+This can enable analysts to more quickly understand what is inside their data assets, do "quick" analysis of a particular smaller research question, and enable a more distinct separation of work between a clinical expert reviewer and analyst teams.
+It is highly recommended to still create phenotype definitions about particular populations one explores.
+
+TODO: Add reference to phenotype paper
+TODO: Add small example showing iterative process 
+TODO: Reference capr somehow
 
 \subsection{Working with Patient Databases}
 
-TODO: Discuss DBConnector
+One of the biggest styming factors within not only the Julia ecosystem, but observational health research in general has been the difficulty of working with different databases.
+Although the OMOP CDM has been great for standardizing \textit{how} real world data is handled, there is a lack of consensus on \textit{what} is needed to handle these data assets.
+For a variety of reasons, different groups will choose different database architectures (perhaps PostgreSQL for improved permission support, DuckDB for performance, or even SQLite for ease of use) but all are subtly different enough to create headaches in seamlessly working across different research sites.
 
-In this paper we discuss data-sets of type OMOPCDM, DBConnector is a Julia package that connects databases on MySQL, SQLite or postgreSQL using one line command. DBConnector uses the DBInterface 
+The way that the Julia ecosystem handles this is via the creation of a common database interface called the DBInterface.
+Specific Julia database packages can implement dispatches for this interace allowing users to have a much better experience working across databases.
+In spite of the such benefits, for some users (and especially within the context of observational health studies), it can beneficial to have a more prescriptive interface where one just needs to pass perhaps a password, username, database name, and schema.
+For that reason, we DBConnector.jl was created.
+
+Although this is not an explicit JuliaHealth package, it was a pain point that was experienced throughout the process of observational health research across multiple partner sites.
+The promise of DBConnector.jl is that with one line command, users can connect simply, and in a common (albeit opinionated) manner, to databases.
+DBConnector unifies Julia database packages that implement the DBInterface to achieve this level of simplified connection making.
+
+Finally, if someone needs more fine-grained control over a particular database connection, they can choose to eschew this package.
+Instead, they can switch to the specific Julia database package that would give them the additional control.
+Although they'll lose the simplicity of this package, core required functionality is not lost when working with databases.
+
+TODO: Add database connector example
+TODO: Reference database connector example
+TODO: Reference that it was inspired by database connector OHDSI package
+TODO: Mention package extensions utility
 
 \subsection{Building on Current Tools and State of the Art}
 
@@ -69,11 +99,103 @@ TODO: Discuss OHDSIAPI.jl
 
 \section{Conducting a Small-Scale Observational Health Research Study Using JuliaHealth Tools}
 
-  1. Showing DBConnection
-  2. Using ATLAS Cohort Definition
-  3. Pulling from OMOP CDM Cohort
-  4. Writing characterization code
-  5. Creating artifacts like plots and summary statistics
+With the JuliaHealth tools that have now been created, we can now demonstrate an observational health study workflow that would be used in practice.
+For this paper, we used two datasets: a synthetic patient dataset called \textit{Eunomia} and the MIMIC III patient dataset which had been converted into the OMOP CDM to illustrate the workflow provided by the Observational Health sub-ecosystem.
+Reproducing the workflow using the \textit{Eunomia} dataset is made readily available at the repository here:
+
+TODO: Add tutorial to separate repository
+TODO: Create tutorial about Eunomia
+TODO: Reference Eunomia
+
+\textit{Eunomia} will be used to drive the workflow example looking at patients who have ever had a history of strep throat.
+Results generated by the \textit{Eunomia} dataset will be shown for pedagogical purposes although the actual results of that analysis will be nonsensical given the synthetic nature of the database.
+However, to complement this, a similar study will be done on the MIMIC III dataset characterizing individuals with a history of Type 2 Diabetes Mellitus to encourage discussion on what is practically possible with these tools.
+
+\subsection{Connecting to a Database}
+
+\begin{verbatim}
+  import HealthSampleData: Eunomia
+  import OMOPCDMCohortCreator as OCC
+
+  eunomia = Eunomia()
+  conn = DB(eunomia)
+
+  occ.GenerateDatabaseDetails(
+      :sqlite,
+      "main"
+  )
+
+  occ.GenerateTables(conn)
+\end{verbatim}
+
+TODO: Replace with DBConnector syntax
+
+\subsection{Bridging between OHDSI and JuliaHealth Communities}
+
+Briding between tools used in the OHDSI and JuliaHealth communities is now exceptionally straightforward.
+
+\includegraphics{./atlas_gui.png}
+
+\subsection{Using a Cohort Definition To Build an Initial Cohort}
+
+After having a strep throat phenotype definition defined using ATLAS, we can then execute the resulting computable phenotype definition against the \textit{Eunomia} database.
+
+\begin{verbatim}
+  using JSON3 
+  using OHDSICohortExpressions
+
+  import DBInterface as DBI
+
+  cohort = JSON3.read("strep_throat.json")
+  cohort_expression = cohort[:items][1][:expression]
+
+  model = Model(cdm_version=v"5.3.1", cdm_schema="main",
+                       vocabulary_schema="main", results_schema="main",
+                       target_schema="main", target_table="cohort");
+
+  sql = translate(cohort_expression, dialect=:sqlite, model=model, cohort_definition_id=1);
+
+  [DBI.execute(conn, sub_query) for sub_query in split(sql, ";")[1:end-1]]
+\end{verbatim}
+
+A quick query of the cohort table (where the resulting subjects were stored) shows $\approx 1600$ from the dataset match this criteria.
+
+TODO: Clean up the code a little nicer
+TODO: Make sure the JSON3 reading of a cohort works properly
+
+\subsection{Characterizing Patient Populations}
+
+\begin{verbatim}
+  patients = DBI.execute(conn, "SELECT subject_id AS person_id FROM cohort;") |> DF.DataFrame
+\end{verbatim}
+
+TODO: Replace this line from Jay's PR for getting cohorts
+
+\begin{verbatim}
+  patients_race = occ.GetPatientRace(patients.person_id, conn)
+  patients_gender = occ.GetPatientGender(patients.person_id, conn)
+
+  patients_age_group = occ.GetPatientAgeGroup(
+    patients.person_id, 
+    conn; 
+    age_groupings = [[age, age + 4] for age in 0:5:119]
+  )
+\end{verbatim}
+
+\subsection{Summary of Results}
+
+\begin{verbatim}
+  import DataFrames as DF
+
+  patients_characterized = DF.outerjoin(patients_race,
+                                              patients_gender,
+                                              patients_age_group;
+                                              on = :person_id, 
+                                              matchmissing = :equal)
+  patients_characterized = patients_characterized[:, DF.Not(:person_id)]
+  patient_groups = DF.groupby(patients_characterized, [:race_concept_id, :gender_concept_id, :age_group])
+  patient_groups = DF.combine(patient_groups, DF.nrow => :count)
+\end{verbatim}
 
 \section{Discussion}
 
