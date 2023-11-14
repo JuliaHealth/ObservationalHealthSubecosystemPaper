@@ -182,7 +182,7 @@ TODO: Replace this line from Jay's PR for getting cohorts
   )
 \end{verbatim}
 
-\subsection{Calculating Crudge Prevalence Rate}
+\subsection{Calculating Crude Prevalence Rate}
 
 \begin{verbatim}
   import DataFrames as DF
@@ -223,7 +223,17 @@ As shown in this work, there is a rich opportunity for the JuliaHealth organizat
 JuliaHealth is now sufficiently at a stage of maturity where potential future researchers can leverage JuliaHealth's tools to conduct further future research or build upon existing architecture to target specific needs.
 Some potential future directions that can be taken are as follows.
 
-, efforts can focus on developing a package for assessing fairness and bias in patient datasets, considering factors like data completeness, demographic variables, and fairness algorithms. Additionally, researchers can work on creating modular tools for disease pathway analysis, allowing quick insights into disease prevalence, incidence, and comorbidities within patient data. 
+Due to the strong composition that exists within the JuliaHealth and broader Julia ecosystem, solutions may already exist for solving various health informatics related research.
+However, what has consistently been a problem within the Julia ecosystem is the lack of sufficient documentation dedicated to describing these novel compositions and their application to various endeavors.
+Future efforts can be dedicated to taking existing tools and reframing them in a JuliaHealth context to assist newcomers to Julia and JuliaHealth in determining how to explore and address problems that they are interested in.
+
+Additionally, due to the composable and modular nature of the observational health sub-ecosystem, research analyses and visualizations can be decoupled and interchanged with one another.
+Whereas in other ecosystems that make technologies for tools such as dashboards tightly coupled to analytics regimens, the subecosystem is mature enough to enable new users and developers to create analytics tools that can be separately woven into more graphical user interfaces.
+For example, treatment pathways is a novel observational health approach to understand and visualize the care a patient receives within a care setting.
+Only a few tools exist to visualize such hidden patient narratives but with the JuliaHealth ecosystem, the possibility of making tools that can interrogate patient care pathways more deeply could be fully realized.
+
+Furthermore, again exploiting the composition within the JuliaHealth ecosystem, as mentioned in the context of JuliaHealth and machine learning applications, future efforts could focus on developing fairness and bias auditing tools in patient datasets.
+These tools could consider factors commonly explored in health equity literature like data completeness, demographic variables, and fairness algorithms. 
 
 Moreover, there's potential to advance clinical informatics by developing a flexible clinical type system, supporting computable phenotype definitions and medical ontologies. The ecosystem can also benefit from tools to audit the fairness of phenotype definitions. Finally, as the landscape of data expands, integrating non-traditional sources like social media and environmental data into standardized patient records will be a critical frontier. In these ways, JuliaHealth is primed to drive innovation in observational health informatics, pushing the boundaries of data-driven healthcare research.
 
