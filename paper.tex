@@ -134,7 +134,7 @@ TODO: Replace with DBConnector syntax
 
 Briding between tools used in the OHDSI and JuliaHealth communities is now exceptionally straightforward.
 
-\includegraphics{./atlas_gui.png}
+% \includegraphics{./atlas_gui.png}
 
 \subsection{Using a Cohort Definition To Build an Initial Cohort}
 
@@ -200,6 +200,31 @@ TODO: Replace this line from Jay's PR for getting cohorts
 Using this analytical approach, tabulation can be quickly conducted across patients.
 Additionally, throughout the process, one can perform relevant analysis methods.
 Here, we'll conduct a crude prevalence calculation across the patient cohort.
+
+|                        Race |   Gender |   Age Group | Cohort Count | Total Count |            Prev. (%) |
+| ---------------------------:| --------:| -----------:| ------------:| -----------:| --------------------:|
+| $Black or African American$ | $Female$ |   $60 - 64$ |         $13$ |        $21$ | $61.904761904761905$ |
+|                     $White$ |   $Male$ |   $70 - 74$ |         $68$ |        $96$ |  $70.83333333333334$ |
+|                     $White$ |   $Male$ |   $45 - 49$ |         $47$ |        $74$ |  $63.51351351351351$ |
+|                     $White$ | $Female$ |   $50 - 54$ |         $59$ |       $111$ | $53.153153153153156$ |
+| $Black or African American$ | $Female$ |   $55 - 59$ |          $7$ |        $19$ |  $36.84210526315789$ |
+|                     $White$ | $Female$ | $110 - 114$ |         $22$ |        $29$ |  $75.86206896551724$ |
+|                     $White$ |   $Male$ |   $75 - 79$ |         $45$ |        $56$ |  $80.35714285714286$ |
+|                     $White$ | $Female$ |   $55 - 59$ |         $62$ |        $97$ |  $63.91752577319587$ |
+|                     $White$ | $Female$ |   $45 - 49$ |         $41$ |        $92$ | $44.565217391304344$ |
+|                     $Asian$ | $Female$ |   $80 - 84$ |          $4$ |         $5$ |               $80.0$ |
+|                     $White$ | $Female$ |   $60 - 64$ |         $88$ |       $123$ |  $71.54471544715447$ |
+|                     $White$ | $Female$ |   $75 - 79$ |         $43$ |        $58$ |  $74.13793103448276$ |
+|                     $White$ |   $Male$ |   $60 - 64$ |         $62$ |       $106$ | $58.490566037735846$ |
+|                     $White$ | $Female$ | $100 - 104$ |         $20$ |        $29$ |  $68.96551724137932$ |
+|                     $White$ |   $Male$ |   $55 - 59$ |         $61$ |       $111$ |  $54.95495495495496$ |
+|                     $Asian$ |   $Male$ |   $80 - 84$ |          $6$ |        $10$ |               $60.0$ |
+|                     $White$ |   $Male$ |   $50 - 54$ |         $65$ |       $119$ | $54.621848739495796$ |
+| $Black or African American$ | $Female$ |   $45 - 49$ |         $10$ |        $23$ |  $43.47826086956522$ |
+|       $No matching concept$ | $Female$ |   $60 - 64$ |         $29$ |        $39$ |  $74.35897435897436$ |
+| $Black or African American$ |   $Male$ |   $65 - 69$ |         $12$ |        $18$ |  $66.66666666666666$ |
+
+TODO: Fix up this table
 
 \subsection{Summary of Results}
 
