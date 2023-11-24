@@ -48,11 +48,19 @@ Health Analytics Data-to-Evidence Suite (HADES) is a collection of 20 R packages
 As an example, OHDSI's HADES (Health Analytics Data-To-Evidence Suite) has been in existence for over $10$ years and has several rich packages.
 One of the premier tools within HADES is the ATLAS Shiny application which was developed to "support the design and execution of observational analyses to generate real world evidence from patient level observational data."
 
-\section{Describing an Observational Health Research Workflow Using JuliaHealth}
+\section{Describing Common Observational Health Research Tasks within the Julia Ecosystem}
 
-TODO: Discuss the "big idea" of what this workflow could look like
+This section guides readers through common steps part of observational health research and to what capacity the Julia ecosystem supports these tasks.
+Here are the steps covered 
 
-\subsection{Cohort Expressions Usability}
+\begin{enumerate}
+  \item \textbf{Using Phenotype Definitions} - brief overview of phenotype definitions and how to work with them
+  \item \textbf{Rapid Cohort Iteration and Creation} - how to use JuliaHealth tools to iteratively develop patient cohorts to explore
+  \item \textbf{Working with Patient Databases} - current approaches to working with different patient databases
+  \item \textbf{Ecosystem Interoperability} - how one can bridge between JuliaHealth's ecosystem to other research ecosystems
+\end{enumerate}
+
+\subsection{Using Phenotype Definitions}
 
 Broadly, ATLAS has become the de facto tool to develop patient phenotype definitions within observational health research contexts.
 These phenotype definitions have varying levels of complexity where they can be very simple (finding all patients with one health condition or diagnosis) or grow to be extremely complex (defining controlled, uncontrolled, and indeterminate patient cohorts based on medications, lab results, etc.)
@@ -62,9 +70,9 @@ The Julia package, OHDSICohortExpressions.jl, exists specifically to ingest thes
 How this tool works is to 1) read and verify the serialized computable phenotype definition 2) reinterpret the serialization into the FunSQL.jl Domain Specific Language 3) return a prepared SQL statement against a given SQL database that queries an OMOP CDM database for the desired patient population(s) of interest.
 Once these prepared statements are made, researchers can execute the generated SQL against their OMOP CDM instance to generate cohorts for future analyses.
 
-\subsection{Fine-Grain Creation of Cohorts}
+\subsection{Rapid Cohort Iteration and Creation}
 
-Although OHDSICohortExpressions.jl is sufficient to translate existing phenotype definitions generated in ATLAS to executable queries, oftentimes, there is a tricky problem of how to best iterate on phenotype definitions.
+Although OHDSICohortExpressions.jl is sufficient to translate existing phenotype definitions generated in ATLAS to executable queries, oftentimes, there is a tricky problem of how to best iterate on phenotype definitions. \cite{zelkoDevelopingRobustComputable2023}
 Often, one has to take an existing definition and either revise to a more narrow cohort or write manual code to build more niche cohorts after an initial definition is created.
 This refactoring of a phenotype definition can lead to conflating ideas within conversation between expert clinical reviewers, analysts, and health researchers.
 This broadly can be the notions of what we are exploring (the phenotype definition; often the responsibility of a clinical reviewer), what is possible to compute upon (the computable phenotype definition; often the responsibility of an analyst), and the goals of the overall study.
@@ -75,7 +83,6 @@ One can use patient pools developed from pre-existing cohorts defined off of phe
 This can enable analysts to more quickly understand what is inside their data assets, do "quick" analysis of a particular smaller research question, and enable a more distinct separation of work between a clinical expert reviewer and analyst teams.
 It is highly recommended to still create phenotype definitions about particular populations one explores.
 
-TODO: Add reference to phenotype paper
 TODO: Add small example showing iterative process 
 TODO: Reference capr somehow
 
@@ -103,13 +110,13 @@ TODO: Reference database connector example
 TODO: Reference that it was inspired by database connector OHDSI package
 TODO: Mention package extensions utility
 
-\subsection{Building on Current Tools and State of the Art}
+\subsection{Ecosystem Interoperability}
 
 TODO: Discuss OHDSIAPI.jl
 
 \section{Conducting a Small-Scale Observational Health Research Study Using JuliaHealth Tools}
 
-With the JuliaHealth tools that have now been created, we can now demonstrate an observational health study workflow that would be used in practice.
+With the JuliaHealth tools that have been created, we can now demonstrate an observational health study workflow that would be used in practice.
 For this paper, we used two datasets: a synthetic patient dataset called \textit{Eunomia} and the MIMIC III patient dataset which had been converted into the OMOP CDM to illustrate the workflow provided by the Observational Health sub-ecosystem.
 Reproducing the workflow using the \textit{Eunomia} dataset is made readily available at the repository here:
 
