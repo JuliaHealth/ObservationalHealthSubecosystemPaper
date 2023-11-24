@@ -35,6 +35,16 @@ Over the history of JuliaHealth, a sub-ecosystem within the JuliaHealth ecosyste
 This sub-ecosystem is now mature enough to conduct internationally federated observational health research using tools housed within JuliaHealth and Julia exclusively.
 Additionally, due to the strong interoperability capabilities of Julia, rather than forgoing or completely reinventing aspects of pre-existing observational health research tools, the Julia observational health subecosystem builds on some of these innovations.
 
+Observational Health Data Sciences and Informatics (OHDSI) is a global, collaborative, interdisciplinary, and open-science network of researchers, healthcare professionals, students, patients, other individuals and organizations committed to large-scale health data analytics and generating reliable evidence, with the goal of promoting better health decisions and better care. 
+
+Since current observational health data sources are aggregated at different levels and cannot be generalized to the overall population, the data is often incomplete, inaccurate, and prone to issues of bias, error handling, and multidimensional complexity. The goal of OHDSI is to produce reproducible, robust, and reliable evidence by developing standardized data formats and research protocol designs to enable large-scale collaborative research and improve the transparency and scalability of observational health research. 
+
+The development of the Observational Medical Outcomes Partnership (OMOP) was created in 2009 to address concerns related to data type, study design, and data privacy concerns. The OMOP Common Data Model (CDM) is a "person-centered" information model with standardized relationships and structures with other event tables to create a longitudinal view of all clinical, healthcare-related events for each person. 
+
+OHDSI also develops open-source analytical and software tools, such as HADES and ATLAS, which features a comprehensive set of functions needed to conduct network studies from assessing demographic information to generating summary statistics and interactive dashboards. The best practices set forth by OHDSI has improved the quality and reliability of evidence in observational studies, and it improved network research study collaboration, supported large-scale analytics, and standardized data structures and medical vocabulary.  
+
+Health Analytics Data-to-Evidence Suite (HADES) is a collection of 20 R packages, developed by the OHDSI team, that interact directly with the OMOP CDM to support large-scale analytics, including cohort construction (CirceR, CohortGenerator), population-level estimation (CohortMethod), patient-level prediction (PatientLevelPrediction), and return statistics, figures, and tables. 
+
 As an example, OHDSI's HADES (Health Analytics Data-To-Evidence Suite) has been in existence for over $10$ years and has several rich packages.
 One of the premier tools within HADES is the ATLAS Shiny application which was developed to "support the design and execution of observational analyses to generate real world evidence from patient level observational data."
 
@@ -201,30 +211,26 @@ Using this analytical approach, tabulation can be quickly conducted across patie
 Additionally, throughout the process, one can perform relevant analysis methods.
 Here, we'll conduct a crude prevalence calculation across the patient cohort.
 
-|                        Race |   Gender |   Age Group | Cohort Count | Total Count |            Prev. (%) |
-| ---------------------------:| --------:| -----------:| ------------:| -----------:| --------------------:|
-| $Black or African American$ | $Female$ |   $60 - 64$ |         $13$ |        $21$ | $61.904761904761905$ |
-|                     $White$ |   $Male$ |   $70 - 74$ |         $68$ |        $96$ |  $70.83333333333334$ |
-|                     $White$ |   $Male$ |   $45 - 49$ |         $47$ |        $74$ |  $63.51351351351351$ |
-|                     $White$ | $Female$ |   $50 - 54$ |         $59$ |       $111$ | $53.153153153153156$ |
-| $Black or African American$ | $Female$ |   $55 - 59$ |          $7$ |        $19$ |  $36.84210526315789$ |
-|                     $White$ | $Female$ | $110 - 114$ |         $22$ |        $29$ |  $75.86206896551724$ |
-|                     $White$ |   $Male$ |   $75 - 79$ |         $45$ |        $56$ |  $80.35714285714286$ |
-|                     $White$ | $Female$ |   $55 - 59$ |         $62$ |        $97$ |  $63.91752577319587$ |
-|                     $White$ | $Female$ |   $45 - 49$ |         $41$ |        $92$ | $44.565217391304344$ |
-|                     $Asian$ | $Female$ |   $80 - 84$ |          $4$ |         $5$ |               $80.0$ |
-|                     $White$ | $Female$ |   $60 - 64$ |         $88$ |       $123$ |  $71.54471544715447$ |
-|                     $White$ | $Female$ |   $75 - 79$ |         $43$ |        $58$ |  $74.13793103448276$ |
-|                     $White$ |   $Male$ |   $60 - 64$ |         $62$ |       $106$ | $58.490566037735846$ |
-|                     $White$ | $Female$ | $100 - 104$ |         $20$ |        $29$ |  $68.96551724137932$ |
-|                     $White$ |   $Male$ |   $55 - 59$ |         $61$ |       $111$ |  $54.95495495495496$ |
-|                     $Asian$ |   $Male$ |   $80 - 84$ |          $6$ |        $10$ |               $60.0$ |
-|                     $White$ |   $Male$ |   $50 - 54$ |         $65$ |       $119$ | $54.621848739495796$ |
-| $Black or African American$ | $Female$ |   $45 - 49$ |         $10$ |        $23$ |  $43.47826086956522$ |
-|       $No matching concept$ | $Female$ |   $60 - 64$ |         $29$ |        $39$ |  $74.35897435897436$ |
-| $Black or African American$ |   $Male$ |   $65 - 69$ |         $12$ |        $18$ |  $66.66666666666666$ |
-
-TODO: Fix up this table
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|}
+    \hline
+        Race & Gender & Age Group & Cohort Count & Total Count & Prev. (\%) \\ \hline
+        Black or African American & Female & 60 - 64 & 13 & 21 & 61.90 \\ \hline
+        White & Male & 70 - 74 & 68 & 96 & 70.83 \\ \hline
+        White & Male & 45 - 49 & 47 & 74 & 63.51 \\ \hline
+        White & Female & 50 - 54 & 59 & 111 & 53.15 \\ \hline
+        Black or African American & Female & 55 - 59 & 7 & 19 & 36.84 \\ \hline
+        White & Male & 75 - 79 & 45 & 56 & 80.35 \\ \hline
+        White & Female & 55 - 59 & 62 & 97 & 63.91 \\ \hline
+        White & Female & 45 - 49 & 41 & 92 & 44.56 \\ \hline
+        Asian & Female & 80 - 84 & 4 & 5 & 80.0  \hline
+        Asian & Male & 80 - 84 & 6 & 10 & 60.00 \\ \hline
+        Black or African American & Female & 45 - 49 & 10 & 23 & 43.47 \\ \hline
+        No matching concept & Female & 60 - 64 & 29 & 39 & 74.35 \\ \hline
+        Black or African American & Male & 65 - 69 & 12 & 18 & 66.66 \\ \hline
+    \end{tabular}
+\end{table}
 
 \subsection{Summary of Results}
 
@@ -238,9 +244,124 @@ In Table 3, we can calculate across this dataset meaningful statistics that coul
 
     1. Modularization of code and chaining
     2. Distributed computing
-    3. FunSQL back-end
 
-\subsection{Strong Composition of Machine Learning, Differential Equations, and JuliaHealth}
+\subsubsection{Modularization of Code and Chaining}
+
+An exciting emergent aspect of the JuliaHealth ecosystem that came about as a result of developing OMOPCDMCohortCreator.jl was the prospect of radical modularization and chaining of package functionalities together.
+For example, taking our workflow example from the earlier section where we characterized patients by race, gender, and age group, we can do a few "tricks" to modularize these characterization functions as follows:
+
+
+We can leverage a unique property of Julia in that Julia supports partial evaluation of functions (also known as currying) to simplify repeated function calls to the same function over and over again.
+First, we'll take our original functions and fix a connection object to each of our cofactor functions.
+This simplifies having to continuously pass forward a connection object and opens up the ability to chain together these functions simply:
+
+TODO: Check that I equated currying correctly here.
+
+\begin{verbatim}
+import Base:
+  Fix2
+
+CGetPatientRace = Base.Fix2(occ.GetPatientRace, conn)
+CGetPatientGender = Base.Fix2(occ.GetPatientGender, conn)
+CGetPatientAgeGroup = Base.Fix2(occ.GetPatientAgeGroup, conn)
+\end{verbatim}
+
+NOTE: The "C" prefix for each of our curried functions denotes that it is curried.
+
+Second, as OMOPCDMCohortCreator.jl is built on top of DataFrames.jl and one has the option of creating a DataFrame with the result from every OCC function, we can use the package, Chain.jl.
+This package abstracts away some of the explicit functionalities of DataFrames.jl but instead gives much easier ways to define a flow of functions:
+
+\begin{verbatim}
+import Chain:
+  @chain
+
+CofactorPatients(patients) = @chain patients begin
+    CGetPatientRace_fixed
+    CGetPatientGender_fixed
+    CGetPatientAgeGroup_fixed
+end
+\end{verbatim}
+
+\begin{verbatim}
+CharacterizePatients(patients) = @chain patients begin
+    _[:, DF.Not(:person_id)]
+    DF.groupby(_, names(_))
+    DF.combine(_, DF.nrow => :count)
+    occ.ExecuteAudit
+end
+\end{verbatim}
+
+This gives one the ability to simply reason about an analysis in a very straightforward and readable manner:
+
+\begin{verbatim}
+RunStudy(patients) = @chain patients begin
+    CofactorPatients
+    CharacterizePatients
+end
+\end{verbatim}
+
+In this way, future researchers using tools such as OMOPCDMCohortCreator.jl can create these more convenient abstractions.
+In fact, it could be a point of exploration in the future to build on top of OMOPCDMCohortCreator.jl even more abstracted and reusable functionalities to simplify ease of use while also enabling more readily auditable functionality.
+Finally, as these functions have now been fully modularized, these can now be readily distributed using Julia's distributed computing methods:
+
+\begin{verbatim}
+import Distributed:
+  @distributed 
+
+result = @distributed (append!) for i in 1:10
+   vals = 
+      RunStudy(strep_patients[i*100 + 1:(i+1)*100, :])
+   [vals]
+end
+
+vcat(result...) |> audit_patient_groups
+\end{verbatim}
+
+Distributed computing here then allows a researcher to run multiple investigations at once as well as optimize performance to a given database.
+
+
+\subsubsection{Auto-Generating SQL from JuliaHealth Commands}
+
+One crucial aspect of the observational health sub-ecosystem is that it is unavoidable to work with databases that contain patient health information.
+For better or worse, the tool that is used to best interact with these databases are SQL dialects that loosely follow consistently the ANSI SQL guidance.
+To accomodate for this, several of the core tools developed in this sub-ecosystem generate SQL that can be used in the case where Julia may not be available in a given environment housing patient health data.
+As an example, \textit{OMOPCDMCohortCreator.jl} functions build upon \textit{FunSQL.jl} allowing one to use a function such `GetPatientAgeGroup` without a connection object which would result in SQL.
+
+\begin{verbatim}
+  GetPatientAgeGroup([1]; age_groupings = [[0, 40], [41, 80]])
+\end{verbatim}
+
+\begin{verbatim}
+  SELECT
+    "PERSON_2"."person_id",
+    (CASE 
+      WHEN ("PERSON_2"."age" < 41) 
+        THEN '0 - 40' 
+      WHEN ("PERSON_2"."age" < 81) 
+        THEN '41 - 80' END) AS "age_group"
+  FROM (
+    SELECT
+      "PERSON_1"."person_id",
+      (2023 - "PERSON_1"."year_of_birth") AS "age"
+    FROM "PERSON" AS "PERSON_1"
+    WHERE ("PERSON_1"."person_id" IN (1))
+  ) AS "PERSON_2"
+\end{verbatim}
+
+
+\subsection{Strong Composition within JuliaHealth}
+
+Within Julia, one aspect of the language that is often viewed as a technical problem within other languages emerges more as a social problem within Julia.
+That problem is the problem of strong composition within Julia.
+What composition within Julia is thought to be generally is that a user of Julia packages A and B can combine these packages oftentimes seamlessly together in such a way as to solve a problem that the original designers of A and B did not think about.
+This has the virtue of Julia packages being strongly flexible to suit problems at hand but a discoverability problem where users developing these novel compositions may not share about these combinations.
+As a result, there arise a paradox wherein strongly compositional systems, like Julia, simultaneously give rise to obfuscational logic.
+
+Within JuliaHealth, this problem is an active area of exploration.
+During the summer of 2023, this problem was one of the focuses of Google Summer of Code mentee, Fareeda Abdelazeez.
+Originally, the project dealt with determining if another package in the JuliaHealth ecosystem was necessary to support prediction for patient outcomes.
+Instead, what was realized instead is that what should be further investigated is novel compositions that can be viewed through the lens of JuliaHealth.
+As shown in this workflow, although there were some packages that were made specifically for JuliaHealth, other packages that were not JuliaHealth specific were used alongside of it that composed flawlessly with the rest of the JuliaHealth observational health subecosystem.
 
 \subsection{Potential Future Directions}
 
@@ -262,14 +383,30 @@ These tools could consider factors commonly explored in health equity literature
 
 Moreover, there's potential to advance clinical informatics by developing a flexible clinical type system, supporting computable phenotype definitions and medical ontologies. The ecosystem can also benefit from tools to audit the fairness of phenotype definitions. Finally, as the landscape of data expands, integrating non-traditional sources like social media and environmental data into standardized patient records will be a critical frontier. In these ways, JuliaHealth is primed to drive innovation in observational health informatics, pushing the boundaries of data-driven healthcare research.
 
-
 \section{Conclusion}
 
+In conclusion, this paper has demonstrated the capabilities of the JuliaHealth observational health sub-ecosystem and its potential to further investigations in observational health research.
+Although it is an ecosystem that is relatively new, its robustness allows for novel investigations to be pursued within this domain of research. 
+Additionally, due to the strongly compositional nature of the Julia ecosystem, these JuliaHealth tools can readily compose with tooling to support in-depth statistical analyses, mathematical modeling, and visualization capacities.
 
+The deep dive into the JuliaHealth ecosystem unravels its arsenal of tools tailored for observational health research, meticulously designed to navigate the complexities of handling OMOP CDM data. Notably, the sub-ecosystem within JuliaHealth presents mature, internationally federated research capabilities, building upon existing innovations like OHDSI's HADES, while offering novel tools such as OMOPCDMCohortCreator.jl.
+In considering future directions, the paper posits the promising avenues for JuliaHealth, envisioning expanded documentation, the development of visualization tools, and integration of machine learning applications for fairness auditing. The ecosystem's potential to revolutionize clinical informatics by integrating non-traditional data sources, auditing phenotype definitions, and fostering innovation in data-driven healthcare research is paramount.
+In essence, the JuliaHealth ecosystem stands as a catalyst for transformative observational health research, poised to push the boundaries of innovation, collaboration, and standardization in the pursuit of better healthcare outcomes. As it continues to evolve, JuliaHealth emerges as a beacon of progress in the dynamic landscape of health informatics.
 
 \section{Acknowledgements}
 
-For this work, we would like to thank and recognize the following individuals and groups: Dr. Jon Duke and Charity Hilton for their early support, 
+For this work, we would like to thank and recognize the following individuals and groups: 
+
+\begin{enumerate}
+
+  \item Dr. Jon Duke for his early support
+  \item Kristin Kostka for being an early champion in trying novel ideas
+  \item Dilum Aluthge for helping this work find a home in JuliaHealth
+  \item Adam Black for thinking through potential approaches
+  \item The Roux Institute's OHDSI Center for their encouragement
+  \item The JuliaHealth community and contributors for fearlessly trying to push boundaries on what observational health informatics can truly be
+
+\end{enumerate}
 
 \section{References}
 
@@ -298,59 +435,3 @@ WebAPI Version 2.12.1.
 \input{bib.tex}
 
 \end{document}
-
-% Paragraph 1: Background on observational health research
-
-% Observational health data captures a comprehensive view of patient cohort populations, and they are often used to assess incidence rates, prevalence rates, risk factors, and prognosis associated with physical and mental health conditions and treatment interventions. By analyzing healthcare records and clinical events, observational health research can perform cohort characterization, population-estimation, and patient-level predictions to evaluate population health, target interventions and prevention measures, and ultimately transform healthcare policy.    
-
-% However, current observational health and epidemiological surveys are limited by their data collection and administration methods, sample size representativeness, cohort phenotype definitions, and statistical/algorithmic methods to combine outside, disparate data sources. There is a need for timely, unbiased, accurate, and quality data regarding the mental illness and the ability detect and characterize trends in prevalence, severity, and the association with other chronic illnesses/morbidities. 
-
-% This effort could help leading health officials implement better informed interventions that will increase equitable access to mental healthcare across vulnerable populations, support efforts to decrease acute mental health-related morbidities, and improve efficacy of health spending. 
-
-% Paragraph 2: What is OHDSI + HADES R ecosystem
-
-% Observational Health Data Sciences and Informatics (OHDSI) is a global, collaborative, interdisciplinary, and open-science network of researchers, healthcare professionals, students, patients, other individuals and organizations committed to large-scale health data analytics and generating reliable evidence, with the goal of promoting better health decisions and better care. 
-
-% Since current observational health data sources are aggregated at different levels and cannot be generalized to the overall population, the data is often incomplete, inaccurate, and prone to issues of bias, error handling, and multidimensional complexity. The goal of OHDSI is to produce reproducible, robust, and reliable evidence by developing standardized data formats and research protocol designs to enable large-scale collaborative research and improve the transparency and scalability of observational health research. 
-
-% The development of the Observational Medical Outcomes Partnership (OMOP) was created in 2009 to address concerns related to data type, study design, and data privacy concerns. The OMOP Common Data Model (CDM) is a "person-centered" information model with standardized relationships and structures with other event tables to create a longitudinal view of all clinical, healthcare-related events for each person. 
-
-% OHDSI also develops open-source analytical and software tools, such as HADES and ATLAS, which features a comprehensive set of functions needed to conduct network studies from assessing demographic information to generating summary statistics and interactive dashboards. The best practices set forth by OHDSI has improved the quality and reliability of evidence in observational studies, and it improved network research study collaboration, supported large-scale analytics, and standardized data structures and medical vocabulary.  
-
-% Health Analytics Data-to-Evidence Suite (HADES) is a collection of 20 R packages, developed by the OHDSI team, that interact directly with the OMOP CDM to support large-scale analytics, including cohort construction (CirceR, CohortGenerator), population-level estimation (CohortMethod), patient-level prediction (PatientLevelPrediction), and return statistics, figures, and tables. 
-
-% Paragraph 3: Why tooling was needed
-
-% Old Content
-
-% \subsection{Tooling for Observational Health Research}
-
-% Paragraph 1: Introduction of novel packages
-
-% Paragraph 2: Development philosophy and algorithmic design
-
-% \subsection{Example Use Cases}
-
-% \subsubsection{Minimal Characterization Study}
-
-% Paragraph 1: Condensed version of tutorial: https://juliahealth.org/OMOPCDMCohortCreator.jl/dev/tutorials/
-
-% Paragraph 2: Example of using results (base off this paragraph): From here, the potential to calculate valuable metrics disease prevalence across niche populations is rich and opens up the possibility to do even more with these subpopulations one could generate (e.g. cross walking with survey panel data, area estimation, etc.). Furthermore, I have tested this but have not had an opportunity to write a tutorial on the matter, but these functionalities work with Distributed.jl to enable non-blocking asynchronous code execution (still working out exact approach/functionalities) to fully utilize Julia’s performance when working and transforming large amounts of data that is often found in observational studies.
-
-% \subsubsection{Composability within Ecosystem} 
-
-% Paragraph 1 - 2: Distributed computing + Distributed.jl (maybe with Memoization) + Light benchmarking (?)
-
-% Paragraph 3: Support for other databases + FunSQL.jl + SQL output
-
-% \section{Discussion}
-
-% Paragraph 1: How it is being used
-
-% Paragraph 2: Next steps and Future - base off of this: As I was recently funded another year to continue my health disparities research (yay!), I have great ambitions to build out observational health research capacity in JuliaHealth through avenues such as:
-
-% Finalize a submission to JuliaCon Proceedings (need to finish writing tests across this portfolio and adding documentation in the coming weeks)
-% Partnering on potentially running studies within the Julia community using these tools
-% Scoping out better support for survey and panel data
-% Building additional tooling around observational health research (such as determining fairness metrics, easily deployable interactive results explorers, interop with OHDSI tools, etc.)
-% Lowering barrier to entry of prototyping large scale studies for researchers
