@@ -43,7 +43,6 @@ The development of the Observational Medical Outcomes Partnership (OMOP) was cre
 
 OHDSI also develops open-source analytical and software tools, such as HADES and ATLAS, which features a comprehensive set of functions needed to conduct network studies from assessing demographic information to generating summary statistics and interactive dashboards. The best practices set forth by OHDSI has improved the quality and reliability of evidence in observational studies, and it improved network research study collaboration, supported large-scale analytics, and standardized data structures and medical vocabulary.  
 
-Health Analytics Data-to-Evidence Suite (HADES) is a collection of 20 R packages, developed by the OHDSI team, that interact directly with the OMOP CDM to support large-scale analytics, including cohort construction (CirceR, CohortGenerator), population-level estimation (CohortMethod), patient-level prediction (PatientLevelPrediction), and return statistics, figures, and tables. 
 
 As an example, OHDSI's HADES (Health Analytics Data-To-Evidence Suite) has been in existence for over $10$ years and has several rich packages.
 One of the premier tools within HADES is the ATLAS Shiny application which was developed to "support the design and execution of observational analyses to generate real world evidence from patient level observational data."
@@ -105,14 +104,25 @@ Finally, if someone needs more fine-grained control over a particular database c
 Instead, they can switch to the specific Julia database package that would give them the additional control.
 Although they'll lose the simplicity of this package, core required functionality is not lost when working with databases.
 
+DBConnector.jl was inspired by the package \textit{DatabaseConnector} (Link: https://github.com/OHDSI/DatabaseConnector)
+
 TODO: Add database connector example
 TODO: Reference database connector example
-TODO: Reference that it was inspired by database connector OHDSI package
 TODO: Mention package extensions utility
 
 \subsection{Ecosystem Interoperability}
 
-TODO: Discuss OHDSIAPI.jl
+In order to more effectively bridge the JuliaHealth ecosystem with ongoing efforts in other ecosystems, Julia provides methods to allow one to seamlessly interoperate with not only other ecosystems but entirely different languages as well.
+For example, through the work of packages like RCall.jl or PythonCall.jl, one can utilize R or Python packages and interfaces directly within Julia. \cite{PythonCall.jl} \cite{RCallJl}
+This embedding allows one to patch one's workflow where proper tools are missing with the equivalent package in Python or R.
+
+One particular ecosystem is the OHDSI Health Analytics Data-to-Evidence Suite (HADES) ecosystem where the majority of its tools are written in a combination of R and Java.
+HADES is a collection of approximately 20 packages, developed by the OHDSI community to interact directly with the OMOP CDM to support large-scale analytics.
+The goals of HADES is much the same as the JuliaHealth observational health subecosystem such as supporting cohort construction, population-level estimation, patient-level prediction, and calculating other sorts of relevant research artifacts.
+
+For HADES tools that expose APIs, rather than having to somehow wrap around this with a tool like RCall.jl, instead, HADES software can continue to run as a service and OHDSIAPI.jl can be used.
+OHDSIAPI.jl is a Julia wrapper around a variety of OHDSI API-based services that can directly interface with such services.
+This can be a great bridging mechanism so that observational health researchers can continue doing work and still interact with necessary research endpoints as needed without interrupting their workflow.
 
 \section{Conducting a Small-Scale Observational Health Research Study Using JuliaHealth Tools}
 
