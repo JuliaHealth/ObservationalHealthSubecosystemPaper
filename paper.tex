@@ -26,31 +26,67 @@ The OMOP CDM itself does not require a specific technology to work with the data
 It features a person-centric design where each domain records personal identity while prioritizing data protection through the limiting of information that could endanger patient anonymity.
 As the OMOP CDM has become a cornerstone in running these widely distributed network studies, special attention to developing tools around handling OMOP CDM data is necessary to meaningfully contribute within the observational health research space.
 
-\subsection{What Is JuliaHealth and Its Goals?}
-JuliaHealth is an open-source organization under the umbrella of the Julia language. It leverages the high-performance of the Julia language in the health field while for example handling large data sets and manipulating them. JuliaHealth aims to be researchers' companion in making use of the observational-health data as Julia is easy to be learnt syntax-wise.
+\subsection{What Is JuliaHealth?}
+
+DONE:
+JuliaHealth is an open-source collective dedicated to bringing the Julia programming language to various avenues of health research domains such as observational health, medical imaging, standards interoperability, etc.
+It leverages the strengths of the Julia language to introduce new approaches to these spaces, augment and improve existing workflows, and provide a central community structure for health researchers both part of and entering into the Julia ecosystem.
+Eventually, JuliaHealth will host a variety of subecosystems and associated resources that will enable novel research to be conducted within Julia. 
 
 \subsection{Status of Conducting Observational Health Research in Julia}
 
-Over the history of JuliaHealth, a sub-ecosystem within the JuliaHealth ecosystem has developed which is dedicated to performing observational health research around the OMOP CDM.
-This sub-ecosystem is now mature enough to conduct internationally federated observational health research using tools housed within JuliaHealth and Julia exclusively.
-Additionally, due to the strong interoperability capabilities of Julia, rather than forgoing or completely reinventing aspects of pre-existing observational health research tools, the Julia observational health subecosystem builds on some of these innovations.
+JuliaHealth itself is a loose collective of various research software engineers, health researchers, and hobbyist programmers that had its origins in $\approx 2020$.
+Being that JuliaHealth is a federated network of contributors, varying aspects of the ecosystem have developed at differing rates as a function of multiple different factors such as developer time, workplace incentives, and more.
+One area of the subecosystems within JuliaHealth that has matured significantly over the years has been the observational health subecosystem (referred to as OHS for the remainder of this paper).
 
-Observational Health Data Sciences and Informatics (OHDSI) is a global, collaborative, interdisciplinary, and open-science network of researchers, healthcare professionals, students, patients, other individuals and organizations committed to large-scale health data analytics and generating reliable evidence, with the goal of promoting better health decisions and better care. 
+Although difficult to date, it can said that OHS had its inception in work done by Evans and Simonov with efforts such as \textit{FunOHDSI.jl}, \textit{OHDSICohortExpressions}, and \textit{FunSQL.jl} around $2021$  \cite{kirill_simonov_2023_7705325}
+Since then, Zelko et. al. have spearheaded most recent developments within OHS via the creation of a variety of tools and demonstrated their effectiveness in using these tools for novel observational health research endeavors \cite{zelko2022pilot}
+Through such efforts, OHS is becoming further capable of executing novel observational health research although, understandably, not as mature as similar ecosystems. 
 
-Since current observational health data sources are aggregated at different levels and cannot be generalized to the overall population, the data is often incomplete, inaccurate, and prone to issues of bias, error handling, and multidimensional complexity. The goal of OHDSI is to produce reproducible, robust, and reliable evidence by developing standardized data formats and research protocol designs to enable large-scale collaborative research and improve the transparency and scalability of observational health research. 
+TODO: Cite FunOHDSI
+TODO: Cite OHDSICohortExpressions
+TODO: Cite OHDSI Symposium poster on JuliaHealth
+TODO: Register OHDSI Symposium poster to Zenodo
+TODO: Cite JuliaCon 2023 presentation
+TODO: Register JuliaCon 2023 presentation to Zenodo
 
-The development of the Observational Medical Outcomes Partnership (OMOP) was created in 2009 to address concerns related to data type, study design, and data privacy concerns. The OMOP Common Data Model (CDM) is a "person-centered" information model with standardized relationships and structures with other event tables to create a longitudinal view of all clinical, healthcare-related events for each person. 
+In particular, the strongest influence and inspiration to OHS is the OHDSI open-science network.
+OHDSI (Observational Health Data Sciences and Informatics) is a global, collaborative, interdisciplinary, and open network of researchers, healthcare professionals, students, patients, and other entities committed to large-scale health data analytics and generating reliable evidence, with the goal of promoting better health decisions and better care. 
+Since current observational health data sources are aggregated at different levels and cannot be generalized to the overall population, the data is often incomplete, inaccurate, and prone to issues of bias, error handling, and multidimensional complexity. 
+The goal of OHDSI is to produce reproducible, robust, and reliable evidence by developing standardized data formats and research protocol designs to enable large-scale collaborative research and improve the transparency and scalability of observational health research. 
 
-OHDSI also develops open-source analytical and software tools, such as HADES and ATLAS, which features a comprehensive set of functions needed to conduct network studies from assessing demographic information to generating summary statistics and interactive dashboards. The best practices set forth by OHDSI has improved the quality and reliability of evidence in observational studies, and it improved network research study collaboration, supported large-scale analytics, and standardized data structures and medical vocabulary.  
+OHDSI had its inception in the development of the Observational Medical Outcomes Partnership (OMOP) that was created in 2009 by the US Food and Drug Administration to address concerns related to data type, study design, and data privacy concerns of "Real World Data" \cite{ohdsi2019book} \cite{FDARealWorldEvidence}
+What could be considered the magnum opus of the OMOP group was the development of what is called the OMOP Common Data Model (OMOP CDM) to house and ingest this sort of data in a consistent format that has been optimized to assist in extracting meaningful population health information.
+In brief, the OMOP Common Data Model (CDM) is a "person-centered" model that has standardized common events in a given patient encounter with database tables that represent the unique structures found in patient events.
+This creates a longitudinal view of all healthcare-related events per person recorded in a singular health system.
+OHDSI was developed to focus on leveraging observational health data stored within the OMOP CDM.
 
+At this time, OHS prioritizes creation and maintenance of tools that support analysis of "OMOP-ified"\footnotemark data (that is, data which is formatted in the OMOP CDM), in much the same manner that OHDSI does.
 
-As an example, OHDSI's HADES (Health Analytics Data-To-Evidence Suite) has been in existence for over $10$ years and has several rich packages.
+\footnotetext{I am unsure of where this notion came from. I believe it may have originally been coined by my former mentor and OHDSI founder, Dr. Jon Duke. 
+The provenance of related terms like "OMOP-ification" (the process of converting a database to the OMOP CDM) is even murkier.}
+
+OHDSI supports the development of open-source software tools in a centralized ecosystem called HADES (Health Analytics Data-to-Evidence Suite) for particularly managing and working with OMOP CDM formatted data.
+The HADES ecosystem has been in existence for $\approx 10$ years and has given rise to improvements in the quality and reliability of observational health research as well as motivating novel collaboration mechanisms.
+
+In particular, one collaboration mechanism that OHDSI has been able to operationalize meaningfully while working with observational health data is the notion of "network studies".
+These studies, are designed to be transparent and encompasses research endeavors being explored by members of the OHDSI comprehensive of relevant documentation, analysis code, results, and study protocols describing the study's scope and objectives.
+One core innovation brought about by OHDSI in the space of network science is how, given the HADES tools and procedures established by OHDSI, a research group can develop their analysis on their own OMOP CDM instance and then bundle together their study.
+Once this packaging is done, they can pass along the study package to another site to collaborate on the same analysis but on different data assets.
+Data confidentiality is preserved in this approach as data from individual participating sites remains exclusive to each site, with only aggregate results shared across a given collaborator network network.
+As such, no risk for re-identification comes about through this network collaboration and has ushered in the possibility for similar research approaches to be taken across the globe. \cite{ohdsi2019book}
+
 One of the premier tools within HADES is the ATLAS Shiny application which was developed to "support the design and execution of observational analyses to generate real world evidence from patient level observational data."
 
 \section{Describing Common Observational Health Research Tasks within the Julia Ecosystem}
 
-This section guides readers through common steps part of observational health research and to what capacity the Julia ecosystem supports these tasks.
-Here are the steps covered 
+DONE: 
+
+Achieving the notion of a network study in an OHDSI-sense is a highly valuable goal to multiple communities.
+JuliaHealth now has capacity to do just the same and can harness the best of OHDSI and the best of Julia to achieve novel observational health workflows.
+The JuliaHealth observational health subecosystem (referred to as OHS for the remainder of this paper) supports a variety of use cases designed to support and enable investigations into observational health data.
+This paper summarizes some of the current capacity OHS possesses to conduct such endeavors.
+In particular, the following supported areas will be discussed:
 
 \begin{enumerate}
   \item \textbf{Using Phenotype Definitions} - brief overview of phenotype definitions and how to work with them
@@ -118,7 +154,7 @@ This embedding allows one to patch one's workflow where proper tools are missing
 
 One particular ecosystem is the OHDSI Health Analytics Data-to-Evidence Suite (HADES) ecosystem where the majority of its tools are written in a combination of R and Java.
 HADES is a collection of approximately 20 packages, developed by the OHDSI community to interact directly with the OMOP CDM to support large-scale analytics.
-The goals of HADES is much the same as the JuliaHealth observational health subecosystem such as supporting cohort construction, population-level estimation, patient-level prediction, and calculating other sorts of relevant research artifacts.
+The goals of HADES is much the same as the JuliaHealth OHS such as supporting cohort construction, population-level estimation, patient-level prediction, and calculating other sorts of relevant research artifacts.
 
 For HADES tools that expose APIs, rather than having to somehow wrap around this with a tool like RCall.jl, instead, HADES software can continue to run as a service and OHDSIAPI.jl can be used.
 OHDSIAPI.jl is a Julia wrapper around a variety of OHDSI API-based services that can directly interface with such services.
@@ -128,7 +164,7 @@ This can be a great bridging mechanism so that observational health researchers 
 
 With the JuliaHealth tools that have been created, we can now demonstrate an observational health study workflow that would be used in practice.
 For this paper, we used two datasets: a synthetic patient dataset called \textit{Eunomia} and the MIMIC III patient dataset which had been converted into the OMOP CDM to illustrate the workflow provided by the Observational Health sub-ecosystem.
-Reproducing the workflow using the \textit{Eunomia} dataset is made readily available at the repository here:
+Reproducing the workflow using the \textit{Eunomia} dataset is made readily available at the repository here: \cite{schuemieEunomia2023}
 
 TODO: Add tutorial to separate repository
 TODO: Create tutorial about Eunomia
@@ -339,7 +375,7 @@ Distributed computing here then allows a researcher to run multiple investigatio
 
 \subsubsection{Auto-Generating SQL from JuliaHealth Commands}
 
-One crucial aspect of the observational health sub-ecosystem is that it is unavoidable to work with databases that contain patient health information.
+One crucial aspect of the OHS is that it is unavoidable to work with databases that contain patient health information.
 For better or worse, the tool that is used to best interact with these databases are SQL dialects that loosely follow consistently the ANSI SQL guidance.
 To accomodate for this, several of the core tools developed in this sub-ecosystem generate SQL that can be used in the case where Julia may not be available in a given environment housing patient health data.
 As an example, \textit{OMOPCDMCohortCreator.jl} functions build upon \textit{FunSQL.jl} allowing one to use a function such `GetPatientAgeGroup` without a connection object which would result in SQL.
@@ -365,7 +401,6 @@ As an example, \textit{OMOPCDMCohortCreator.jl} functions build upon \textit{Fun
   ) AS "PERSON_2"
 \end{verbatim}
 
-
 \subsection{Strong Composition within JuliaHealth}
 
 Within Julia, one aspect of the language that is often viewed as a technical problem within other languages emerges more as a social problem within Julia.
@@ -378,7 +413,7 @@ Within JuliaHealth, this problem is an active area of exploration.
 During the summer of 2023, this problem was one of the focuses of Google Summer of Code mentee, Fareeda Abdelazeez.
 Originally, the project dealt with determining if another package in the JuliaHealth ecosystem was necessary to support prediction for patient outcomes.
 Instead, what was realized instead is that what should be further investigated is novel compositions that can be viewed through the lens of JuliaHealth.
-As shown in this workflow, although there were some packages that were made specifically for JuliaHealth, other packages that were not JuliaHealth specific were used alongside of it that composed flawlessly with the rest of the JuliaHealth observational health subecosystem.
+As shown in this workflow, although there were some packages that were made specifically for JuliaHealth, other packages that were not JuliaHealth specific were used alongside of it that composed flawlessly with the rest of the JuliaHealth OHS.
 
 \subsection{Potential Future Directions}
 
@@ -390,7 +425,7 @@ Due to the strong composition that exists within the JuliaHealth and broader Jul
 However, what has consistently been a problem within the Julia ecosystem is the lack of sufficient documentation dedicated to describing these novel compositions and their application to various endeavors.
 Future efforts can be dedicated to taking existing tools and reframing them in a JuliaHealth context to assist newcomers to Julia and JuliaHealth in determining how to explore and address problems that they are interested in.
 
-Additionally, due to the composable and modular nature of the observational health sub-ecosystem, research analyses and visualizations can be decoupled and interchanged with one another.
+Additionally, due to the composable and modular nature of the OHS, research analyses and visualizations can be decoupled and interchanged with one another.
 Whereas in other ecosystems that make technologies for tools such as dashboards tightly coupled to analytics regimens, the subecosystem is mature enough to enable new users and developers to create analytics tools that can be separately woven into more graphical user interfaces.
 For example, treatment pathways is a novel observational health approach to understand and visualize the care a patient receives within a care setting.
 Only a few tools exist to visualize such hidden patient narratives but with the JuliaHealth ecosystem, the possibility of making tools that can interrogate patient care pathways more deeply could be fully realized.
@@ -402,7 +437,7 @@ Moreover, there's potential to advance clinical informatics by developing a flex
 
 \section{Conclusion}
 
-In conclusion, this paper has demonstrated the capabilities of the JuliaHealth observational health sub-ecosystem and its potential to further investigations in observational health research.
+In conclusion, this paper has demonstrated the capabilities of the JuliaHealth OHS and its potential to further investigations in observational health research.
 Although it is an ecosystem that is relatively new, its robustness allows for novel investigations to be pursued within this domain of research. 
 Additionally, due to the strongly compositional nature of the Julia ecosystem, these JuliaHealth tools can readily compose with tooling to support in-depth statistical analyses, mathematical modeling, and visualization capacities.
 
