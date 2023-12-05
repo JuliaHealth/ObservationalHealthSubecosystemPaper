@@ -1,0 +1,43 @@
+\begin{thebibliography}{1}
+
+\bibitem{RCallJl}
+{{RCall}}.jl.
+
+\bibitem{ohdsi2019book}
+{OHDSI}.
+{\em The Book of {{OHDSI}}: {{Observational}} Health Data Sciences and
+  Informatics}.
+{OHDSI}.
+
+\bibitem{PythonCall.jl}
+Christopher Rowley.
+{{PythonCall}}.jl: {{Python}} and {{Julia}} in harmony.
+
+\bibitem{schuemieEunomia2023}
+Martijn Schuemie, Frank DeFalco, and Vojtech Huser.
+Eunomia.
+
+\bibitem{kirill_simonov_2023_7705325}
+Kirill Simonov, Clark~C. Evans, and Jacob~S. Zelko.
+{{FunSQL}} : {{Julia}} library for compositional construction of {{SQL}}
+  queries.
+\href{http://dx.doi.org/10.5281/zenodo.7705325}{doi:10.5281/zenodo.7705325}.
+
+\bibitem{FDARealWorldEvidence}
+{U.S. Food and Drug Administration}.
+Real-world evidence.
+
+\bibitem{zelko2022pilot}
+Jacob Zelko, Malina Hy, Varshini Chinta, Emily Liau, and Morgan Knowlton.
+A pilot characterization study assessing health equity in mental healthcare
+  delivery within the state of georgia.
+
+\bibitem{zelkoDevelopingRobustComputable2023}
+Jacob~S. Zelko, Sarah Gasman, Shenita~R. Freeman, Dong~Yun Lee, Jaan Altosaar,
+  Azza Shoaibi, and Gowtham Rao.
+Developing a {{Robust Computable Phenotype Definition Workflow}} to {{Describe
+  Health}} and {{Disease}} in {{Observational Health Research}}.
+\href{http://dx.doi.org/10.48550/arXiv.2304.06504}{doi:10.48550/arXiv.2304.06504}.
+arxiv:\href{http://arxiv.org/abs/2304.06504}{2304.06504 [cs]}.
+
+\end{thebibliography}
