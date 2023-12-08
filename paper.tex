@@ -1,6 +1,22 @@
+%! TeX program = lualatex
+
 \documentclass{juliacon}
 
 \usepackage{listings}
+
+\usepackage{fontspec}
+\usepackage{minted}
+
+\newfontfamily \JuliaMono {JuliaMono.ttf}[
+    Path      = ./,
+    Extension = .ttf
+    ]
+
+\newfontface \JuliaMono{JuliaMono}
+
+\setmonofont{JuliaMono}[
+    Contextuals=Alternate
+]
 
 \setcounter{page}{1}
 
@@ -13,38 +29,49 @@
 \begin{abstract}
 
 Observational health continues to be a growing field in health informatics research as electronic health records (EHR), patient medical claims, and other ancilliary patient data source become more readily computable and accessible to researchers.
+% TODO: 
 JuliaHealth is poised as an ecosystem to innovate within this area of research by bringing highly performant analytics approaches, composable solutions, and interoperable software that leverages prior state of the art. 
+% TODO: 
 This paper will discuss the state of the art observational health research tools within the JuliaHealth ecosystem and how JuliaHealth is prepared to further research goals within this domain.
 
 \end{abstract}
 
 \section{Introduction}
 
+% EXPLAIN: What is observational health research?
+% EXPLAIN: What sort of innovations?
 Over the past $10$ years, there have been several innovations within the observational health research community.
+
+% EXPLAIN: Why is this a crucial innovation?
+% EXPLAIN: What is meant by a transferable analysis
 Arguably, the most crucial innovation that has emerged is the Observational Medical Outcomes Partnership Common Data Model (OMOP CDM) which was designed specifically to standardize observational health data to enable transferable analyses.
+% TODO: Add citation
+% NOTE: Why is mapping relevant here?
 The importance of this model has become apparent within open science organizations like the OHDSI (Observational Health Data Science and Informatics) network where members across $100+$ countries with access to various health systems have been able to successfully map their patient data to the OMOP CDM.
+% TODO: Add citation about successful collaborations
+% EXPLAIN: What is a network study
+% TODO: Cite the quote "write once, run everywhere"
 This has led to successful collaboration relationships across countries where one research group can develop a network study and then disseminate the study across collaborators leading to the idea that you can "write once, run everywhere."
 
+As the OMOP CDM has become a cornerstone in running these widely distributed network studies, special attention to developing tools around handling OMOP CDM data is necessary to meaningfully contribute within the observational health research space.
 The OMOP CDM itself does not require a specific technology to work with the data stored in this standard.
 It features a person-centric design where each domain records personal identity while prioritizing data protection through the limiting of information that could endanger patient anonymity.
-As the OMOP CDM has become a cornerstone in running these widely distributed network studies, special attention to developing tools around handling OMOP CDM data is necessary to meaningfully contribute within the observational health research space.
 
 \subsection{What Is JuliaHealth?}
 
-% DONE:
-JuliaHealth is an open-source collective dedicated to bringing the Julia programming language to various avenues of health research domains such as observational health, medical imaging, standards interoperability, etc.
-It leverages the strengths of the Julia language to introduce new approaches to these spaces, augment and improve existing workflows, and provide a central community structure for health researchers both part of and entering into the Julia ecosystem.
+% DONE
+JuliaHealth is an open-science collective dedicated to bringing the Julia programming language to various avenues of health research domains including, but not limited to, observational health, medical imaging, standards interoperability and more.
+It leverages the strengths of the Julia language to introduce new methods into these spaces, augment existing workflows, and provide a community structure for health researchers within the global Julia ecosystem.
 Eventually, JuliaHealth will host a variety of subecosystems and associated resources that will enable novel research to be conducted within Julia. 
 
 \subsection{Status of Conducting Observational Health Research in Julia}
 
-JuliaHealth itself is a loose collective of various research software engineers, health researchers, and hobbyist programmers that had its origins in $\approx 2020$.
-Being that JuliaHealth is a federated network of contributors, varying aspects of the ecosystem have developed at differing rates as a function of multiple different factors such as developer time, workplace incentives, and more.
-One area of the subecosystems within JuliaHealth that has matured significantly over the years has been the observational health subecosystem (referred to as OHS for the remainder of this paper).
+As JuliaHealth is an ad hoc network of contributors, varying aspects of the ecosystem have developed at differing rates as a function of factors such as developer time or workplace incentives.
+One area of the subecosystems within JuliaHealth that has matured significantly over the years has been the JuliaHealth observational health subecosystem (referred to as OHS or the "subecosystem" for the remainder of this paper).
 
-Although difficult to date, it can said that OHS had its inception in work done by Evans and Simonov with efforts such as \textit{FunOHDSI.jl}, \textit{OHDSICohortExpressions}, and \textit{FunSQL.jl} around $2021$  \cite{kirill_simonov_2023_7705325}
+Although difficult to date, it can said that OHS had its inception in work done by Evans and Simonov with efforts such as \textit{FunOHDSI.jl}, \textit{OHDSICohortExpressions.jl}, and \textit{FunSQL.jl} around $2021$ \cite{kirill_simonov_2023_7705325}
 Since then, Zelko et. al. have spearheaded most recent developments within OHS via the creation of a variety of tools and demonstrated their effectiveness in using these tools for novel observational health research endeavors \cite{zelko2022pilot}
-Through such efforts, OHS is becoming further capable of executing novel observational health research although, understandably, not as mature as similar ecosystems. 
+Through such efforts, OHS is becoming further capable of executing novel observational health research. 
 
 % TODO: Cite FunOHDSI
 % TODO: Cite OHDSICohortExpressions
@@ -54,8 +81,8 @@ Through such efforts, OHS is becoming further capable of executing novel observa
 % TODO: Cite JuliaCon 2023 presentation
 % TODO: Register JuliaCon 2023 presentation to Zenodo
 
-In particular, the strongest influence and inspiration to OHS is the OHDSI open-science network.
-OHDSI (Observational Health Data Sciences and Informatics) is a global, collaborative, interdisciplinary, and open network of researchers, healthcare professionals, students, patients, and other entities committed to large-scale health data analytics and generating reliable evidence, with the goal of promoting better health decisions and better care. 
+Driving development within the subecosystem is the influence the OHDSI open-science network.
+As mentioned previously, OHDSI is a global, collaborative, interdisciplinary, and open network of researchers, healthcare professionals, students, patients, and other entities committed to large-scale health data analytics and generating reliable evidence, with the goal of promoting better health decisions and better care. 
 Since current observational health data sources are aggregated at different levels and cannot be generalized to the overall population, the data is often incomplete, inaccurate, and prone to issues of bias, error handling, and multidimensional complexity. 
 The goal of OHDSI is to produce reproducible, robust, and reliable evidence by developing standardized data formats and research protocol designs to enable large-scale collaborative research and improve the transparency and scalability of observational health research. 
 
@@ -203,7 +230,7 @@ Briding between tools used in the OHDSI and JuliaHealth communities is now excep
 
 After having a strep throat phenotype definition defined using ATLAS, we can then execute the resulting computable phenotype definition against the \textit{Eunomia} database.
 
-\begin{lstlisting}[language=Julia,numbers=none]
+\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 using JSON3 
 using OHDSICohortExpressions
 
@@ -227,7 +254,7 @@ sql = translate(cohort_expression,
 for query in split(sql, ";")[1:end-1]
   DBI.execute(conn, sub_query)
 end
-\end{lstlisting}
+\end{minted}
 
 A quick query of the cohort table (where the resulting subjects were stored) shows $\approx 1600$ from the dataset match this criteria.
 
