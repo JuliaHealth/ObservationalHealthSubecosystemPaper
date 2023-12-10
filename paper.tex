@@ -2,8 +2,6 @@
 
 \documentclass{juliacon}
 
-\usepackage{listings}
-
 \usepackage{fontspec}
 \usepackage{minted}
 
@@ -54,12 +52,12 @@ The importance of this model has become apparent within open science organizatio
 This has led to successful collaboration relationships across countries where one research group can develop a network study and then disseminate the study across collaborators leading to the idea that you can "write once, run everywhere."
 
 As the OMOP CDM has become a cornerstone in running these widely distributed network studies, special attention to developing tools around handling OMOP CDM data is necessary to meaningfully contribute within the observational health research space.
+% TODO: Move this to the section: Status of Conducting Observational Health Research in Julia
 The OMOP CDM itself does not require a specific technology to work with the data stored in this standard.
 It features a person-centric design where each domain records personal identity while prioritizing data protection through the limiting of information that could endanger patient anonymity.
 
 \subsection{What Is JuliaHealth?}
 
-% DONE
 JuliaHealth is an open-science collective dedicated to bringing the Julia programming language to various avenues of health research domains including, but not limited to, observational health, medical imaging, standards interoperability and more.
 It leverages the strengths of the Julia language to introduce new methods into these spaces, augment existing workflows, and provide a community structure for health researchers within the global Julia ecosystem.
 Eventually, JuliaHealth will host a variety of subecosystems and associated resources that will enable novel research to be conducted within Julia. 
@@ -111,8 +109,6 @@ One of the premier tools within HADES is the ATLAS Shiny application which was d
 
 \section{Describing Common Observational Health Research Tasks within the Julia Ecosystem}
 
-% DONE: 
-
 Achieving the notion of a network study in an OHDSI-sense is a highly valuable goal to multiple communities.
 JuliaHealth now has capacity to do just the same and can harness the best of OHDSI and the best of Julia to achieve novel observational health workflows.
 The JuliaHealth observational health subecosystem (referred to as OHS for the remainder of this paper) supports a variety of use cases designed to support and enable investigations into observational health data.
@@ -120,10 +116,10 @@ This paper summarizes some of the current capacity OHS possesses to conduct such
 In particular, the following supported areas will be discussed:
 
 \begin{enumerate}
-  \item \textbf{Using Phenotype Definitions} - brief overview of phenotype definitions and how to work with them
-  \item \textbf{Rapid Cohort Iteration and Creation} - how to use JuliaHealth tools to iteratively develop patient cohorts to explore
-  \item \textbf{Working with Patient Databases} - current approaches to working with different patient databases
-  \item \textbf{Ecosystem Interoperability} - how one can bridge between JuliaHealth's ecosystem to other research ecosystems
+\item \textbf{Using Phenotype Definitions} - brief overview of phenotype definitions and how to work with them
+\item \textbf{Rapid Cohort Iteration and Creation} - how to use JuliaHealth tools to iteratively develop patient cohorts to explore
+\item \textbf{Working with Patient Databases} - current approaches to working with different patient databases
+\item \textbf{Ecosystem Interoperability} - how one can bridge between JuliaHealth's ecosystem to other research ecosystems
 \end{enumerate}
 
 \subsection{Using Phenotype Definitions}
@@ -203,7 +199,7 @@ However, to complement this, a similar study will be done on the MIMIC III datas
 
 \subsection{Connecting to a Database}
 
-\begin{lstlisting}[language=Julia,numbers=none]
+\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 import DBConnector: 
   DBConnection
 import HealthSampleData: 
@@ -218,7 +214,7 @@ occ.GenerateDatabaseDetails(
 )
 
 occ.GenerateTables(conn)
-\end{lstlisting}
+\end{minted}
 
 \subsection{Bridging between OHDSI and JuliaHealth Communities}
 
@@ -252,7 +248,7 @@ sql = translate(cohort_expression,
                 cohort_definition_id = 1);
 
 for query in split(sql, ";")[1:end-1]
-  DBI.execute(conn, sub_query)
+  DBI.execute(conn, query)
 end
 \end{minted}
 
@@ -260,7 +256,7 @@ A quick query of the cohort table (where the resulting subjects were stored) sho
 
 \subsection{Characterizing Patient Populations}
 
-\begin{lstlisting}[language=Julia,numbers=none]
+\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 C = GetCohortSubjects(1, conn)
 rename!(C, :subject_id => :person_id)
 
@@ -271,11 +267,11 @@ C_age_group = occ.GetPatientAgeGroup(
   C.person_id, 
   conn; 
 )
-\end{lstlisting}
+\end{minted}
 
 \subsection{Calculating Crude Prevalence Rate}
 
-\begin{lstlisting}[language=Julia,numbers=none]
+\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 import DataFrames as DF
 
 C_features = DF.outerjoin(C_race,
@@ -294,7 +290,7 @@ C_groups = DF.groupby(C_features,
                       ])
 
 C_groups = DF.combine(C_groups, DF.nrow => :count)
-\end{lstlisting}
+\end{minted}
 
 Using this analytical approach, tabulation can be quickly conducted across patients.
 Additionally, throughout the process, one can perform relevant analysis methods.
@@ -337,7 +333,7 @@ We can leverage a unique property of Julia in that Julia supports partial evalua
 First, we'll take our original functions and fix a connection object to each of our cofactor functions.
 This simplifies having to continuously pass forward a connection object and opens up the ability to chain together these functions simply:
 
-\begin{lstlisting}[language=Julia,numbers=none]
+\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 import Base:
   Fix2
 
@@ -349,14 +345,14 @@ import OMOPCDMCohortCreator:
 CGetPatientRace = Fix2(GetPatientRace, c)
 CGetPatientGender = Fix2(GetPatientGender, c)
 CGetPatientAgeGroup = Fix2(GetPatientAgeGroup, c)
-\end{lstlisting}
+\end{minted}
 
 NOTE: The "C" prefix for each of our curried functions denotes that it is curried.
 
 Second, as OMOPCDMCohortCreator.jl is built on top of DataFrames.jl and one has the option of creating a DataFrame with the result from every OCC function, we can use the package, Chain.jl.
 This package abstracts away some of the explicit functionalities of DataFrames.jl but instead gives much easier ways to define a flow of functions:
 
-\begin{lstlisting}[language=Julia,numbers=none]
+\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 import Chain:
   @chain
 
@@ -365,31 +361,31 @@ CofactorPatients(patients) = @chain patients begin
     CGetPatientGender_fixed
     CGetPatientAgeGroup_fixed
 end
-\end{lstlisting}
+\end{minted}
 
-\begin{lstlisting}[language=Julia,numbers=none]
+\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 CharacterizePatients(patients) = @chain patients begin
     _[:, DF.Not(:person_id)]
     DF.groupby(_, names(_))
     DF.combine(_, DF.nrow => :count)
     occ.ExecuteAudit
 end
-\end{lstlisting}
+\end{minted}
 
 This gives one the ability to simply reason about an analysis in a very straightforward and readable manner:
 
-\begin{lstlisting}[language=Julia,numbers=none]
+\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 RunStudy(patients) = @chain patients begin
     CofactorPatients
     CharacterizePatients
 end
-\end{lstlisting}
+\end{minted}
 
 In this way, future researchers using tools such as OMOPCDMCohortCreator.jl can create these more convenient abstractions.
 In fact, it could be a point of exploration in the future to build on top of OMOPCDMCohortCreator.jl even more abstracted and reusable functionalities to simplify ease of use while also enabling more readily auditable functionality.
 Finally, as these functions have now been fully modularized, these can now be readily distributed using Julia's distributed computing methods:
 
-\begin{lstlisting}[language=Julia,numbers=none]
+\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 import Distributed:
   @distributed 
 
@@ -400,7 +396,7 @@ result = @distributed (append!) for i in 1:10
 end
 
 vcat(result...) |> audit_patient_groups
-\end{lstlisting}
+\end{minted}
 
 Distributed computing here then allows a researcher to run multiple investigations at once as well as optimize performance to a given database.
 
@@ -412,11 +408,11 @@ For better or worse, the tool that is used to best interact with these databases
 To accomodate for this, several of the core tools developed in this sub-ecosystem generate SQL that can be used in the case where Julia may not be available in a given environment housing patient health data.
 As an example, \textit{OMOPCDMCohortCreator.jl} functions build upon \textit{FunSQL.jl} allowing one to use a function such `GetPatientAgeGroup` without a connection object which would result in SQL.
 
-\begin{lstlisting}[language=Julia,numbers=none]
+\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
   GetPatientAgeGroup([1]; age_groupings = [[0, 40], [41, 80]])
-\end{lstlisting}
+\end{minted}
 
-\begin{lstlisting}[language=Julia,numbers=none]
+\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
   SELECT
     "PERSON_2"."person_id",
     (CASE 
@@ -431,7 +427,7 @@ As an example, \textit{OMOPCDMCohortCreator.jl} functions build upon \textit{Fun
     FROM "PERSON" AS "PERSON_1"
     WHERE ("PERSON_1"."person_id" IN (1))
   ) AS "PERSON_2"
-\end{lstlisting}
+\end{minted}
 
 \subsection{Strong Composition within JuliaHealth}
 
