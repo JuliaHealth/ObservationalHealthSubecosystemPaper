@@ -47,37 +47,17 @@ Arguably, the most crucial innovation that has emerged is the Observational Medi
 % NOTE: Why is mapping relevant here?
 The importance of this model has become apparent within open science organizations like the OHDSI (Observational Health Data Science and Informatics) network where members across $100+$ countries with access to various health systems have been able to successfully map their patient data to the OMOP CDM.
 % TODO: Add citation about successful collaborations
-% EXPLAIN: What is a network study
+% EXPLAIN: What is a network study?
 % TODO: Cite the quote "write once, run everywhere"
 This has led to successful collaboration relationships across countries where one research group can develop a network study and then disseminate the study across collaborators leading to the idea that you can "write once, run everywhere."
+
+\subsection{Background}
 
 As the OMOP CDM has become a cornerstone in running these widely distributed network studies, special attention to developing tools around handling OMOP CDM data is necessary to meaningfully contribute within the observational health research space.
 % TODO: Move this to the section: Status of Conducting Observational Health Research in Julia
 The OMOP CDM itself does not require a specific technology to work with the data stored in this standard.
 It features a person-centric design where each domain records personal identity while prioritizing data protection through the limiting of information that could endanger patient anonymity.
 
-\subsection{What Is JuliaHealth?}
-
-JuliaHealth is an open-science collective dedicated to bringing the Julia programming language to various avenues of health research domains including, but not limited to, observational health, medical imaging, standards interoperability and more.
-It leverages the strengths of the Julia language to introduce new methods into these spaces, augment existing workflows, and provide a community structure for health researchers within the global Julia ecosystem.
-Eventually, JuliaHealth will host a variety of subecosystems and associated resources that will enable novel research to be conducted within Julia. 
-
-\subsection{Status of Conducting Observational Health Research in Julia}
-
-As JuliaHealth is an ad hoc network of contributors, varying aspects of the ecosystem have developed at differing rates as a function of factors such as developer time or workplace incentives.
-One area of the subecosystems within JuliaHealth that has matured significantly over the years has been the JuliaHealth observational health subecosystem (referred to as OHS or the "subecosystem" for the remainder of this paper).
-
-Although difficult to date, it can said that OHS had its inception in work done by Evans and Simonov with efforts such as \textit{FunOHDSI.jl}, \textit{OHDSICohortExpressions.jl}, and \textit{FunSQL.jl} around $2021$ \cite{kirill_simonov_2023_7705325}
-Since then, Zelko et. al. have spearheaded most recent developments within OHS via the creation of a variety of tools and demonstrated their effectiveness in using these tools for novel observational health research endeavors \cite{zelko2022pilot}
-Through such efforts, OHS is becoming further capable of executing novel observational health research. 
-
-% TODO: Cite FunOHDSI
-% TODO: Cite OHDSICohortExpressions
-% 
-% TODO: Cite OHDSI Symposium poster on JuliaHealth
-% TODO: Register OHDSI Symposium poster to Zenodo
-% TODO: Cite JuliaCon 2023 presentation
-% TODO: Register JuliaCon 2023 presentation to Zenodo
 
 Driving development within the subecosystem is the influence the OHDSI open-science network.
 As mentioned previously, OHDSI is a global, collaborative, interdisciplinary, and open network of researchers, healthcare professionals, students, patients, and other entities committed to large-scale health data analytics and generating reliable evidence, with the goal of promoting better health decisions and better care. 
@@ -104,6 +84,33 @@ One core innovation brought about by OHDSI in the space of network science is ho
 Once this packaging is done, they can pass along the study package to another site to collaborate on the same analysis but on different data assets.
 Data confidentiality is preserved in this approach as data from individual participating sites remains exclusive to each site, with only aggregate results shared across a given collaborator network network.
 As such, no risk for re-identification comes about through this network collaboration and has ushered in the possibility for similar research approaches to be taken across the globe. \cite{ohdsi2019book}
+
+\subsection{What Is JuliaHealth?}
+
+% TODO: Cite Discourse post on start of JuliaHealth
+JuliaHealth is an open-science collective dedicated to bringing the Julia programming language to various avenues of health research domains including, but not limited to, observational health, medical imaging, standards interoperability and more.
+It leverages the strengths of the Julia language to introduce new methods into these spaces, augment existing workflows, and provide a community structure for health researchers within the global Julia ecosystem.
+% EXPLAIN: What is a subecosystem?
+% EXPLAIN: How does having more subecosystems enable novel research to be done?
+Eventually, JuliaHealth will host a variety of subecosystems and associated resources that will enable novel research to be conducted within Julia. 
+
+\subsection{Status of Conducting Observational Health Research in Julia}
+
+% TODO: Move this to What Is JuliaHealth section
+As JuliaHealth is an ad hoc network of contributors, varying aspects of the ecosystem have developed at differing rates as a function of factors such as developer time or workplace incentives.
+
+One area of the subecosystems within JuliaHealth that has matured significantly over the years has been the JuliaHealth observational health subecosystem (OHS).
+It can be said that OHS had its inception in work done by Evans and Simonov with efforts such as \textit{FunOHDSI.jl}, \textit{OHDSICohortExpressions.jl}, and \textit{FunSQL.jl} around $2021$ \cite{kirill_simonov_2023_7705325}
+% TODO: Cite FunOHDSI
+% TODO: Cite OHDSICohortExpressions
+% TODO: Cite OHDSI Symposium poster on JuliaHealth
+% TODO: Register OHDSI Symposium poster to Zenodo
+% TODO: Cite JuliaCon 2023 presentation
+% TODO: Register JuliaCon 2023 presentation to Zenodo
+Since then, Zelko et. al. have spearheaded most recent developments within OHS via the creation of a variety of tools and demonstrated their effectiveness in using these tools for novel observational health research endeavors \cite{zelko2022pilot}
+% EXPLAIN: What does this mean?
+Through such efforts, OHS is becoming further capable of executing novel observational health research. 
+
 
 One of the premier tools within HADES is the ATLAS Shiny application which was developed to "support the design and execution of observational analyses to generate real world evidence from patient level observational data."
 
