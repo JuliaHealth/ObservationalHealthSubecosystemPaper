@@ -52,28 +52,7 @@ The importance of this model has become apparent within open science organizatio
 % http://www.sun.com/smi/Press/sunflash/1996-01/sunflash.960123.10561.xml} 
 This has led to successful collaboration relationships across countries where one research group can develop a network study and then disseminate the study across collaborators leading to the idea that you can "write once, run everywhere."
 
-\subsection{Background}
-
-% TODO: Reframe this paragraph to make it like a better background introduction.
-As the OMOP CDM has become a cornerstone in running these widely distributed network studies, special attention to developing tools around handling OMOP CDM data is necessary to meaningfully contribute within the observational health research space.
-The OMOP CDM itself does not require a specific technology to work with the data stored in this standard.
-It features a person-centric design where each domain records personal identity while prioritizing data protection through the limiting of information that could endanger patient anonymity.
-
-% TODO: Reframe this to suggest the more general impact that OHDSI has had within the observational health research space.
-Driving development within the subecosystem is the influence the OHDSI open-science network.
-As mentioned previously, OHDSI is a global, collaborative, interdisciplinary, and open network of researchers, healthcare professionals, students, patients, and other entities committed to large-scale health data analytics and generating reliable evidence, with the goal of promoting better health decisions and better care. 
-OHDSI had its inception in the development of the Observational Medical Outcomes Partnership (OMOP) that was created in 2009 by the US Food and Drug Administration to address concerns related to data type, study design, and data privacy concerns of "Real World Data" \cite{ohdsi2019book} \cite{FDARealWorldEvidence}
-What could be considered the magnum opus of the OMOP group was the development of what is called the OMOP Common Data Model (OMOP CDM) to house and ingest this sort of data in a consistent format that has been optimized to assist in extracting meaningful population health information.
-In brief, the OMOP Common Data Model (CDM) is a "person-centered" model that has standardized common events in a given patient encounter with database tables that represent the unique structures found in patient events.
-This creates a longitudinal view of all healthcare-related events per person recorded in a singular health system.
-OHDSI was developed to focus on leveraging observational health data stored within the OMOP CDM.
-Since current observational health data sources are aggregated at different levels and cannot be generalized to the overall population, the data is often incomplete, inaccurate, and prone to issues of bias, error handling, and multidimensional complexity. 
-The goal of OHDSI is to produce reproducible, robust, and reliable evidence by developing standardized data formats and research protocol designs to enable large-scale collaborative research and improve the transparency and scalability of observational health research. 
-
-OHDSI supports the development of open-source software tools in a centralized ecosystem called HADES (Health Analytics Data-to-Evidence Suite) for particularly managing and working with OMOP CDM formatted data.
-The HADES ecosystem has been in existence for $\approx 10$ years and has given rise to improvements in the quality and reliability of observational health research as well as motivating novel collaboration mechanisms.
-
-% TODO: Use this content to address what the notion of "network studies" are; move this to the "Introduction" section
+% TODO: Use this to address the notion of what "network studies" are
 In particular, one collaboration mechanism that OHDSI has been able to operationalize meaningfully while working with observational health data is the notion of "network studies".
 These studies, are designed to be transparent and encompasses research endeavors being explored by members of the OHDSI comprehensive of relevant documentation, analysis code, results, and study protocols describing the study's scope and objectives.
 One core innovation brought about by OHDSI in the space of network science is how, given the HADES tools and procedures established by OHDSI, a research group can develop their analysis on their own OMOP CDM instance and then bundle together their study.
@@ -81,12 +60,38 @@ Once this packaging is done, they can pass along the study package to another si
 Data confidentiality is preserved in this approach as data from individual participating sites remains exclusive to each site, with only aggregate results shared across a given collaborator network network.
 As such, no risk for re-identification comes about through this network collaboration and has ushered in the possibility for similar research approaches to be taken across the globe. \cite{ohdsi2019book}
 
+\subsection{Background}
+
+\subsubsection{Core Technologies within Observational Health Research}
+
+% TODO: Reframe this paragraph to make it like a better background introduction.
+What could be considered the magnum opus of the OMOP group was the development of what is called the OMOP Common Data Model (OMOP CDM) to house and ingest this sort of data in a consistent format that has been optimized to assist in extracting meaningful population health information.
+In brief, the OMOP Common Data Model (CDM) is a "person-centered" model that has standardized common events in a given patient encounter with database tables that represent the unique structures found in patient events.
+This creates a longitudinal view of all healthcare-related events per person recorded in a singular health system.
+As the OMOP CDM has become a cornerstone in running these widely distributed network studies, special attention to developing tools around handling OMOP CDM data is necessary to meaningfully contribute within the observational health research space.
+The OMOP CDM itself does not require a specific technology to work with the data stored in this standard.
+It features a person-centric design where each domain records personal identity while prioritizing data protection through the limiting of information that could endanger patient anonymity.
+
+\subsubsection{The Impact of the Observational Health Data Science and Informatics (OHDSI) Consortium}
+
+% TODO: Reframe this to suggest the more general impact that OHDSI has had within the observational health research space.
+Driving development within the subecosystem is the influence the OHDSI open-science network.
+As mentioned previously, OHDSI is a global, collaborative, interdisciplinary, and open network of researchers, healthcare professionals, students, patients, and other entities committed to large-scale health data analytics and generating reliable evidence, with the goal of promoting better health decisions and better care. 
+OHDSI had its inception in the development of the Observational Medical Outcomes Partnership (OMOP) that was created in 2009 by the US Food and Drug Administration to address concerns related to data type, study design, and data privacy concerns of "Real World Data" \cite{ohdsi2019book} \cite{FDARealWorldEvidence}
+OHDSI was developed to focus on leveraging observational health data stored within the OMOP CDM.
+Since current observational health data sources are aggregated at different levels and cannot be generalized to the overall population, the data is often incomplete, inaccurate, and prone to issues of bias, error handling, and multidimensional complexity. 
+The goal of OHDSI is to produce reproducible, robust, and reliable evidence by developing standardized data formats and research protocol designs to enable large-scale collaborative research and improve the transparency and scalability of observational health research. 
+
+OHDSI supports the development of open-source software tools in a centralized ecosystem called HADES (Health Analytics Data-to-Evidence Suite) for particularly managing and working with OMOP CDM formatted data.
+The HADES ecosystem has been in existence for $\approx 10$ years and has given rise to improvements in the quality and reliability of observational health research as well as motivating novel collaboration mechanisms.
+
+\subsubsection{JuliaHealth's Role within Observational Health Research}
+
+As JuliaHealth is an ad hoc network of contributors, varying aspects of the ecosystem have developed at differing rates as a function of factors such as developer time or workplace incentives.
+
 At this time, OHS prioritizes creation and maintenance of tools that support analysis of "OMOP-ified"\footnotemark data (that is, data which is formatted in the OMOP CDM), in much the same manner that OHDSI does.
 
-\footnotetext{I am unsure of where this notion came from. I believe it may have originally been coined by my former mentor and OHDSI founder, Dr. Jon Duke. 
-The provenance of related terms like "OMOP-ification" (the process of converting a database to the OMOP CDM) is even murkier.}
-
-\subsection{What Is JuliaHealth?}
+\footnotetext{It is unclear where terms like "OMOP-ify" or "OMOP-ification" (the process of converting a data to the OMOP CDM) originated; it may have been coined by Dr. Jon Duke.}
 
 % TODO: Cite Discourse post on start of JuliaHealth
 JuliaHealth is an open-science collective dedicated to bringing the Julia programming language to various avenues of health research domains including, but not limited to, observational health, medical imaging, standards interoperability and more.
@@ -94,11 +99,6 @@ It leverages the strengths of the Julia language to introduce new methods into t
 % EXPLAIN: What is a subecosystem?
 % EXPLAIN: How does having more subecosystems enable novel research to be done?
 Eventually, JuliaHealth will host a variety of subecosystems and associated resources that will enable novel research to be conducted within Julia. 
-
-\subsection{Status of Conducting Observational Health Research in Julia}
-
-% TODO: Move this to What Is JuliaHealth section
-As JuliaHealth is an ad hoc network of contributors, varying aspects of the ecosystem have developed at differing rates as a function of factors such as developer time or workplace incentives.
 
 One area of the subecosystems within JuliaHealth that has matured significantly over the years has been the JuliaHealth observational health subecosystem (OHS).
 It can be said that OHS had its inception in work done by Evans and Simonov with efforts such as \textit{FunOHDSI.jl}, \textit{OHDSICohortExpressions.jl}, and \textit{FunSQL.jl} around $2021$ \cite{kirill_simonov_2023_7705325}
@@ -111,9 +111,6 @@ It can be said that OHS had its inception in work done by Evans and Simonov with
 Since then, Zelko et. al. have spearheaded most recent developments within OHS via the creation of a variety of tools and demonstrated their effectiveness in using these tools for novel observational health research endeavors \cite{zelko2022pilot}
 % EXPLAIN: What does this mean?
 Through such efforts, OHS is becoming further capable of executing novel observational health research. 
-
-
-One of the premier tools within HADES is the ATLAS Shiny application which was developed to "support the design and execution of observational analyses to generate real world evidence from patient level observational data."
 
 \section{Describing Common Observational Health Research Tasks within the Julia Ecosystem}
 
@@ -131,6 +128,8 @@ In particular, the following supported areas will be discussed:
 \end{enumerate}
 
 \subsection{Using Phenotype Definitions}
+
+One of the premier tools within HADES is the ATLAS Shiny application which was developed to "support the design and execution of observational analyses to generate real world evidence from patient level observational data."
 
 Broadly, ATLAS has become the de facto tool to develop patient phenotype definitions within observational health research contexts.
 These phenotype definitions have varying levels of complexity where they can be very simple (finding all patients with one health condition or diagnosis) or grow to be extremely complex (defining controlled, uncontrolled, and indeterminate patient cohorts based on medications, lab results, etc.)
