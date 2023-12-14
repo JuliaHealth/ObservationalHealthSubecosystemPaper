@@ -26,10 +26,9 @@
 
 \begin{abstract}
 
+TODO: Review the abstract after reviewing the paper fully
 Observational health continues to be a growing field in health informatics research as electronic health records (EHR), patient medical claims, and other ancilliary patient data source become more readily computable and accessible to researchers.
-% TODO: 
 JuliaHealth is poised as an ecosystem to innovate within this area of research by bringing highly performant analytics approaches, composable solutions, and interoperable software that leverages prior state of the art. 
-% TODO: 
 This paper will discuss the state of the art observational health research tools within the JuliaHealth ecosystem and how JuliaHealth is prepared to further research goals within this domain.
 
 \end{abstract}
@@ -49,42 +48,43 @@ Arguably, the most crucial innovation that has emerged is the Observational Medi
 The importance of this model has become apparent within open science organizations like the OHDSI (Observational Health Data Science and Informatics) network where members across $100+$ countries with access to various health systems have been able to successfully map their patient data to the OMOP CDM.
 % TODO: Add citation about successful collaborations
 % EXPLAIN: What is a network study?
-% TODO: Cite the quote "write once, run everywhere" http://www.sun.com/smi/Press/sunflash/1996-01/sunflash.960123.10561.xml} 
+% TODO: Cite the quote "write once, run everywhere" 
+% http://www.sun.com/smi/Press/sunflash/1996-01/sunflash.960123.10561.xml} 
 This has led to successful collaboration relationships across countries where one research group can develop a network study and then disseminate the study across collaborators leading to the idea that you can "write once, run everywhere."
 
 \subsection{Background}
 
+% TODO: Reframe this paragraph to make it like a better background introduction.
 As the OMOP CDM has become a cornerstone in running these widely distributed network studies, special attention to developing tools around handling OMOP CDM data is necessary to meaningfully contribute within the observational health research space.
-% TODO: Move this to the section: Status of Conducting Observational Health Research in Julia
 The OMOP CDM itself does not require a specific technology to work with the data stored in this standard.
 It features a person-centric design where each domain records personal identity while prioritizing data protection through the limiting of information that could endanger patient anonymity.
 
-
+% TODO: Reframe this to suggest the more general impact that OHDSI has had within the observational health research space.
 Driving development within the subecosystem is the influence the OHDSI open-science network.
 As mentioned previously, OHDSI is a global, collaborative, interdisciplinary, and open network of researchers, healthcare professionals, students, patients, and other entities committed to large-scale health data analytics and generating reliable evidence, with the goal of promoting better health decisions and better care. 
-Since current observational health data sources are aggregated at different levels and cannot be generalized to the overall population, the data is often incomplete, inaccurate, and prone to issues of bias, error handling, and multidimensional complexity. 
-The goal of OHDSI is to produce reproducible, robust, and reliable evidence by developing standardized data formats and research protocol designs to enable large-scale collaborative research and improve the transparency and scalability of observational health research. 
-
 OHDSI had its inception in the development of the Observational Medical Outcomes Partnership (OMOP) that was created in 2009 by the US Food and Drug Administration to address concerns related to data type, study design, and data privacy concerns of "Real World Data" \cite{ohdsi2019book} \cite{FDARealWorldEvidence}
 What could be considered the magnum opus of the OMOP group was the development of what is called the OMOP Common Data Model (OMOP CDM) to house and ingest this sort of data in a consistent format that has been optimized to assist in extracting meaningful population health information.
 In brief, the OMOP Common Data Model (CDM) is a "person-centered" model that has standardized common events in a given patient encounter with database tables that represent the unique structures found in patient events.
 This creates a longitudinal view of all healthcare-related events per person recorded in a singular health system.
 OHDSI was developed to focus on leveraging observational health data stored within the OMOP CDM.
-
-At this time, OHS prioritizes creation and maintenance of tools that support analysis of "OMOP-ified"\footnotemark data (that is, data which is formatted in the OMOP CDM), in much the same manner that OHDSI does.
-
-\footnotetext{I am unsure of where this notion came from. I believe it may have originally been coined by my former mentor and OHDSI founder, Dr. Jon Duke. 
-The provenance of related terms like "OMOP-ification" (the process of converting a database to the OMOP CDM) is even murkier.}
+Since current observational health data sources are aggregated at different levels and cannot be generalized to the overall population, the data is often incomplete, inaccurate, and prone to issues of bias, error handling, and multidimensional complexity. 
+The goal of OHDSI is to produce reproducible, robust, and reliable evidence by developing standardized data formats and research protocol designs to enable large-scale collaborative research and improve the transparency and scalability of observational health research. 
 
 OHDSI supports the development of open-source software tools in a centralized ecosystem called HADES (Health Analytics Data-to-Evidence Suite) for particularly managing and working with OMOP CDM formatted data.
 The HADES ecosystem has been in existence for $\approx 10$ years and has given rise to improvements in the quality and reliability of observational health research as well as motivating novel collaboration mechanisms.
 
+% TODO: Use this content to address what the notion of "network studies" are; move this to the "Introduction" section
 In particular, one collaboration mechanism that OHDSI has been able to operationalize meaningfully while working with observational health data is the notion of "network studies".
 These studies, are designed to be transparent and encompasses research endeavors being explored by members of the OHDSI comprehensive of relevant documentation, analysis code, results, and study protocols describing the study's scope and objectives.
 One core innovation brought about by OHDSI in the space of network science is how, given the HADES tools and procedures established by OHDSI, a research group can develop their analysis on their own OMOP CDM instance and then bundle together their study.
 Once this packaging is done, they can pass along the study package to another site to collaborate on the same analysis but on different data assets.
 Data confidentiality is preserved in this approach as data from individual participating sites remains exclusive to each site, with only aggregate results shared across a given collaborator network network.
 As such, no risk for re-identification comes about through this network collaboration and has ushered in the possibility for similar research approaches to be taken across the globe. \cite{ohdsi2019book}
+
+At this time, OHS prioritizes creation and maintenance of tools that support analysis of "OMOP-ified"\footnotemark data (that is, data which is formatted in the OMOP CDM), in much the same manner that OHDSI does.
+
+\footnotetext{I am unsure of where this notion came from. I believe it may have originally been coined by my former mentor and OHDSI founder, Dr. Jon Duke. 
+The provenance of related terms like "OMOP-ification" (the process of converting a database to the OMOP CDM) is even murkier.}
 
 \subsection{What Is JuliaHealth?}
 
