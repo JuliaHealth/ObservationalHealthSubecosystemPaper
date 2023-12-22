@@ -26,7 +26,7 @@
 
 \begin{abstract}
 
-TODO: Review the abstract after reviewing the paper fully
+%TODO: Review the abstract after reviewing the paper fully
 Observational health continues to be a growing field in health informatics research as electronic health records (EHR), patient medical claims, and other ancilliary patient data source become more readily computable and accessible to researchers.
 JuliaHealth is poised as an ecosystem to innovate within this area of research by bringing highly performant analytics approaches, composable solutions, and interoperable software that leverages prior state of the art. 
 This paper will discuss the state of the art observational health research tools within the JuliaHealth ecosystem and how JuliaHealth is prepared to further research goals within this domain.
@@ -35,9 +35,11 @@ This paper will discuss the state of the art observational health research tools
 
 \section{Introduction}
 
-% EXPLAIN: What is observational health research?
+% EXPLAIN: What is observational health research? Done
 % EXPLAIN: What sort of innovations?
-Over the past $10$ years, there have been several innovations within the observational health research community.
+Over the past $10$ years, there have been several innovations within the observational health research community.  Observational health research is an area of study that leverages authentic health data to gain insights into the health system without interference. Data are collected by researchers as they follow groups of people over a specified period. Depending on the study, these groups may comprise healthy individuals, individuals with a specific disease, or those at high risk of developing a particular condition—such as individuals with a family history—while also taking into consideration the imperative of safeguarding their privacy. Observational studies can contribute to answering questions as what genes cause a specific disease to grow, patterns and trends for a particular disease, experiences of past patients, behaviours increasing the risk of developing a certain disease. 
+
+ 
 
 % EXPLAIN: Why is this a crucial innovation?
 % EXPLAIN: What is meant by a transferable analysis
@@ -137,30 +139,30 @@ Since then, Zelko et. al. have spearheaded most recent developments within OHS v
 % EXPLAIN: What does this mean?
 Through such efforts, OHS is becoming further capable of executing novel observational health research. 
 
-\section{Accomplishing Common Observational Health Research Tasks within Julia Ecosystem}
+\section{Accomplishing Common Observational Health Research Tasks within Julia}
 
-Achieving the notion of a network study in an OHDSI-sense is a highly valuable goal to multiple communities.
-JuliaHealth now has capacity to do just the same and can harness the best of OHDSI and the best of Julia to achieve novel observational health workflows.
-The JuliaHealth observational health subecosystem (referred to as OHS for the remainder of this paper) supports a variety of use cases designed to support and enable investigations into observational health data.
-This paper summarizes some of the current capacity OHS possesses to conduct such endeavors.
-In particular, the following supported areas will be discussed:
+JuliaHealth has capacity through the OHS to perform observational health workflows via a variety of tools designed to support and enable novel investigations.
+This paper summarizes and highlights some of the current capacity OHS provides such as:
 
 \begin{enumerate}
 \item \textbf{Using Phenotype Definitions} - brief overview of phenotype definitions and how to work with them
-\item \textbf{Rapid Cohort Iteration and Creation} - how to use JuliaHealth tools to iteratively develop patient cohorts to explore
-\item \textbf{Working with Patient Databases} - current approaches to working with different patient databases
-\item \textbf{Ecosystem Interoperability} - how one can bridge between JuliaHealth's ecosystem to other research ecosystems
+\item \textbf{Rapid Cohort Iteration and Creation} - how to iteratively develop patient cohorts to explore
+\item \textbf{Working with Patient Databases} - approaches to working with different patient databases
+\item \textbf{Ecosystem Interoperability} - extending JuliaHealth's ecosystem to other research ecosystems
 \end{enumerate}
 
 \subsection{Using Phenotype Definitions}
 
-One of the premier tools within HADES is the ATLAS Shiny application which was developed to "support the design and execution of observational analyses to generate real world evidence from patient level observational data."
+One of the premier tools within the OHDSI HADES ecosystem is the ATLAS Shiny application which was developed to develop patient phenotype definitions within observational health research contexts (amongst other use cases).
+These phenotype definitions have varying levels of complexity where they can be very simple (such as finding all patients with one health condition or diagnosis) or grow to be extremely complex (defining controlled, uncontrolled, and indeterminate patient cohorts based on medications, lab results, etc.)
+% TODO: Cite schema of the definition from GitHub
+The computable phenotype definitions that ATLAS generates based on phenotype definitions are in a variety of serialization formats such as JSON or prepared SQL expressions available in multiple SQL flavors.
 
-Broadly, ATLAS has become the de facto tool to develop patient phenotype definitions within observational health research contexts.
-These phenotype definitions have varying levels of complexity where they can be very simple (finding all patients with one health condition or diagnosis) or grow to be extremely complex (defining controlled, uncontrolled, and indeterminate patient cohorts based on medications, lab results, etc.)
-The computable phenotype definitions that ATLAS generates based on phenotype definitions are in a variety of serialization formats such as JSON (see \ref{appendix:json}) or prepared SQL expressions available in multiple SQL flavors (see \ref{appendix:postgresql}).
-
+% TODO: Cite package
+% TODO: Reframe this to more say how ATLAS can be used to build cohorts
+% TODO: Explain how this package to accomplish similar tasks
 The Julia package, OHDSICohortExpressions.jl, exists specifically to ingest these serialized expressions of computable phenotype definitions and create patient cohorts that match the given criterion in the definition.
+% TODO: Change this list into an enumeration
 How this tool works is to 1) read and verify the serialized computable phenotype definition 2) reinterpret the serialization into the FunSQL.jl Domain Specific Language 3) return a prepared SQL statement against a given SQL database that queries an OMOP CDM database for the desired patient population(s) of interest.
 Once these prepared statements are made, researchers can execute the generated SQL against their OMOP CDM instance to generate cohorts for future analyses.
 
