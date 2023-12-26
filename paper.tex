@@ -26,7 +26,7 @@
 
 \begin{abstract}
 
-%TODO: Review the abstract after reviewing the paper fully
+% TODO::HARD Review the abstract after reviewing the paper fully
 Observational health continues to be a growing field in health informatics research as electronic health records (EHR), patient medical claims, and other ancilliary patient data source become more readily computable and accessible to researchers.
 JuliaHealth is poised as an ecosystem to innovate within this area of research by bringing highly performant analytics approaches, composable solutions, and interoperable software that leverages prior state of the art. 
 This paper will discuss the state of the art observational health research tools within the JuliaHealth ecosystem and how JuliaHealth is prepared to further research goals within this domain.
@@ -35,22 +35,22 @@ This paper will discuss the state of the art observational health research tools
 
 \section{Introduction}
 
-% EXPLAIN: What is observational health research? Done
-% EXPLAIN: What sort of innovations?
+% EXPLAIN::EASY What is observational health research?
+% EXPLAIN::MEDIUM What sort of innovations?
 Over the past $10$ years, there have been several innovations within the observational health research community.  Observational health research is an area of study that leverages authentic health data to gain insights into the health system without interference. Data are collected by researchers as they follow groups of people over a specified period. Depending on the study, these groups may comprise healthy individuals, individuals with a specific disease, or those at high risk of developing a particular condition—such as individuals with a family history—while also taking into consideration the imperative of safeguarding their privacy. Observational studies can contribute to answering questions as what genes cause a specific disease to grow, patterns and trends for a particular disease, experiences of past patients, behaviours increasing the risk of developing a certain disease. 
 
  
 
-% EXPLAIN: Why is this a crucial innovation?
-% EXPLAIN: What is meant by a transferable analysis
-% TODO: Cite: J. M. Overhage, P. B. Ryan, C. G. Reich, A. G. Hartzema, and P. E. Stang, “Validation of a common data model for active safety surveillance research,” Journal of the American Medical Informatics Association, vol. 19, no. 1, pp. 54–60, 2012.
+% EXPLAIN::MEDIUM Why is this a crucial innovation?
+% EXPLAIN::MEDIUM What is meant by a transferable analysis?
+% TODO::EASY Cite: J. M. Overhage, P. B. Ryan, C. G. Reich, A. G. Hartzema, and P. E. Stang, “Validation of a common data model for active safety surveillance research,” Journal of the American Medical Informatics Association, vol. 19, no. 1, pp. 54–60, 2012.
 Arguably, the most crucial innovation that has emerged is the Observational Medical Outcomes Partnership Common Data Model (OMOP CDM) which was designed specifically to standardize observational health data to enable transferable analyses.
-% TODO: Add citation from OHDSI website's collaborator statistics
-% EXPLAIN: Why is mapping relevant here?
+% TODO::EASY Add citation from OHDSI website's collaborator statistics
+% EXPLAIN::MEDIUM Why is mapping relevant here?
 The importance of this model has become apparent within open science organizations like the OHDSI (Observational Health Data Science and Informatics) network where members across $100+$ countries with access to various health systems have been able to successfully map their patient data to the OMOP CDM.
-% TODO: Add citation about successful collaborations
-% EXPLAIN: What is a network study?
-% TODO: Cite the quote "write once, run everywhere" 
+% TODO::EASY Add citation about successful collaborations
+% EXPLAIN::EASY What is a network study?
+% TODO::EASY Cite the quote "write once, run everywhere" 
 % http://www.sun.com/smi/Press/sunflash/1996-01/sunflash.960123.10561.xml} 
 This has led to successful collaboration relationships across countries where one research group can develop a network study and then disseminate the study across collaborators leading to the idea that you can "write once, run everywhere."
 
@@ -70,44 +70,44 @@ A few of these technologies highlighted in this paper are:
 In particular, the data standard that will be most highlighted for the remainder of this paper is the Observational Medical Outcomes Partnership Common Data Model (OMOP CDM).
 Subsequent discussion will be focused on the opportunities that this specific data model has given rise to across observational health as well as research communities such as the Observational Health Data Sciences and Informatics (OHDSI) open science consortium.
 
-% TODO: This paragraph should be centered on the core technology of data standards -- in particular, the OMOP CDM
-% EXPLAIN: What is real world data? Use https://jacobzelko.com/10282021140730-real-world-evidence/
+% TODO::EASY This paragraph should be centered on the core technology of data standards -- in particular, the OMOP CDM
+% EXPLAIN::MEDIUM What is real world data? Use https://jacobzelko.com/10282021140730-real-world-evidence/
 OMOP was created in 2009 by the US Food and Drug Administration to address concerns related to data type, study design, and data privacy concerns of "Real World Data" \cite{ohdsi2019book} \cite{FDARealWorldEvidence}
 What could arguably be considered the longest standing achievement of OMOP was the development of the OMOP Common Data Model (OMOP CDM) to house and ingest real world data.
-% TODO: Combine the next two sentences together
-% EXPLAIN: What does "person-centered" mean?
-% EXPLAIN: What is a patient event? Could you give an example?
+% TODO::EASY Combine the next two sentences together
+% EXPLAIN::EASY What does "person-centered" mean?
+% EXPLAIN::MEDIUM What is a patient event? Could you give an example?
 in a consistent format that has been optimized to assist in extracting meaningful population health information.
 In brief, the OMOP Common Data Model (CDM) is a "person-centered" model that has standardized common events in a given patient encounter with database tables that represent the unique structures found in patient events.
-% TODO: Develop this fragment into a full sentence
+% TODO::EASY Develop this fragment into a full sentence
 prioritizing data protection through the limiting of information that could endanger patient anonymity.
-% EXPLAIN: What is a health system? Could you give an example?
+% EXPLAIN:: What is a health system? Could you give an example?
 This creates a longitudinal view of all healthcare-related events per person recorded in a singular health system.
-% TODO: Make this more coherent to the rest of the paragraph
-% TODO: Explicitly mention that although the model prescribes a database schema, it does not need a specific database type
+% TODO::EASY Make this more coherent to the rest of the paragraph
+% TODO::EASY Explicitly mention that although the model prescribes a database schema, it does not need a specific database type
 The OMOP CDM itself does not require a specific technology to work with the data stored in this standard.
 
-% TODO: This paragraph should be centered on the core technology of the concept of network studies
-% TODO: Use this to address the notion of what "network studies" are
-% TODO: Make this initially less OHDSI specific; pull from https://jacobzelko.com/05122023034151-network-macarthur
+% TODO::MEDIUM This paragraph should be centered on the core technology of the concept of network studies
+% TODO::MEDIUM Use this to address the notion of what "network studies" are
+% TODO::MEDIUM Make this initially less OHDSI specific; pull from https://jacobzelko.com/05122023034151-network-macarthur
 In particular, one collaboration mechanism that OHDSI has been able to operationalize meaningfully while working with observational health data is the notion of "network studies".
 These studies, are designed to be transparent and encompasses research endeavors being explored by members of OHDSI comprehensive of relevant documentation, analysis code, results, and study protocols describing the study's scope and objectives.
 OHDSI had its inception in the development of the Observational Medical Outcomes Partnership (OMOP) that was created in 2009 by the US Food and Drug Administration to address concerns related to data type, study design, and data privacy concerns of "Real World Data" \cite{ohdsi2019book} \cite{FDARealWorldEvidence}
 OHDSI was developed to focus on leveraging observational health data stored within the OMOP CDM.
 Since current observational health data sources are aggregated at different levels and cannot be generalized to the overall population, the data is often incomplete, inaccurate, and prone to issues of bias, error handling, and multidimensional complexity. 
 The goal of OHDSI is to produce reproducible, robust, and reliable evidence by developing standardized data formats and research protocol designs to enable large-scale collaborative research and improve the transparency and scalability of observational health research. 
-% TODO: Carry HADES discussion into the paragraph talking about research tooling
+% TODO::MEDIUM Carry HADES discussion into the paragraph talking about research tooling
 One core innovation brought about by OHDSI in the space of network science is how, given the HADES tools and procedures established by OHDSI, 
-% TODO: Make this more general such that it flows into the next paragraph on research tooling better
+% TODO::EASY Make this more general such that it flows into the next paragraph on research tooling better
 a research group can develop their analysis on their own OMOP CDM instance and then bundle together their study.
-% EXPLAIN: What is a study package?
-% EXPLAIN: What data assets?
+% EXPLAIN::EASY What is a study package?
+% EXPLAIN::EASY What data assets?
 Once this packaging is done, they can pass along the study package to another site to collaborate on the same analysis but on different data assets.
-% EXPLAIN: What is a collaborator network?
+% EXPLAIN::MEDIUM What is a collaborator network?
 Data confidentiality is preserved in this approach as data from individual participating sites remains exclusive to each site, with only aggregate results shared across a given collaborator network.
 As such, no risk for re-identification comes about through this network collaboration and has ushered in the possibility for similar research approaches to be taken across the globe. \cite{ohdsi2019book}
 
-% TODO: Develop this paragraph more about research software
+% TODO::HARD Develop this paragraph more about research software
 As the OMOP CDM has become ubiquitous within observational health research, developing research software to handle and manage OMOP CDM data is necessary to meaningfully contribute within the observational health research space.
 OHDSI supports the development of open-source software tools in a centralized ecosystem called HADES (Health Analytics Data-to-Evidence Suite) for particularly managing and working with OMOP CDM formatted data.
 The HADES ecosystem has been in existence for $\approx 10$ years and has given rise to improvements in the quality and reliability of observational health research as well as motivating novel collaboration mechanisms.
@@ -120,23 +120,23 @@ At this time, OHS prioritizes creation and maintenance of tools that support ana
 
 \footnotetext{It is unclear where terms like "OMOP-ify" or "OMOP-ification" (the process of converting a data to the OMOP CDM) originated; it may have been coined by Dr. Jon Duke.}
 
-% TODO: Cite Discourse post on start of JuliaHealth
+% TODO::EASY Cite Discourse post on start of JuliaHealth
 JuliaHealth is an open-science collective dedicated to bringing the Julia programming language to various avenues of health research domains including, but not limited to, observational health, medical imaging, standards interoperability and more.
 It leverages the strengths of the Julia language to introduce new methods into these spaces, augment existing workflows, and provide a community structure for health researchers within the global Julia ecosystem.
-% EXPLAIN: What is a subecosystem?
-% EXPLAIN: How does having more subecosystems enable novel research to be done?
+% EXPLAIN::EASY What is a subecosystem?
+% EXPLAIN:: How does having more subecosystems enable novel research to be done?
 Eventually, JuliaHealth will host a variety of subecosystems and associated resources that will enable novel research to be conducted within Julia. 
 
 One area of the subecosystems within JuliaHealth that has matured significantly over the years has been the JuliaHealth observational health subecosystem (OHS).
 It can be said that OHS had its inception in work done by Evans and Simonov with efforts such as \textit{FunOHDSI.jl}, \textit{OHDSICohortExpressions.jl}, and \textit{FunSQL.jl} around $2021$ \cite{kirill_simonov_2023_7705325}
-% TODO: Cite FunOHDSI
-% TODO: Cite OHDSICohortExpressions
-% TODO: Cite OHDSI Symposium poster on JuliaHealth
-% TODO: Register OHDSI Symposium poster to Zenodo
-% TODO: Cite JuliaCon 2023 presentation
-% TODO: Register JuliaCon 2023 presentation to Zenodo
+% TODO::EASY Cite FunOHDSI
+% TODO::EASY Cite OHDSICohortExpressions
+% TODO::EASY Cite OHDSI Symposium poster on JuliaHealth
+% TODO::HARD Register OHDSI Symposium poster to Zenodo
+% TODO::EASY Cite JuliaCon 2023 presentation
+% TODO::HARD Register JuliaCon 2023 presentation to Zenodo
 Since then, Zelko et. al. have spearheaded most recent developments within OHS via the creation of a variety of tools and demonstrated their effectiveness in using these tools for novel observational health research endeavors \cite{zelko2022pilot}
-% EXPLAIN: What does this mean?
+% EXPLAIN::MEDIUM What does this mean?
 Through such efforts, OHS is becoming further capable of executing novel observational health research. 
 
 \section{Accomplishing Common Observational Health Research Tasks within Julia}
@@ -153,77 +153,76 @@ This paper summarizes and highlights some of the current capacity OHS provides s
 
 \subsection{Using Phenotype Definitions}
 
-% TODO: Add a paragraph here about what is a phenotype definition
-% TODO: Cite my paper here
+% TODO::MEDIUM Add a paragraph here about what is a phenotype definition
+% TODO::EASY Cite my paper here
 
-% TODO: Segue this better from phenotype definitions
+% TODO::EASY Segue this better from phenotype definitions
 One of the premier tools within the OHDSI HADES ecosystem is the ATLAS Shiny application which was developed to develop patient phenotype definitions within observational health research contexts (amongst other use cases).
 These phenotype definitions have varying levels of complexity where they can be very simple (such as finding all patients with one health condition or diagnosis) or grow to be extremely complex (defining controlled, uncontrolled, and indeterminate patient cohorts based on medications, lab results, etc.)
-% TODO: Cite schema of the definition from GitHub
-% EXPLAIN: Better introduce what SQL is
+% TODO::EASY Cite schema of the definition from GitHub
+% EXPLAIN::EASY Better introduce what SQL is
 The computable phenotype definitions that ATLAS generates based on phenotype definitions are in a variety of serialization formats such as JSON or prepared SQL expressions available in multiple SQL flavors.
 
-% TODO: Cite package
-% TODO: Reframe this to more say how ATLAS can be used to build cohorts
-% TODO: Explain how this package to accomplish similar tasks
+% TODO::EASY Cite package
+% TODO::MEDIUM Reframe this to more say how ATLAS can be used to build cohorts
+% TODO::EASY Explain how this package to accomplish similar tasks
 The Julia package, OHDSICohortExpressions.jl, exists specifically to ingest these serialized expressions of computable phenotype definitions and create patient cohorts that match the given criterion in the definition.
-% TODO: Change this list into an enumeration
+% TODO::EASY Change this list into an enumeration
 How this tool works is to 1) read and verify the serialized computable phenotype definition 2) reinterpret the serialization into the FunSQL.jl Domain Specific Language 3) return a prepared SQL statement against a given SQL database that queries an OMOP CDM database for the desired patient population(s) of interest.
-% EXPLAIN: What is a prepared statement?
-% EXPLAIN: What is a cohort in this context?
+% EXPLAIN::MEDIUM What is a prepared statement?
+% EXPLAIN::MEDIUM What is a cohort in this context?
 Once these prepared statements are made, researchers can execute the generated SQL against their OMOP CDM instance to generate cohorts for future analyses.
 
 \subsection{Rapid Cohort Iteration and Creation}
 
-% TODO: Reword this sentence
+% TODO::EASY Reword this sentence
 Although OHDSICohortExpressions.jl is sufficient to translate existing phenotype definitions generated in ATLAS to executable queries, oftentimes, there is a tricky problem of how to best iterate on phenotype definitions. \cite{zelkoDevelopingRobustComputable2023}
-% EXPLAIN: Better contextualize why this is important -- why not just create a new phenotype definition?
+% EXPLAIN:: Better contextualize why this is important -- why not just create a new phenotype definition?
 Often, one has to take an existing definition and either revise to a more narrow cohort or write manual code to build more niche cohorts after an initial definition is created.
-% EXPLAIN: How so?
-% TODO: Review this sentence; maybe cut it
+% EXPLAIN::MEDIUM How so?
+% TODO::MEDIUM Review this sentence; maybe cut it
 This refactoring of a phenotype definition can lead to conflating ideas within conversation between expert clinical reviewers, analysts, and health researchers.
-% TODO: Move this to the previous section on phenotype definitions
+% TODO::EASY Move this to the previous section on phenotype definitions
 This broadly can be the notions of what we are exploring (the phenotype definition; often the responsibility of a clinical reviewer), what is possible to compute upon (the computable phenotype definition; often the responsibility of an analyst), and the goals of the overall study.
 
-% TODO: Present this more as a general introduction to what tools are here for this
-% TODO: Talk about composition with DataFrames or Tidier
+% TODO::EASY Present this more as a general introduction to what tools are here for this
+% TODO::EASY Talk about composition with DataFrames or Tidier
+% TODO::EASY Mention capr; maybe?
 OMOPCDMCohortCreator.jl allows one to iteratively build a patient population quickly and easily.
 One can use patient pools developed from pre-existing cohorts defined off of phenotype definitions as a starting point in exploring patients or create new patient populations quickly without the need for a well-defined phenotype definition.
-% TODO: Mention the ability to satisfy research requests
+% TODO::MEDIUM Mention the ability to satisfy research requests
 This can enable analysts to more quickly understand what is inside their data assets, do "quick" analysis of a particular smaller research question, and enable a more distinct separation of work between a clinical expert reviewer and analyst teams.
-
-% TODO: Mention capr
 
 \subsection{Working with Patient Databases}
 
-% TODO: Mention JuliaCon Birds of a Feather discussion
+% TODO::EASY Mention JuliaCon Birds of a Feather discussion
 One of the biggest styming factors within not only the Julia ecosystem, but observational health research in general has been the difficulty of working with different databases.
 Although the OMOP CDM has been great for standardizing \textit{how} real world data is handled, there is a lack of consensus on \textit{what} is needed to handle these data assets.
-% TODO: Make this less verbose
+% TODO::EASY Make this less verbose
 For a variety of reasons, different groups will choose different database architectures (perhaps PostgreSQL for improved permission support, DuckDB for performance, or even SQLite for ease of use) but all are subtly different enough to create headaches in seamlessly working across different research sites.
 
-% TODO: Change the phrasing of this
+% TODO::EASY Change the phrasing of this
 The way that the Julia ecosystem handles this is via the creation of a common database interface called the DBInterface.
-% EXPLAIN: What is dispatch
+% EXPLAIN:: What is dispatch
 Specific Julia database packages can implement dispatches for this interace allowing users to have a much better experience working across databases.
 In spite of such benefits, for some users (and especially within the context of observational health studies), it can beneficial to have a more prescriptive interface where one just needs to pass perhaps a password, username, database name, and schema.
 
-% TODO: Better introduce this
+% TODO::MEDIUM Better introduce this
 For that reason, DBConnector.jl was created.
-% EXPLAIN: Contextualize this a bit better
+% EXPLAIN::MEDIUM Contextualize this a bit better
 Although this is not an explicit JuliaHealth package, it was a pain point that was experienced throughout the process of observational health research across multiple partner sites.
 The promise of DBConnector.jl is that with one line command, users can connect simply, and in a common (albeit opinionated) manner, to databases.
 DBConnector unifies Julia database packages that implement the DBInterface to achieve this level of simplified connection making.
 DBConnector.jl was inspired by the package \textit{DatabaseConnector} (Link: https://github.com/OHDSI/DatabaseConnector)
 
-% TODO: Combine with the previous paragraph and state that there are two approaches
-% TODO: Make explicit DBConnector's path
-% TODO: Make explicit the path of choosing general packages
+% TODO::MEDIUM Combine with the previous paragraph and state that there are two approaches
+% TODO::EASY Make explicit DBConnector's path
+% TODO::EASY Make explicit the path of choosing general packages
 Finally, if someone needs more fine-grained control over a particular database connection, they can choose to eschew this package.
 Instead, they can switch to the specific Julia database package that would give them the additional control.
 Although they'll lose the simplicity of this package, core required functionality is not lost when working with databases.
 
-% TODO: Review if this section is actually needed
+% TODO::HARD Review if this section is actually needed
 \subsection{Ecosystem Interoperability}
 
 In order to more effectively bridge the JuliaHealth ecosystem with ongoing efforts in other ecosystems, Julia provides methods to allow one to seamlessly interoperate with not only other ecosystems but entirely different languages as well.
@@ -240,18 +239,18 @@ This can be a great bridging mechanism so that observational health researchers 
 
 \section{Conducting a Small-Scale Observational Health Research Study Using JuliaHealth Tools}
 
-% TODO: Reference code repository
+% TODO::EASY Reference code repository
 Using the JuliaHealth tools developed, we enumerate an example observational health study workflow that would be used in practice.\footnotemark
-% TODO: Enumerate these two datasets
-% EXPLAIN: In enumeration talk about what Eunomia is 
-% EXPLAIN: In enumeration discuss MIMIC III
-% TODO: Cite MIMIC III, MIT LCP, and OMOP-ification process
+% TODO::EASY Enumerate these two datasets
+% EXPLAIN::EASY In enumeration talk about what Eunomia is 
+% EXPLAIN::EASY In enumeration discuss MIMIC III
+% TODO::EASY Cite MIMIC III, MIT LCP, and OMOP-ification process
 For this paper, we used two datasets: a synthetic patient dataset called \textit{Eunomia} and the MIMIC III patient dataset which had been converted into the OMOP CDM to illustrate the workflow provided by the Observational Health sub-ecosystem.
-% TODO: Mention in footnote explicitly that reproducing workflow in Eunomia is possible
-% TODO: Mention in footnote that explicitly reproducing workflow in MIMIC III is possible but not readily accessible
+% TODO::EASY Mention in footnote explicitly that reproducing workflow in Eunomia is possible
+% TODO::EASY Mention in footnote that explicitly reproducing workflow in MIMIC III is possible but not readily accessible
 Reproducing the workflow using the \textit{Eunomia} dataset is made readily available at the repository here: \cite{schuemieEunomia2023}
 
-% TODO: Add link to code repository
+% TODO::EASY Add link to code repository
 \footnotetext{The code snippets presented in the body of the paper may omit certain intermediate steps. 
 Please review the associated code repository for a full working tutorial.}
 
@@ -261,9 +260,9 @@ However, to complement this, a similar study will be done on the MIMIC III datas
 
 \subsection{Connecting to a Database}
 
-% EXPLAIN: What is this doing here?
-% TODO: Update DBConnector
-% TODO: Maybe remove package imports and mention them within the caption instead
+% EXPLAIN::EASY What is this doing here?
+% TODO::HARD Update DBConnector
+% TODO::MEDIUM Maybe remove package imports and mention them within the caption instead
 
 \begin{listing}[!ht]
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
@@ -286,7 +285,7 @@ occ.GenerateTables(conn)
 \label{listing:connection}
 \end{listing}
 
-% TODO: Review if this subsection is needed
+% TODO::HARD Review if this subsection is needed
 \subsection{Bridging between OHDSI and JuliaHealth Communities}
 
 Briding between tools used in the OHDSI and JuliaHealth communities is now exceptionally straightforward.
@@ -295,11 +294,11 @@ Briding between tools used in the OHDSI and JuliaHealth communities is now excep
 
 \subsection{Using a Cohort Definition To Build an Initial Cohort}
 
-% EXPLAIN: What is this doing here?
+% EXPLAIN:: What is this doing here?
 After having a strep throat phenotype definition defined using ATLAS, we can then execute the resulting computable phenotype definition against the \textit{Eunomia} database.
 
-% TODO: Add figure, caption, and label details
-% TODO: Maybe remove package imports and mention them within the caption instead
+% TODO::EASY Add figure, caption, and label details
+% TODO::HARD Maybe remove package imports and mention them within the caption instead
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 using JSON3 
 using OHDSICohortExpressions
@@ -326,15 +325,15 @@ for query in split(sql, ";")[1:end-1]
 end
 \end{minted}
 
-% TODO: Move this to a caption
+% TODO::EASY Move this to a caption
 A quick query of the cohort table (where the resulting subjects were stored) shows $\approx 1600$ from the dataset match this criteria.
 
 \subsection{Characterizing Patient Populations}
 
-% EXPLAIN: What is this section doing?
+% EXPLAIN:: What is this section doing?
 
-% TODO: Add figure, caption, and label details
-% TODO: Maybe remove package imports and mention them within the caption instead
+% TODO::EASY Add figure, caption, and label details
+% TODO::EASY Maybe remove package imports and mention them within the caption instead
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 C = GetCohortSubjects(1, conn)
 rename!(C, :subject_id => :person_id)
@@ -350,10 +349,10 @@ C_age_group = occ.GetPatientAgeGroup(
 
 \subsection{Calculating Crude Prevalence Rate}
 
-% EXPLAIN: What is this section doing?
+% EXPLAIN::MEDIUM What is this section doing?
 
-% TODO: Add figure, caption, and label details
-% TODO: Maybe remove package imports and mention them within the caption instead
+% TODO::EASY Add figure, caption, and label details
+% TODO::EASY Maybe remove package imports and mention them within the caption instead
 
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 import DataFrames as DF
@@ -378,13 +377,13 @@ C_groups = DF.combine(C_groups, DF.nrow => :count)
 
 Using this analytical approach, tabulation can be quickly conducted across patients.
 
-% EXPLAIN: Move this to the caption of the table
+% EXPLAIN::EASY Move this to the caption of the table
 Additionally, throughout the process, one can perform relevant analysis methods.
 Here, we'll conduct a crude prevalence calculation across the patient cohort.
 
-% EXPLAIN: What is this section doing?
+% EXPLAIN::MEDIUM What is this section doing?
 
-% TODO: Add figure, caption, and label details
+% TODO::EASY Add figure, caption, and label details
 \begin{table}[!ht]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|}
@@ -401,8 +400,8 @@ Here, we'll conduct a crude prevalence calculation across the patient cohort.
 
 \subsection{Summary of Results}
 
-% TODO: Create table for MIMIC III results
-% TODO: Create reference to Eunomia table
+% TODO::HARD Create table for MIMIC III results
+% TODO::EASY Create reference to Eunomia table
 As seen in Table 1, informative results can be rapidly generated by this workflow relevant to observational health research.
 Although the values shown in Table 2 are synthetic and the crude prevalence values themselves are meaningless, we can take a this approach and apply it directly to the MIMIC III dataset.
 In Table 3, we can calculate across this dataset meaningful statistics that could later be further analyzed and drive further questioning (such as ...).
@@ -411,31 +410,31 @@ In Table 3, we can calculate across this dataset meaningful statistics that coul
 
 \subsection{Advanced Features of the JuliaHealth Ecosystem}
 
-% EXPLAIN: What is the overview of this section?
-% EXPLAIN: What does each topic do?
-% TODO: Convert this to an enumeration
+% EXPLAIN::MEDIUM What is the overview of this section?
+% EXPLAIN::MEDIUM What does each topic do?
+% TODO::EASY Convert this to an enumeration
 
     1. Modularization of code and chaining
     2. Distributed computing
     3. Automatic generation of SQL from health packages
 
-% TODO: Rename section
+% TODO::EASY Rename section
 \subsubsection{Modularization of Code and Chaining}
 
-% TODO: Make this more explicit about utilizing Julia's composition
+% TODO::MEDIUM Make this more explicit about utilizing Julia's composition
 An exciting emergent aspect of the JuliaHealth ecosystem that came about as a result of developing OMOPCDMCohortCreator.jl was the prospect of radical modularization and chaining of package functionalities together.
-% TODO: Tie into currying more directly
-% TODO: Check if I am mentioning currying correctly
+% TODO::MEDIUM Tie into currying more directly
+% TODO::MEDIUM Check if I am mentioning currying correctly
 We can leverage a unique property of Julia in that Julia supports partial evaluation of functions (also known as currying) to simplify repeated function calls to the same function over and over again.
-% TODO: Rewrite this part in light of the previous sections 
+% TODO::MEDIUM Rewrite this part in light of the previous sections 
 For example, taking our workflow example from the earlier section where we characterized patients by race, gender, and age group, we can do a few "tricks" to modularize these characterization functions as follows:
 
-% TODO: Rework this section further
+% TODO::EASY Rework this section further
 First, we'll take our original functions and fix a connection object to each of our cofactor functions.
 This simplifies having to continuously pass forward a connection object and opens up the ability to chain together these functions simply:
 
-% TODO: Maybe move this into the tutorial code
-% TODO: Add figure, caption, and label details
+% TODO::MEDIUM Maybe move this into the tutorial code
+% TODO::EASY Add figure, caption, and label details
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 import Base:
   Fix2
@@ -450,14 +449,14 @@ CGetPatientGender = Fix2(GetPatientGender, c)
 CGetPatientAgeGroup = Fix2(GetPatientAgeGroup, c)
 \end{minted}
 
-% TODO: Add this to previous code caption
+% TODO::EASY Add this to previous code caption
 NOTE: The "C" prefix for each of our curried functions denotes that it is curried.
 
-% EXPLAIN: Refactor this paragraph better or put most of it into the caption for the next code block
+% EXPLAIN::EASY Refactor this paragraph better or put most of it into the caption for the next code block
 Second, as OMOPCDMCohortCreator.jl is built on top of DataFrames.jl and one has the option of creating a DataFrame with the result from every OCC function, we can use the package, Chain.jl.
 This package abstracts away some of the explicit functionalities of DataFrames.jl but instead gives much easier ways to define a flow of functions:
 
-% TODO: Do we even need chaining here or could we use direct composition of functions?
+% TODO::MEDIUM Do we even need chaining here or could we use direct composition of functions?
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 import Chain:
   @chain
@@ -469,7 +468,7 @@ CofactorPatients(patients) = @chain patients begin
 end
 \end{minted}
 
-% TODO: Can this be simplified?
+% TODO::MEDIUM Can this be simplified?
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 CharacterizePatients(patients) = @chain patients begin
     _[:, DF.Not(:person_id)]
@@ -489,13 +488,13 @@ end
 \end{minted}
 
 In this way, future researchers using tools such as OMOPCDMCohortCreator.jl can create these more convenient abstractions.
-% TODO: Move this into the future discussion section
+% TODO::EASY Move this into the future discussion section
 In fact, it could be a point of exploration in the future to build on top of OMOPCDMCohortCreator.jl even more abstracted and reusable functionalities to simplify ease of use while also enabling more readily auditable functionality.
 
-% TODO: Move this into its own section
+% TODO::MEDIUM Move this into its own section
 Finally, as these functions have now been fully modularized, these can now be readily distributed using Julia's distributed computing methods:
 
-% TODO: Redo example; I do not feel it is good
+% TODO::HARD Redo example; I do not feel it is good
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 import Distributed:
   @distributed 
@@ -513,23 +512,23 @@ Distributed computing here then allows a researcher to run multiple investigatio
 
 \subsubsection{Auto-Generating SQL from JuliaHealth Commands}
 
-% TODO: Rephrase this sentence
+% TODO::EASY Rephrase this sentence
 One crucial aspect of the OHS is that it is unavoidable to work with databases that contain patient health information.
-% TODO: Rephrase this sentence better
-% TODO: Cite ANSI SQL
+% TODO::EASY Rephrase this sentence better
+% TODO::EASY Cite ANSI SQL
 For better or worse, the tool that is used to best interact with these databases are SQL dialects that loosely follow consistently the ANSI SQL guidance.
-% EXPLAIN: Highlight this more
-% EXPLAIN: In what scenarios might using Julia may not be possible
+% EXPLAIN::MEDIUM Highlight this more
+% EXPLAIN::MEDIUM In what scenarios might using Julia may not be possible
 To accomodate for this, several of the core tools developed in this sub-ecosystem generate SQL that can be used in the case where Julia may not be available in a given environment housing patient health data.
-% EXPLAIN: Introduce this better
+% EXPLAIN::MEDIUM Introduce this better
 As an example, \textit{OMOPCDMCohortCreator.jl} functions build upon \textit{FunSQL.jl} allowing one to use a function such `GetPatientAgeGroup` without a connection object which would result in SQL.
 
-% TODO: Add figure, caption, and label details
+% TODO::EASY Add figure, caption, and label details
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
   GetPatientAgeGroup([1]; age_groupings = [[0, 40], [41, 80]])
 \end{minted}
 
-% TODO: Add figure, caption, and label details
+% TODO::EASY Add figure, caption, and label details
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
   SELECT
     "PERSON_2"."person_id",
@@ -547,7 +546,7 @@ As an example, \textit{OMOPCDMCohortCreator.jl} functions build upon \textit{Fun
   ) AS "PERSON_2"
 \end{minted}
 
-% TODO: Combine this section with the future directions section
+% TODO::MEDIUM Combine this section with the future directions section
 \subsection{Strong Composition within JuliaHealth}
 
 Within Julia, one aspect of the language that is often viewed as a technical problem within other languages emerges more as a social problem within Julia.
@@ -564,23 +563,23 @@ As shown in this workflow, although there were some packages that were made spec
 
 \subsection{Potential Future Directions}
 
-% TODO: Rephrase this introductory paragraph
+% TODO::EASY Rephrase this introductory paragraph
 JuliaHealth is now sufficiently at a stage of maturity where potential future researchers can leverage JuliaHealth's tools to conduct further future research or build upon existing architecture to target specific needs.
 Some potential future directions that can be taken are as follows.
 
-% TODO: This is where to introduce the paradox of composition
+% TODO::MEDIUM This is where to introduce the paradox of composition
 Due to the strong composition that exists within the JuliaHealth and broader Julia ecosystem, solutions may already exist for solving various health informatics related research.
 However, what has consistently been a problem within the Julia ecosystem is the lack of sufficient documentation dedicated to describing these novel compositions and their application to various endeavors.
 Future efforts can be dedicated to taking existing tools and reframing them in a JuliaHealth context to assist newcomers to Julia and JuliaHealth in determining how to explore and address problems that they are interested in.
 
-% TODO: Combine this paragraph with the previous paragraph
-% TODO: Shorten this sentiment
+% TODO::MEDIUM Combine this paragraph with the previous paragraph
+% TODO::EASY Shorten this sentiment
 Additionally, due to the composable and modular nature of the OHS, research analyses and visualizations can be decoupled and interchanged with one another.
 Whereas in other ecosystems that make technologies for tools such as dashboards tightly coupled to analytics regimens, the subecosystem is mature enough to enable new users and developers to create analytics tools that can be separately woven into more graphical user interfaces.
 For example, treatment pathways is a novel observational health approach to understand and visualize the care a patient receives within a care setting.
 Only a few tools exist to visualize such hidden patient narratives but with the JuliaHealth ecosystem, the possibility of making tools that can interrogate patient care pathways more deeply could be fully realized.
 
-% TODO: Make this more about the flexible nature of the JuliaHealth organization
+% TODO::EASY Make this more about the flexible nature of the JuliaHealth organization
 Furthermore, again exploiting the composition within the JuliaHealth ecosystem, as mentioned in the context of JuliaHealth and machine learning applications, future efforts could focus on developing fairness and bias auditing tools in patient datasets.
 These tools could consider factors commonly explored in health equity literature like data completeness, demographic variables, and fairness algorithms. 
 
@@ -588,10 +587,10 @@ These tools could consider factors commonly explored in health equity literature
 
 In conclusion, this paper has demonstrated the capabilities of the JuliaHealth OHS and its potential to further investigations in observational health research.
 Although it is an ecosystem that is relatively new, its robustness allows for novel investigations to be pursued within this domain of research. 
-% TODO: Mention how this allows JuliaHealth to solve more problems than what is present within JuliaHealth
+% TODO::MEDIUM Mention how this allows JuliaHealth to solve more problems than what is present within JuliaHealth
 Additionally, due to the strongly compositional nature of the Julia ecosystem, these JuliaHealth tools can readily compose with tooling to support in-depth statistical analyses, mathematical modeling, and visualization capacities.
 
-% TODO: Rework this
+% TODO::MEDIUM Rework this
 In essence, the JuliaHealth ecosystem stands as a catalyst for transformative observational health research, poised to push the boundaries of innovation, collaboration, and standardization in the pursuit of better healthcare outcomes. As it continues to evolve, JuliaHealth emerges as a beacon of progress in the dynamic landscape of health informatics.
 
 \section{Acknowledgements}
@@ -612,7 +611,7 @@ For this work, we would like to thank and recognize the following individuals an
 
 \section{References}
 
-% TODO: Review and remove appendix
+% TODO::HARD Review and probably remove appendix
 
 % APPENDIX
 \appendix
