@@ -2,6 +2,10 @@
 
 \documentclass{juliacon}
 
+\usepackage[labelfont=bf]{caption}
+\captionsetup[table]{skip=4pt}
+\captionsetup{font=scriptsize}
+
 \usepackage{fontspec}
 \usepackage{minted}
 
@@ -38,8 +42,6 @@ This paper will discuss the state of the art observational health research tools
 % EXPLAIN::EASY What is observational health research?
 % EXPLAIN::MEDIUM What sort of innovations?
 Over the past $10$ years, there have been several innovations within the observational health research community.  Observational health research is an area of study that leverages authentic health data to gain insights into the health system without interference. Data are collected by researchers as they follow groups of people over a specified period. Depending on the study, these groups may comprise healthy individuals, individuals with a specific disease, or those at high risk of developing a particular condition—such as individuals with a family history—while also taking into consideration the imperative of safeguarding their privacy. Observational studies can contribute to answering questions as what genes cause a specific disease to grow, patterns and trends for a particular disease, experiences of past patients, behaviours increasing the risk of developing a certain disease. 
-
- 
 
 % EXPLAIN::MEDIUM Why is this a crucial innovation?
 % EXPLAIN::MEDIUM What is meant by a transferable analysis?
@@ -246,16 +248,16 @@ This can be a great bridging mechanism so that observational health researchers 
 
 % TODO::EASY Reference code repository
 Using the JuliaHealth tools developed, we enumerate an example observational health study workflow that would be used in practice.\footnotemark
-% EXPLAIN::EASY In enumeration talk about what Eunomia is 
-% EXPLAIN::EASY In enumeration discuss MIMIC III
 
-For this paper, we used two datasets: a synthetic patient dataset called \textit{Eunomia} and the MIMIC III patient dataset which had been converted into the OMOP CDM to illustrate the workflow provided by the Observational Health sub-ecosystem.\cite{physionet, hripcsakCharacterizingTreatmentPathways2016, johnson2016mimic, johnson2018mimic}
+For this paper, we used two datasets: 
 
 \begin{enumerate}
 
-\item \textbf{Eunomia} -
+% TODO::EASY Cite https://github.com/synthetichealth/synthea
+\item \textbf{Eunomia} - this is a synthetic patient dataset created from the open source synthetic patient generator, \textit{Synthea}, and hosted within the HADES and JuliaHealth ecosystems.
 
-\item \textbf{MIMIC III} -
+\item \textbf{MIMIC III} - a deidentified datasets consisting of inpatient visits from Beth Israel Deaconness Hospital in Boston, Massachussetts.
+The particular version of the dataset that we used was transformed into the OMOP CDM using tools from MIT LCP and PhysioNet. \cite{physionet, hripcsakCharacterizingTreatmentPathways2016, johnson2016mimic, johnson2018mimic}
 
 \end{enumerate}
 
@@ -275,15 +277,12 @@ However, to complement this, a similar study will be done on the MIMIC III datas
 
 % EXPLAIN::EASY What is this doing here?
 % TODO::HARD Update DBConnector
-% TODO::MEDIUM Maybe remove package imports and mention them within the caption instead
-
 \begin{listing}[!ht]
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 import DBConnector: 
   DBConnection
 import HealthSampleData: 
   Eunomia
-import OMOPCDMCohortCreator as OCC
 
 conn = DBConnection("sqlite", Eunomia())
 
@@ -294,7 +293,7 @@ occ.GenerateDatabaseDetails(
 
 occ.GenerateTables(conn)
 \end{minted}
-\caption{This illustrates how to connect to the Eunomia database}
+\caption{\textbf{Configuring OMOP CDM Database Connection.} Using \textit{DBConnector.jl}, connection to the \textit{Eunomia} SQLite database can be made. Then, \textit{OMOPCDMCohortCreator.jl} (occ) is used to generate connection details used internally by the package for the rest of the session.}
 \label{listing:connection}
 \end{listing}
 
@@ -313,34 +312,20 @@ After having a strep throat phenotype definition defined using ATLAS, we can the
 % TODO::HARD Maybe remove package imports and mention them within the caption instead
 \begin{listing}[!ht]
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
-using JSON3 
-using OHDSICohortExpressions
-
-import DBInterface as DBI
-
-cohort = JSON3.read("strep_throat.json")
-cohort_expression = cohort[:items][1][:expression]
-
-model = Model(cdm_version = v"5.3.1", 
+model = oce.Model(cdm_version = v"5.3.1", 
               cdm_schema = "main",
               vocabulary_schema = "main", 
               results_schema = "main",
               target_schema = "main", 
               target_table = "cohort");
 
-sql = translate(cohort_expression, 
+sql = oce.translate(cohort_expression, 
                 dialect = :sqlite, 
                 model = model, 
                 cohort_definition_id = 1);
-
-for query in split(sql, ";")[1:end-1]
-  DBI.execute(conn, query)
-end
 \end{minted}
-% TODO::EASY Add a caption
-\caption{}
-% TODO::EASY Add a label
-\label{listing:}
+\caption{\textbf{Creating a Cohort Using a Computable Phenotype Definition.} \textit{OHDSICohortExpressions.jl} (oce) ingests a computable phenotype definition to generate a cohort of patients. The JSON is translated into an intermediate SQL Syntax Tree, instantiated in SQL (SQLite) targeting an OMOP CDM v5.3.1 database, and then populates the database's cohort table.}
+\label{listing:cohort_creation}
 \end{listing}
 
 % TODO::EASY Move this to a caption
@@ -350,64 +335,40 @@ A quick query of the cohort table (where the resulting subjects were stored) sho
 
 % EXPLAIN:: What is this section doing?
 
-% TODO::EASY Maybe remove package imports and mention them within the caption instead
 \begin{listing}[!ht]
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
-C = GetCohortSubjects(1, conn)
-rename!(C, :subject_id => :person_id)
+patients = occ.GetCohortSubjects(1, conn)
 
-C_race = occ.GetPatientRace(C.person_id, conn)
-C_gender = occ.GetPatientGender(C.person_id, conn)
+patients_race = occ.GetPatientRace(C.person_id, conn)
+patients_gender = occ.GetPatientGender(C.person_id, conn)
 
-C_age_group = occ.GetPatientAgeGroup(
+patients_age_group = occ.GetPatientAgeGroup(
   C.person_id, 
   conn; 
 )
 \end{minted}
-% TODO::EASY Add a caption
-\caption{}
-% TODO::EASY Add a label
-\label{listing:}
+\caption{\textbf{Find Demographic Characteristics of Cohort.} Demographic properties of a cohort can be quickly queried from a database.}
+\label{listing:demographics}
 \end{listing}
 
 \subsection{Calculating Crude Prevalence Rate}
 
 % EXPLAIN::MEDIUM What is this section doing?
 
-% TODO::EASY Maybe remove package imports and mention them within the caption instead
-
 \begin{listing}[!ht]
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
-import DataFrames as DF
+strep_df = df.combine(patient_groups, df.nrow => :count)
 
-C_features = DF.outerjoin(C_race,
-                          C_gender,
-                          C_age_group;
-                          on = :person_id, 
-                          matchmissing = :equal)
+# Creator code to process data and generate counts...
 
-C_features = C_features[:, DF.Not(:person_id)]
-
-C_groups = DF.groupby(C_features, 
-                      [
-                        :race_concept_id, 
-                        :gender_concept_id, 
-                        :age_group
-                      ])
-
-C_groups = DF.combine(C_groups, DF.nrow => :count)
+strep_df.prev = strep_df.count ./ strep_df.total_count 
 \end{minted}
-% TODO::EASY Add a caption
-\caption{}
-% TODO::EASY Add a label
-\label{listing:}
+\caption{\textbf{Calculating crude prevalence rates.} Once demographic information is extracted, processing can be performed using tools such as \textit{DataFrames.jl} (df) to calculate metrics such as prevalence rates in a very straightforward manner.}
+\label{listing:prevalence}
 \end{listing}
 
 Using this analytical approach, tabulation can be quickly conducted across patients.
 
-% EXPLAIN::EASY Move this to the caption of the table
-Additionally, throughout the process, one can perform relevant analysis methods.
-Here, we'll conduct a crude prevalence calculation across the patient cohort.
 
 % EXPLAIN::MEDIUM What is this section doing?
 
@@ -424,9 +385,8 @@ Here, we'll conduct a crude prevalence calculation across the patient cohort.
         B/AA & M & 65 - 69 & 12 & 18 & 66.66 \\ \hline
     \end{tabular}
     % TODO::EASY Add a caption
-    \caption{}
-    % TODO::EASY Add a label
-    \label{table:}
+    \caption{\textbf{Example of a Strep Throat Prevalence Calculation.} This illustrates the sort of results one can quickly generate using the OHS. Note, that although the prevalence values in this table are based on synthetic data and are not realistic, the output looks very similar to what one could expect to generate.}
+    \label{table:eunomia_prevalence}
 \end{table}
 
 \subsection{Summary of Results}
@@ -518,9 +478,9 @@ end
 \begin{listing}[!ht]
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 CharacterizePatients(patients) = @chain patients begin
-    _[:, DF.Not(:person_id)]
-    DF.groupby(_, names(_))
-    DF.combine(_, DF.nrow => :count)
+    _[:, df.Not(:person_id)]
+    df.groupby(_, names(_))
+    df.combine(_, df.nrow => :count)
     occ.ExecuteAudit
 end
 \end{minted}
