@@ -428,81 +428,36 @@ For example, taking our workflow example from the earlier section where we chara
 First, we'll take our original functions and fix a connection object to each of our cofactor functions.
 This simplifies having to continuously pass forward a connection object and opens up the ability to chain together these functions simply:
 
-% TODO::MEDIUM Maybe move this into the tutorial code
-\begin{listing}[!ht]
-\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
-import Base:
-  Fix2
-
-import OMOPCDMCohortCreator:
-  GetPatientRace,
-  GetPatientGender,
-  GetPatientAgeGroup
-
-CGetPatientRace = Fix2(GetPatientRace, c)
-CGetPatientGender = Fix2(GetPatientGender, c)
-CGetPatientAgeGroup = Fix2(GetPatientAgeGroup, c)
-\end{minted}
-% TODO::EASY Add a caption
-\caption{}
-% TODO::EASY Add a label
-\label{listing:}
-\end{listing}
-
-% TODO::EASY Add this to previous code caption
-NOTE: The "C" prefix for each of our curried functions denotes that it is curried.
-
 % EXPLAIN::EASY Refactor this paragraph better or put most of it into the caption for the next code block
 Second, as OMOPCDMCohortCreator.jl is built on top of DataFrames.jl and one has the option of creating a DataFrame with the result from every OCC function, we can use the package, Chain.jl.
 This package abstracts away some of the explicit functionalities of DataFrames.jl but instead gives much easier ways to define a flow of functions:
 
-% TODO::MEDIUM Do we even need chaining here or could we use direct composition of functions?
 \begin{listing}[!ht]
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
-import Chain:
-  @chain
+FGetPatientRace = Fix2(occ.GetPatientRace, conn)
+FGetPatientGender = Fix2(occ.GetPatientGender, conn)
+FGetPatientAgeGroup = Fix2(occ.GetPatientAgeGroup, conn)
 
 CofactorPatients(patients) = @chain patients begin
-    CGetPatientRace_fixed
-    CGetPatientGender_fixed
-    CGetPatientAgeGroup_fixed
+    FGetPatientRace
+    FGetPatientGender
+    FGetPatientAgeGroup
 end
-\end{minted}
-% TODO::EASY Add a caption
-\caption{}
-% TODO::EASY Add a label
-\label{listing:}
-\end{listing}
 
-% TODO::MEDIUM Can this be simplified?
-\begin{listing}[!ht]
-\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 CharacterizePatients(patients) = @chain patients begin
     _[:, df.Not(:person_id)]
     df.groupby(_, names(_))
     df.combine(_, df.nrow => :count)
     occ.ExecuteAudit
 end
-\end{minted}
-% TODO::EASY Add a caption
-\caption{}
-% TODO::EASY Add a label
-\label{listing:}
-\end{listing}
 
-This gives one the ability to simply reason about an analysis in a very straightforward and readable manner:
-
-\begin{listing}[!ht]
-\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 RunStudy(patients) = @chain patients begin
     CofactorPatients
     CharacterizePatients
 end
 \end{minted}
-% TODO::EASY Add a caption
-\caption{}
-% TODO::EASY Add a label
-\label{listing:}
+\caption{\textbf{Modularizing Study Code.} Using Julia's partial application abilities, connection objects can be fixed allowing study code to be readily modularized. Using the package, Chain.jl, occ and processing functions can be composed together to create modular study code.}
+\label{listing:modular_study}
 \end{listing}
 
 In this way, future researchers using tools such as OMOPCDMCohortCreator.jl can create these more convenient abstractions.
@@ -526,10 +481,8 @@ end
 
 vcat(result...) |> audit_patient_groups
 \end{minted}
-% TODO::EASY Add a caption
-\caption{}
-% TODO::EASY Add a label
-\label{listing:}
+\caption{\textbf{Distributed Computation of a Study.} With occ, study code can be easily abstracted and modularized. Using Julia's native Distributed package, each module of a study can then be parallelized over patient cohorts.}
+\label{listing:study_parallelization}
 \end{listing}
 
 Distributed computing here then allows a researcher to run multiple investigations at once as well as optimize performance to a given database.
@@ -548,36 +501,34 @@ To accomodate for this, several of the core tools developed in this sub-ecosyste
 As an example, \textit{OMOPCDMCohortCreator.jl} functions build upon \textit{FunSQL.jl} allowing one to use a function such `GetPatientAgeGroup` without a connection object which would result in SQL.
 
 \begin{listing}[!ht]
-\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
-  GetPatientAgeGroup([1]; age_groupings = [[0, 40], [41, 80]])
-\end{minted}
-% TODO::EASY Add a caption
-\caption{}
-% TODO::EASY Add a label
-\label{listing:}
-\end{listing}
+\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=topline, fontsize=\scriptsize, framesep=2mm]{julia}
+# Julia Input
+occ.GetPatientAgeGroup([1]; age_groupings = [
+                                              [0, 40], 
+                                              [41, 80]
+                                            ])
 
-\begin{listing}[!ht]
-\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
-  SELECT
-    "PERSON_2"."person_id",
-    (CASE 
-      WHEN ("PERSON_2"."age" < 41) 
-        THEN '0 - 40' 
-      WHEN ("PERSON_2"."age" < 81) 
-        THEN '41 - 80' END) AS "age_group"
-  FROM (
-    SELECT
-      "PERSON_1"."person_id",
-      (2023 - "PERSON_1"."year_of_birth") AS "age"
-    FROM "PERSON" AS "PERSON_1"
-    WHERE ("PERSON_1"."person_id" IN (1))
-  ) AS "PERSON_2"
 \end{minted}
-% TODO::EASY Add a caption
-\caption{}
-% TODO::EASY Add a label
-\label{listing:}
+
+\begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=bottomline, fontsize=\scriptsize, framesep=2mm]{sql}
+# SQL Output
+SELECT
+  "PERSON_2"."person_id",
+  (CASE 
+    WHEN ("PERSON_2"."age" < 41) 
+      THEN '0 - 40' 
+    WHEN ("PERSON_2"."age" < 81) 
+      THEN '41 - 80' END) AS "age_group"
+FROM (
+  SELECT
+    "PERSON_1"."person_id",
+    (2023 - "PERSON_1"."year_of_birth") AS "age"
+  FROM "PERSON" AS "PERSON_1"
+  WHERE ("PERSON_1"."person_id" IN (1))
+) AS "PERSON_2"
+\end{minted}
+\caption{\textbf{Producing SQL from Julia Expression.} When occ functions are not passed a connection object, they can produce SQL representing the underyling query the Julia expression is executing.}
+\label{listing:julia_sql}
 \end{listing}
 
 % TODO::MEDIUM Combine this section with the future directions section
@@ -642,32 +593,6 @@ For this work, we would like to thank and recognize the following individuals an
   \item The Roux Institute's OHDSI Center for their encouragement
 
 \end{enumerate}
-
-\section{References}
-
-% TODO::HARD Review and probably remove appendix
-
-% APPENDIX
-\appendix
-
-\section{JSON Serialization of Computable Phenotype Definition}\label{appendix:json}
-
-An example of the JSON serialization of computable phenotype definitions can be found within the paper repository here:
-
-In particular, this example seeks to identify individuals with Type 2 Diabetes Mellitus within a given OMOP CDM.
-
-This was generated using ATLAS Version 2.12.1 as well as 
-WebAPI Version 2.12.1.
-A generic definition of the schema that was created for ATLAS 2.7.1 can be explored here: https://github.com/OHDSIBr/ATLAS-JSON-Schema/tree/2.7.4
-
-\section{PostgreSQL Serialization of Computable Phenotype Definition}\label{appendix:postgresql}
-
-An example of a PostgreSQL SQL serialization of computable phenotype definitions can be found within the paper repository here:
-
-In particular, this example seeks to identify individuals with Type 2 Diabetes Mellitus within a given OMOP CDM.
-
-This was generated using ATLAS Version 2.12.1 as well as 
-WebAPI Version 2.12.1.
 
 \input{bib.tex}
 
