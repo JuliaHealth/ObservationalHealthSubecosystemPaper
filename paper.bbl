@@ -1,7 +1,19 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{RCallJl}
 {{RCall}}.jl.
+
+\bibitem{aluthgeAnnouncingJuliaHealthOrganization2020}
+Dilum Aluthge.
+Announcing the {{JuliaHealth Organization}}.
+
+\bibitem{evansFunOHDSIJl2022}
+Clark~C. Evans and Kirill Simonov.
+{{FunOHDSI}}.jl.
+
+\bibitem{evansOHDSICohortExpressionsJl2023}
+Clark~C. Evans and Kirill Simonov.
+{{OHDSICohortExpressions}}.jl.
 
 \bibitem{ohdsi2019book}
 {OHDSI}.
@@ -9,9 +21,19 @@
   Informatics}.
 {OHDSI}.
 
+\bibitem{overhage2012validation}
+J~Marc Overhage, Patrick~B Ryan, Christian~G Reich, Abraham~G Hartzema, and
+  Paul~E Stang.
+Validation of a common data model for active safety surveillance research.
+19(1):54--60.
+
 \bibitem{PythonCall.jl}
 Christopher Rowley.
 {{PythonCall}}.jl: {{Python}} and {{Julia}} in harmony.
+
+\bibitem{sachsonOurJourney2023}
+Craig Sachson.
+{\em Our {{Journey}}}.
 
 \bibitem{schuemieEunomia2023}
 Martijn Schuemie, Frank DeFalco, and Vojtech Huser.
@@ -31,6 +53,11 @@ Real-world evidence.
 Jacob Zelko, Malina Hy, Varshini Chinta, Emily Liau, and Morgan Knowlton.
 A pilot characterization study assessing health equity in mental healthcare
   delivery within the state of georgia.
+
+\bibitem{zelko2023julia}
+Jacob~S. Zelko.
+Julia in health and medicine.
+In {\em {{JuliaCon}} 2023}. {Birds of a Feather}.
 
 \bibitem{zelkoDevelopingRobustComputable2023}
 Jacob~S. Zelko, Sarah Gasman, Shenita~R. Freeman, Dong~Yun Lee, Jaan Altosaar,
