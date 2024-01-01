@@ -50,9 +50,9 @@ Arguably, the most crucial innovation that has emerged is the Observational Medi
 The importance of this model has become apparent within open science organizations like the OHDSI (Observational Health Data Science and Informatics) network where members across $100+$ countries \cite{sachsonOurJourney2023} with access to various health systems have been able to successfully map their patient data to the OMOP CDM.
 % TODO::EASY Add citation about successful collaborations
 % EXPLAIN::EASY What is a network study?
-% TODO::EASY Cite the quote "write once, run everywhere" 
-% http://www.sun.com/smi/Press/sunflash/1996-01/sunflash.960123.10561.xml} 
-This has led to successful collaboration relationships across countries where one research group can develop a network study and then disseminate the study across collaborators leading to the idea that you can "write once, run everywhere."
+This has led to successful collaboration relationships across countries where one research group can develop a network study and then disseminate the study across collaborators leading to the idea that you can "write once, run everywhere."\footnotemark
+
+\footnotetext{This quote is attributed to Sun Microsystems when discussing the Java programming language.}
 
 \subsection{Core Technologies}
 
@@ -157,10 +157,9 @@ This paper summarizes and highlights some of the current capacity OHS provides s
 One of the premier tools within the OHDSI HADES ecosystem is the ATLAS Shiny application which was developed to develop patient phenotype definitions within observational health research contexts (amongst other use cases).
 These phenotype definitions have varying levels of complexity where they can be very simple (such as finding all patients with one health condition or diagnosis) or grow to be extremely complex (defining controlled, uncontrolled, and indeterminate patient cohorts based on medications, lab results, etc.)
 % TODO::EASY Create footnote about schema
-% TODO::EASY Add reference to schema in footnote
-% TODO::EASY Cite reference schema from GitHub in footnote; \cite{madrilATLASJSONSchema2022}
+% TODO::EASY Cite reference schema from GitHub in footnote; 
 % EXPLAIN::EASY Better introduce what SQL is
-The computable phenotype definitions that ATLAS generates based on phenotype definitions are in a variety of serialization formats such as JSON or prepared SQL expressions available in multiple SQL flavors.
+The computable phenotype definitions that ATLAS generates based on phenotype definitions are in a variety of serialization formats such as JSON or prepared SQL expressions available in multiple SQL flavors.\cite{madrilATLASJSONSchema2022}
 
 % TODO::MEDIUM Reframe this to more say how ATLAS can be used to build cohorts
 % TODO::EASY Explain how this package accomplishes similar tasks
@@ -246,28 +245,25 @@ This can be a great bridging mechanism so that observational health researchers 
 
 \section{Conducting a Small-Scale Observational Health Research Study Using JuliaHealth Tools}
 
-% TODO::EASY Reference code repository
 Using the JuliaHealth tools developed, we enumerate an example observational health study workflow that would be used in practice.\footnotemark
 
 For this paper, we used two datasets: 
 
 \begin{enumerate}
 
-% TODO::EASY Cite https://github.com/synthetichealth/synthea
-\item \textbf{Eunomia} - this is a synthetic patient dataset created from the open source synthetic patient generator, \textit{Synthea}, and hosted within the HADES and JuliaHealth ecosystems.
+\item \textbf{Eunomia} - this is a synthetic patient dataset created from the open source synthetic patient generator, \textit{Synthea}, and hosted within the HADES and JuliaHealth ecosystems. \cite{walonoski2018synthea}
 
 \item \textbf{MIMIC III} - a deidentified datasets consisting of inpatient visits from Beth Israel Deaconness Hospital in Boston, Massachussetts.
 The particular version of the dataset that we used was transformed into the OMOP CDM using tools from MIT LCP and PhysioNet. \cite{physionet, hripcsakCharacterizingTreatmentPathways2016, johnson2016mimic, johnson2018mimic}
 
 \end{enumerate}
 
-% TODO::EASY Mention in footnote explicitly that reproducing workflow in Eunomia is possible
-% TODO::EASY Mention in footnote that explicitly reproducing workflow in MIMIC III is possible but not readily accessible
 Reproducing the workflow using the \textit{Eunomia} dataset is made readily available at the repository here: \cite{schuemieEunomia2023}
 
-% TODO::EASY Add link to code repository
 \footnotetext{The code snippets presented in the body of the paper may omit certain intermediate steps. 
-Please review the associated code repository for a full working tutorial located here: https://github.com/TheCedarPrince/2022-JuliaCon-Proceedings-Submission}
+Please review the associated code repository for a full working tutorial located here: https://github.com/TheCedarPrince/2022-JuliaCon-Proceedings-Submission.
+As a further note, the code to fully reproduce a sample analysis with \textit{Eunomia} is available within the code repository. 
+As MIMIC III is not publicly available, a sample analysis using MIMIC III is available with some information stripped for privacy considerations.}
 
 \textit{Eunomia} will be used to drive the workflow example looking at patients who have ever had a history of strep throat.
 Results generated by the \textit{Eunomia} dataset will be shown for pedagogical purposes although the actual results of that analysis will be nonsensical given the synthetic nature of the database.
@@ -400,16 +396,15 @@ In Table 3, we can calculate across this dataset meaningful statistics that coul
 % EXPLAIN::MEDIUM What does each topic do?
 \begin{enumerate}
 
-\item Modularization of code and chaining
+\item Modularization
 
-\item Distributed computing
+\item Distributed Computing
 
-\item Automatic generation of SQL from health packages
+\item Automatic SQL Generation
 
 \end{enumerate}
 
-% TODO::EASY Rename section
-\subsubsection{Modularization of Code and Chaining}
+\subsubsection{Modularization}
 
 % TODO::MEDIUM Make this more explicit about utilizing Julia's composition
 An exciting emergent aspect of the JuliaHealth ecosystem that came about as a result of developing OMOPCDMCohortCreator.jl was the prospect of radical modularization and chaining of package functionalities together.
@@ -482,13 +477,12 @@ vcat(result...) |> audit_patient_groups
 
 Distributed computing here then allows a researcher to run multiple investigations at once as well as optimize performance to a given database.
 
-\subsubsection{Auto-Generating SQL from JuliaHealth Commands}
+\subsubsection{Automatic SQL Generation}
 
 % TODO::EASY Rephrase this sentence
 One crucial aspect of the OHS is that it is unavoidable to work with databases that contain patient health information.
 % TODO::EASY Rephrase this sentence better
-% TODO::EASY Cite ANSI SQL
-For better or worse, the tool that is used to best interact with these databases are SQL dialects that loosely follow consistently the ANSI SQL guidance.
+For better or worse, the tool that is used to best interact with these databases are SQL dialects that loosely follow consistently the ANSI SQL guidance.\cite{kelechavaSQLStandardISO2018}
 % EXPLAIN::MEDIUM Highlight this more
 % EXPLAIN::MEDIUM In what scenarios might using Julia may not be possible
 To accomodate for this, several of the core tools developed in this sub-ecosystem generate SQL that can be used in the case where Julia may not be available in a given environment housing patient health data.
