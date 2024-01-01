@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{k}{import}\PYG{+w}{ }\PYG{n}{DBConnector}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{DBConnection}
+\PYG{k}{import}\PYG{+w}{ }\PYG{n}{HealthSampleData}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n}{Eunomia}
+
+\PYG{n}{conn}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{DBConnection}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{sqlite}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Eunomia}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{n}{occ}\PYG{o}{.}\PYG{n}{GenerateDatabaseDetails}\PYG{p}{(}
+\PYG{+w}{    }\PYG{l+s+ss}{:sqlite}\PYG{p}{,}
+\PYG{+w}{    }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{main}\PYG{l+s}{\PYGZdq{}}
+\PYG{p}{)}
+
+\PYG{n}{occ}\PYG{o}{.}\PYG{n}{GenerateTables}\PYG{p}{(}\PYG{n}{conn}\PYG{p}{)}
+\end{Verbatim}

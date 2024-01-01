@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{n}{θ}
+
+\PYG{k}{function}\PYG{+w}{ }\PYG{n}{hello}\PYG{p}{(}\PYG{n}{name}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+si}{\PYGZdl{}name}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{end}
+
+\PYG{c}{\PYGZsh{} this is a comment}
+\end{Verbatim}

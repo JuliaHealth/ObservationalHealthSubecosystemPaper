@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{c}{\PYGZsh{} Julia Input}
+\PYG{n}{occ}\PYG{o}{.}\PYG{n}{GetPatientAgeGroup}\PYG{p}{(}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{age\PYGZus{}groupings}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{                                              }\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{40}\PYG{p}{]}\PYG{p}{,}
+\PYG{+w}{                                              }\PYG{p}{[}\PYG{l+m+mi}{41}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{80}\PYG{p}{]}
+\PYG{+w}{                                            }\PYG{p}{]}\PYG{p}{)}
+\end{Verbatim}

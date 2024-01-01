@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{n}{FGetPatientRace}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Fix2}\PYG{p}{(}\PYG{n}{occ}\PYG{o}{.}\PYG{n}{GetPatientRace}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{conn}\PYG{p}{)}
+\PYG{n}{FGetPatientGender}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Fix2}\PYG{p}{(}\PYG{n}{occ}\PYG{o}{.}\PYG{n}{GetPatientGender}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{conn}\PYG{p}{)}
+\PYG{n}{FGetPatientAgeGroup}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Fix2}\PYG{p}{(}\PYG{n}{occ}\PYG{o}{.}\PYG{n}{GetPatientAgeGroup}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{conn}\PYG{p}{)}
+
+\PYG{n}{CofactorPatients}\PYG{p}{(}\PYG{n}{patients}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nd}{@chain}\PYG{+w}{ }\PYG{n}{patients}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{    }\PYG{n}{FGetPatientRace}
+\PYG{+w}{    }\PYG{n}{FGetPatientGender}
+\PYG{+w}{    }\PYG{n}{FGetPatientAgeGroup}
+\PYG{k}{end}
+
+\PYG{n}{CharacterizePatients}\PYG{p}{(}\PYG{n}{patients}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nd}{@chain}\PYG{+w}{ }\PYG{n}{patients}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{    }\PYG{n}{\PYGZus{}}\PYG{p}{[}\PYG{o}{:}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{df}\PYG{o}{.}\PYG{n}{Not}\PYG{p}{(}\PYG{l+s+ss}{:person\PYGZus{}id}\PYG{p}{)}\PYG{p}{]}
+\PYG{+w}{    }\PYG{n}{df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{n}{\PYGZus{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{names}\PYG{p}{(}\PYG{n}{\PYGZus{}}\PYG{p}{)}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{df}\PYG{o}{.}\PYG{n}{combine}\PYG{p}{(}\PYG{n}{\PYGZus{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{df}\PYG{o}{.}\PYG{n}{nrow}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{l+s+ss}{:count}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{occ}\PYG{o}{.}\PYG{n}{ExecuteAudit}
+\PYG{k}{end}
+
+\PYG{n}{RunStudy}\PYG{p}{(}\PYG{n}{patients}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nd}{@chain}\PYG{+w}{ }\PYG{n}{patients}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{    }\PYG{n}{CofactorPatients}
+\PYG{+w}{    }\PYG{n}{CharacterizePatients}
+\PYG{k}{end}
+\end{Verbatim}

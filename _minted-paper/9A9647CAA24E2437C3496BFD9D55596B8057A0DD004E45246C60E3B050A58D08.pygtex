@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{n}{model}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{oce}\PYG{o}{.}\PYG{n}{Model}\PYG{p}{(}\PYG{n}{cdm\PYGZus{}version}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s+sa}{v}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{5.3.1}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{              }\PYG{n}{cdm\PYGZus{}schema}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{main}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{              }\PYG{n}{vocabulary\PYGZus{}schema}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{main}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{              }\PYG{n}{results\PYGZus{}schema}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{main}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{              }\PYG{n}{target\PYGZus{}schema}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{main}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{              }\PYG{n}{target\PYGZus{}table}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{cohort}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{n}{sql}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{oce}\PYG{o}{.}\PYG{n}{translate}\PYG{p}{(}\PYG{n}{cohort\PYGZus{}expression}\PYG{p}{,}
+\PYG{+w}{                }\PYG{n}{dialect}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s+ss}{:sqlite}\PYG{p}{,}
+\PYG{+w}{                }\PYG{n}{model}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{model}\PYG{p}{,}
+\PYG{+w}{                }\PYG{n}{cohort\PYGZus{}definition\PYGZus{}id}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{;}
+\end{Verbatim}

@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{n}{strep\PYGZus{}df}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{df}\PYG{o}{.}\PYG{n}{combine}\PYG{p}{(}\PYG{n}{patient\PYGZus{}groups}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{df}\PYG{o}{.}\PYG{n}{nrow}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{l+s+ss}{:count}\PYG{p}{)}
+
+\PYG{c}{\PYGZsh{} Creator code to process data and generate counts...}
+
+\PYG{n}{strep\PYGZus{}df}\PYG{o}{.}\PYG{n}{prev}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{strep\PYGZus{}df}\PYG{o}{.}\PYG{n}{count}\PYG{+w}{ }\PYG{o}{./}\PYG{+w}{ }\PYG{n}{strep\PYGZus{}df}\PYG{o}{.}\PYG{n}{total\PYGZus{}count}
+\end{Verbatim}

@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{k}{import}\PYG{+w}{ }\PYG{n}{Distributed}\PYG{o}{:}
+\PYG{+w}{  }\PYG{n+nd}{@distributed}
+
+\PYG{n}{result}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nd}{@distributed}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{append!}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{l+m+mi}{10}
+\PYG{+w}{   }\PYG{n}{vals}\PYG{+w}{ }\PYG{o}{=}
+\PYG{+w}{      }\PYG{n}{RunStudy}\PYG{p}{(}\PYG{n}{strep\PYGZus{}patients}\PYG{p}{[}\PYG{n}{i}\PYG{o}{*}\PYG{l+m+mi}{100}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{p}{(}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{:}\PYG{p}{]}\PYG{p}{)}
+\PYG{+w}{   }\PYG{p}{[}\PYG{n}{vals}\PYG{p}{]}
+\PYG{k}{end}
+
+\PYG{n}{vcat}\PYG{p}{(}\PYG{n}{result}\PYG{o}{...}\PYG{p}{)}\PYG{+w}{ }\PYG{err}{|}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{audit\PYGZus{}patient\PYGZus{}groups}
+\end{Verbatim}

@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{o}{\PYGZsh{}}\PYG{+w}{ }\PYG{k}{SQL}\PYG{+w}{ }\PYG{k}{Output}
+\PYG{k}{SELECT}
+\PYG{+w}{  }\PYG{l+s+ss}{\PYGZdq{}PERSON\PYGZus{}2\PYGZdq{}}\PYG{p}{.}\PYG{l+s+ss}{\PYGZdq{}person\PYGZus{}id\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{  }\PYG{p}{(}\PYG{k}{CASE}
+\PYG{+w}{    }\PYG{k}{WHEN}\PYG{+w}{ }\PYG{p}{(}\PYG{l+s+ss}{\PYGZdq{}PERSON\PYGZus{}2\PYGZdq{}}\PYG{p}{.}\PYG{l+s+ss}{\PYGZdq{}age\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{l+m+mi}{41}\PYG{p}{)}
+\PYG{+w}{      }\PYG{k}{THEN}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}0 \PYGZhy{} 40\PYGZsq{}}
+\PYG{+w}{    }\PYG{k}{WHEN}\PYG{+w}{ }\PYG{p}{(}\PYG{l+s+ss}{\PYGZdq{}PERSON\PYGZus{}2\PYGZdq{}}\PYG{p}{.}\PYG{l+s+ss}{\PYGZdq{}age\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{l+m+mi}{81}\PYG{p}{)}
+\PYG{+w}{      }\PYG{k}{THEN}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}41 \PYGZhy{} 80\PYGZsq{}}\PYG{+w}{ }\PYG{k}{END}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{AS}\PYG{+w}{ }\PYG{l+s+ss}{\PYGZdq{}age\PYGZus{}group\PYGZdq{}}
+\PYG{k}{FROM}\PYG{+w}{ }\PYG{p}{(}
+\PYG{+w}{  }\PYG{k}{SELECT}
+\PYG{+w}{    }\PYG{l+s+ss}{\PYGZdq{}PERSON\PYGZus{}1\PYGZdq{}}\PYG{p}{.}\PYG{l+s+ss}{\PYGZdq{}person\PYGZus{}id\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{p}{(}\PYG{l+m+mi}{2023}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+s+ss}{\PYGZdq{}PERSON\PYGZus{}1\PYGZdq{}}\PYG{p}{.}\PYG{l+s+ss}{\PYGZdq{}year\PYGZus{}of\PYGZus{}birth\PYGZdq{}}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{AS}\PYG{+w}{ }\PYG{l+s+ss}{\PYGZdq{}age\PYGZdq{}}
+\PYG{+w}{  }\PYG{k}{FROM}\PYG{+w}{ }\PYG{l+s+ss}{\PYGZdq{}PERSON\PYGZdq{}}\PYG{+w}{ }\PYG{k}{AS}\PYG{+w}{ }\PYG{l+s+ss}{\PYGZdq{}PERSON\PYGZus{}1\PYGZdq{}}
+\PYG{+w}{  }\PYG{k}{WHERE}\PYG{+w}{ }\PYG{p}{(}\PYG{l+s+ss}{\PYGZdq{}PERSON\PYGZus{}1\PYGZdq{}}\PYG{p}{.}\PYG{l+s+ss}{\PYGZdq{}person\PYGZus{}id\PYGZdq{}}\PYG{+w}{ }\PYG{k}{IN}\PYG{+w}{ }\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{)}
+\PYG{p}{)}\PYG{+w}{ }\PYG{k}{AS}\PYG{+w}{ }\PYG{l+s+ss}{\PYGZdq{}PERSON\PYGZus{}2\PYGZdq{}}
+\end{Verbatim}

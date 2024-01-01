@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{n}{patients}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{occ}\PYG{o}{.}\PYG{n}{GetCohortSubjects}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{conn}\PYG{p}{)}
+
+\PYG{n}{patients\PYGZus{}race}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{occ}\PYG{o}{.}\PYG{n}{GetPatientRace}\PYG{p}{(}\PYG{n}{C}\PYG{o}{.}\PYG{n}{person\PYGZus{}id}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{conn}\PYG{p}{)}
+\PYG{n}{patients\PYGZus{}gender}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{occ}\PYG{o}{.}\PYG{n}{GetPatientGender}\PYG{p}{(}\PYG{n}{C}\PYG{o}{.}\PYG{n}{person\PYGZus{}id}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{conn}\PYG{p}{)}
+
+\PYG{n}{patients\PYGZus{}age\PYGZus{}group}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{occ}\PYG{o}{.}\PYG{n}{GetPatientAgeGroup}\PYG{p}{(}
+\PYG{+w}{  }\PYG{n}{C}\PYG{o}{.}\PYG{n}{person\PYGZus{}id}\PYG{p}{,}
+\PYG{+w}{  }\PYG{n}{conn}\PYG{p}{;}
+\PYG{p}{)}
+\end{Verbatim}
