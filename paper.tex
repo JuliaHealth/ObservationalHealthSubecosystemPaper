@@ -48,9 +48,8 @@ Over the past $10$ years, there have been several innovations within the observa
 Arguably, the most crucial innovation that has emerged is the Observational Medical Outcomes Partnership Common Data Model (OMOP CDM) which was designed specifically to standardize observational health data to enable transferable analyses. \cite{overhage2012validation}
 % EXPLAIN::MEDIUM Why is mapping relevant here?
 The importance of this model has become apparent within open science organizations like the OHDSI (Observational Health Data Science and Informatics) network where members across $100+$ countries \cite{sachsonOurJourney2023} with access to various health systems have been able to successfully map their patient data to the OMOP CDM.
-% TODO::EASY Add citation about successful collaborations
 % EXPLAIN::EASY What is a network study?
-This has led to successful collaboration relationships across countries where one research group can develop a network study and then disseminate the study across collaborators leading to the idea that you can "write once, run everywhere."\footnotemark
+This has led to successful collaboration relationships \cite{roseFindingAnswersBig2008} across countries where one research group can develop a network study and then disseminate the study across collaborators leading to the idea that you can "write once, run everywhere."\footnotemark
 
 \footnotetext{This quote is attributed to Sun Microsystems when discussing the Java programming language.}
 
@@ -101,8 +100,7 @@ One core innovation brought about by OHDSI in the space of network science is ho
 % TODO::EASY Make this more general such that it flows into the next paragraph on research tooling better
 a research group can develop their analysis on their own OMOP CDM instance and then bundle together their study.
 % EXPLAIN::EASY What is a study package?
-% EXPLAIN::EASY What data assets?
-Once this packaging is done, they can pass along the study package to another site to collaborate on the same analysis but on different data assets.
+Once this packaging is done, they can pass along the study package to another site to collaborate on the same analysis but execute the study package on their unique OMOP CDM formatted dataset.
 % EXPLAIN::MEDIUM What is a collaborator network?
 Data confidentiality is preserved in this approach as data from individual participating sites remains exclusive to each site, with only aggregate results shared across a given collaborator network.
 As such, no risk for re-identification comes about through this network collaboration and has ushered in the possibility for similar research approaches to be taken across the globe. \cite{ohdsi2019book}
@@ -156,24 +154,22 @@ This paper summarizes and highlights some of the current capacity OHS provides s
 % TODO::EASY Segue this better from phenotype definitions
 One of the premier tools within the OHDSI HADES ecosystem is the ATLAS Shiny application which was developed to develop patient phenotype definitions within observational health research contexts (amongst other use cases).
 These phenotype definitions have varying levels of complexity where they can be very simple (such as finding all patients with one health condition or diagnosis) or grow to be extremely complex (defining controlled, uncontrolled, and indeterminate patient cohorts based on medications, lab results, etc.)
-% TODO::EASY Create footnote about schema
-% TODO::EASY Cite reference schema from GitHub in footnote; 
-% EXPLAIN::EASY Better introduce what SQL is
-The computable phenotype definitions that ATLAS generates based on phenotype definitions are in a variety of serialization formats such as JSON or prepared SQL expressions available in multiple SQL flavors.\cite{madrilATLASJSONSchema2022}
+The computable phenotype definitions that ATLAS generates based on phenotype definitions are in a variety of serialization formats such as JSON schemas or prepared SQL expressions available in multiple SQL flavors.\footnotemark
+
+\footnotetext{Although the JSON schema is not made formally available within OHDSI, a community made copy of the schema can be found here: \cite{madrilATLASJSONSchema2022}}
 
 % TODO::MEDIUM Reframe this to more say how ATLAS can be used to build cohorts
 % TODO::EASY Explain how this package accomplishes similar tasks
 The Julia package, OHDSICohortExpressions.jl, exists specifically to ingest these serialized expressions of computable phenotype definitions and create patient cohorts that match the given criterion in the definition. \cite{evansOHDSICohortExpressionsJl2023}
-% TODO::MEDIUM Turn all items into complete thoughts in list
 How this tool works is to:
 
 \begin{enumerate}
 
-\item read and verify the serialized computable phenotype definition 
+\item Read and verify serialized computable phenotype definitions.
 
-\item reinterpret the serialization into the FunSQL.jl Domain Specific Language 
+\item Reinterpret serialization into the FunSQL.jl Domain Specific Language.
 
-\item return a prepared SQL statement against a given SQL database that queries an OMOP CDM database for the desired patient population(s) of interest.
+\item Return a SQL statement for an OMOP CDM database to generate a given cohort.
 
 \end{enumerate}
 
@@ -187,9 +183,6 @@ Once these prepared statements are made, researchers can execute the generated S
 Although OHDSICohortExpressions.jl is sufficient to translate existing phenotype definitions generated in ATLAS to executable queries, oftentimes, there is a tricky problem of how to best iterate on phenotype definitions. \cite{zelkoDevelopingRobustComputable2023}
 % EXPLAIN:: Better contextualize why this is important -- why not just create a new phenotype definition?
 Often, one has to take an existing definition and either revise to a more narrow cohort or write manual code to build more niche cohorts after an initial definition is created.
-% EXPLAIN::MEDIUM How so?
-% TODO::MEDIUM Review this sentence; maybe cut it
-This refactoring of a phenotype definition can lead to conflating ideas within conversation between expert clinical reviewers, analysts, and health researchers.
 % TODO::EASY Move this to the previous section on phenotype definitions
 This broadly can be the notions of what we are exploring (the phenotype definition; often the responsibility of a clinical reviewer), what is possible to compute upon (the computable phenotype definition; often the responsibility of an analyst), and the goals of the overall study.
 
@@ -293,19 +286,11 @@ occ.GenerateTables(conn)
 \label{listing:connection}
 \end{listing}
 
-% TODO::HARD Review if this subsection is needed
-\subsection{Bridging between OHDSI and JuliaHealth Communities}
-
-Briding between tools used in the OHDSI and JuliaHealth communities is now exceptionally straightforward.
-
-% \includegraphics{./atlas_gui.png}
-
 \subsection{Using a Cohort Definition To Build an Initial Cohort}
 
 % EXPLAIN:: What is this doing here?
 After having a strep throat phenotype definition defined using ATLAS, we can then execute the resulting computable phenotype definition against the \textit{Eunomia} database.
 
-% TODO::HARD Maybe remove package imports and mention them within the caption instead
 \begin{listing}[!ht]
 \begin{minted}[breaklines,escapeinside=||,mathescape=true, numbersep=3pt, gobble=2, frame=lines, fontsize=\scriptsize, framesep=2mm]{julia}
 model = oce.Model(cdm_version = v"5.3.1", 
@@ -361,7 +346,6 @@ strep_df.prev = strep_df.count ./ strep_df.total_count
 \end{listing}
 
 Using this analytical approach, tabulation can be quickly conducted across patients.
-
 
 % EXPLAIN::MEDIUM What is this section doing?
 
