@@ -15,6 +15,40 @@ Clark~C. Evans and Kirill Simonov.
 Clark~C. Evans and Kirill Simonov.
 {{OHDSICohortExpressions}}.jl.
 
+\bibitem{physionet}
+Ary~L Goldberger, Luis~AN Amaral, Leon Glass, Jeffrey~M Hausdorff, Plamen~Ch
+  Ivanov, Roger~G Mark, Joseph~E Mietus, George~B Moody, Chung-Kang Peng, and
+  H~Eugene Stanley.
+{{PhysioBank}}, {{PhysioToolkit}}, and {{PhysioNet}}: Components of a new
+  research resource for complex physiologic signals.
+101(23):e215--e220.
+
+\bibitem{hripcsakCharacterizingTreatmentPathways2016}
+George Hripcsak, Patrick~B. Ryan, Jon~D. Duke, Nigam~H. Shah, Rae~Woong Park,
+  Vojtech Huser, Marc~A. Suchard, Martijn~J. Schuemie, Frank~J. DeFalco, Adler
+  Perotte, Juan~M. Banda, Christian~G. Reich, Lisa~M. Schilling, Michael~E.
+  Matheny, Daniella Meeker, Nicole Pratt, and David Madigan.
+Characterizing treatment pathways at scale using the {{OHDSI}} network.
+113(27):7329--7336.
+\href{http://dx.doi.org/10.1073/pnas.1510502113}{doi:10.1073/pnas.1510502113}.
+
+\bibitem{johnson2016mimic}
+Alistair E~W Johnson, Tom~J Pollard, Lu~Shen, Li-Wei~H Lehman, Mengling Feng,
+  Mohammad Ghassemi, Benjamin Moody, Peter Szolovits, Leo~Anthony Celi, and
+  Roger~G Mark.
+{{MIMIC-III}}, a freely accessible critical care database.
+3(1):1--9.
+
+\bibitem{johnson2018mimic}
+Alistair~EW Johnson, David~J Stone, Leo~A Celi, and Tom~J Pollard.
+The {{MIMIC Code Repository}}: Enabling reproducibility in critical care
+  research.
+25(1):32--39.
+
+\bibitem{kelechavaSQLStandardISO2018}
+Brad Kelechava.
+The {{SQL Standard}} - {{ISO}}/{{IEC}} 9075:2023 ({{ANSI X3}}.135).
+
 \bibitem{ohdsi2019book}
 {OHDSI}.
 {\em The Book of {{OHDSI}}: {{Observational}} Health Data Sciences and
